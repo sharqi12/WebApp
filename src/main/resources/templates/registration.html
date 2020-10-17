@@ -4,12 +4,15 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 	<title>Wspomaganie organizacji konferencji i targów</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" href="assets/css/main.css" />
+	<link rel="stylesheet" href="assets/css/main.css" type="text/css"/>
 </head>
 <body>
 
@@ -26,7 +29,7 @@ and open the template in the editor.
 		<li><a href="generic.html">Najbliższe wydarzenia</a></li>
 		<li><a href="elements.html">Poprzednie wydarzenia</a></li>
 		<li><a href="pomoc.html">Pomoc</a></li>
-		<li><a href="logowanie.html">Zaloguj się</a></li>
+		<li><a href="login.html">Zaloguj się</a></li>
 		<li><a href="registration.html">Zarejestruj się</a></li>
 	</ul>
 </nav>
@@ -41,6 +44,7 @@ and open the template in the editor.
 	<div class="inner">
 
 		<header>
+
 			<form th:action="@{/registration}" th:object="${user}" method="post" >
 
 				<h1>Zarejestruj się</h1>
@@ -63,7 +67,7 @@ and open the template in the editor.
 
 				<button type="submit" class="registerButton">Zarejestruj się</button>
 				<h1></h1>
-				<span> Już zarejestrowany?  <a href="/" th:href="@{/logowanie}">Zaloguj się!</a> </span>
+				<span> Już zarejestrowany?  <a href="/" th:href="@{/login}">Zaloguj się!</a> </span>
 
 
 			</form>
@@ -119,11 +123,11 @@ and open the template in the editor.
 </footer>
 
 <!-- Scripts -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/jquery.scrolly.min.js"></script>
-<script src="assets/js/skel.min.js"></script>
-<script src="assets/js/util.js"></script>
-<script src="assets/js/main.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.scrolly.min.js"></script>
+<script src="js/skel.min.js"></script>
+<script src="js/util.js"></script>
+<script src="js/main.js"></script>
 
 </body>
 </html>
