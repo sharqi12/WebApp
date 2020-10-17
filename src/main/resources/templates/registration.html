@@ -41,22 +41,22 @@ and open the template in the editor.
 	<div class="inner">
 
 		<header>
-			<form action="#" th:action="@{/registration}" th:object="${user}" method="post" >
+			<form th:action="@{/registration}" th:object="${user}" method="post" >
 
 				<h1>Zarejestruj się</h1>
 
 				<fieldset>
 					<label for="nick">Twój nick</label>
-					<input type="text" id="nick" name="user_nick" th:field="*{nick}"/>
+					<input type="text" id="nick" th:field="*{nick}"/>
 
 					<label for="name">Imię i nazwisko lub nazwa organizatora</label>
-					<input type="text" id="name" name="user_name" th:field="*{name}"/>
+					<input type="text" id="name" th:field="*{name}"/>
 
-					<label for="mail">Email</label>
-					<input type="email" id="mail" name="user_email" th:field="*{email}"/>
+					<label for="email">Email</label>
+					<input type="email" id="email" th:field="*{email}"/>
 
 					<label for="password">Hasło</label>
-					<input type="password" id="password" name="user_password" th:field="*{password}"/>
+					<input type="password" id="password" th:field="*{password}"/>
 				</fieldset>
 				<h1></h1>
 
