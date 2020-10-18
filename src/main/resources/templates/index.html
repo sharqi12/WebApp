@@ -25,12 +25,12 @@
 		<!-- Nav -->
 			<nav id="menu">
 				<ul class="links">
-					<li><a href="index.html">Strona główna</a></li>
+					<li><a th:href="@{/index}">Strona główna</a></li>
 					<li><a href="generic.html">Najbliższe wydarzenia</a></li>
 					<li><a href="elements.html">Poprzednie wydarzenia</a></li>
                                         <li><a href="pomoc.html">Pomoc</a></li>
-                                        <li><a href="login.html">Zaloguj się</a></li>
-                                        <li><a href="registration.html">Zarejestruj się</a></li>
+                                        <li><a th:href="@{/login}">Zaloguj się</a></li>
+                                        <li><a href="/" th:href="@{/registration}">Zarejestruj się</a></li>
 				</ul>
 			</nav>
 
