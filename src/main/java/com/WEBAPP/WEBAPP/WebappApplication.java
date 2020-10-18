@@ -10,6 +10,8 @@ import com.WEBAPP.WEBAPP.config.WebConfig;
 @SpringBootApplication
 public class WebappApplication extends SpringBootServletInitializer {
 
+
+
 	public static void main(String[] args) {
 		SpringApplication.run(WebappApplication.class, args);
 	}

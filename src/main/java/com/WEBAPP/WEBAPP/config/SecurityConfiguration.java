@@ -48,6 +48,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception{
 
         http.authorizeRequests().antMatchers(
+                "/",
                 "/registration**",
                 "/assets/**",
                 "/js/**",
@@ -71,10 +72,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         //Web resources
-        web.ignoring().antMatchers("/css/**");
-        web.ignoring().antMatchers("/scripts/**");
-        web.ignoring().antMatchers("/images/**");
-        web.ignoring().antMatchers("/assets/**");
+        web.ignoring().antMatchers("/assets/**", "/css/**","/scripts/**","/images/**");
     }
 
 
