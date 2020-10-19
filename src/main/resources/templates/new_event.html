@@ -44,14 +44,18 @@ and open the template in the editor.
     <div class="inner">
 
         <header>
-             <h1>Zarejestruj się</h1>
+             <h1>Zarejestruj swój event</h1>
 
                 <form action="#" th:action="@{/saveEvent}" th:object="${event}" method="POST">
+                    <br/>
                     <input type="text" th:field="*{city}" placeholder="City" class="form-control mb-4 col-4">
 
+                    <br/>
                     <input type="text" th:field="*{date}" placeholder="Date" class="form-control mb-4 col-4">
+                    <br/>
+                    <br/>
 
-                    <button type="submit" class="btn btn-info col-2"> Save Event</button>
+                    <button type="submit" class="registerButton"> Save Event</button>
                 </form>
 
                 <hr>
@@ -111,11 +115,12 @@ and open the template in the editor.
 </footer>
 
 <!-- Scripts -->
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery.scrolly.min.js"></script>
-<script src="js/skel.min.js"></script>
-<script src="js/util.js"></script>
-<script src="js/main.js"></script>
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/skel.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
 
 </body>
 </html>
