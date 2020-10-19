@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Wspomaganie organizacji konferencji i targów</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+
+<!-- Header -->
+<header id="header">
+    <h1><a href="#">Konferencje i targi<span>   Eventy i organizacja</span></a></h1>
+    <a href="#menu">Menu</a>
+</header>
+
+<!-- Nav -->
+<nav id="menu">
+    <ul class="links">
+        <li><a th:href="@{/index}">Strona główna</a></li>
+        <li><a href="generic.html">Najbliższe wydarzenia</a></li>
+        <li><a href="elements.html">Poprzednie wydarzenia</a></li>
+        <li><a href="pomoc.html">Pomoc</a></li>
+        <li><a th:href="@{/login}">Zaloguj się</a></li>
+        <li><a href="/" th:href="@{/registration}">Zarejestruj się</a></li>
+    </ul>
+</nav>
+
+<!-- Banner -->
+<!--
+    To use a video as your background, set data-video to the name of your video without
+    its extension (eg. images/banner). Your video must be available in both .mp4 and .webm
+    formats to work correctly.
+-->
+<section id="banner" >
+    <div class="inner">
+
+        <header>
+            <h1>Sukces!</h1>
+            <br>
+
+            <span><a href="/" th:href="@{/login}">Zaloguj się!</a> </span>
+        </header>
+        <!-- <a href="#main" class="button big alt scrolly">Dignissim</a> -->
+    </div>
+
+</section>
+
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/skel.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+
+</body>
+</html>
