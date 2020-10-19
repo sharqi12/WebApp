@@ -1,8 +1,8 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <!--
-	Broadcast by TEMPLATED
-	templated.co @templatedco
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
 -->
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:th="http://www.thymeleaf.org"
@@ -12,7 +12,12 @@
 		<title>Wspomaganie organizacji konferencji i targów</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet"
+			  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+			  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+			  crossorigin="anonymous">
 		<link rel="stylesheet" href="assets/css/main.css" />
+
 	</head>
 	<body>
 
@@ -28,10 +33,9 @@
 					<li><a th:href="@{/index}">Strona główna</a></li>
 					<li><a href="generic.html">Najbliższe wydarzenia</a></li>
 					<li><a href="elements.html">Poprzednie wydarzenia</a></li>
-                                        <li><a href="pomoc.html">Pomoc</a></li>
-                                        <li><a th:href="@{/login}">Zaloguj się</a></li>
-                                        <li><a href="/" th:href="@{/registration}">Zarejestruj się</a></li>
-					<li><a href="list" th:href="@{/list}">Lista</a></li>
+					<li><a href="pomoc.html">Pomoc</a></li>
+					<li><a th:href="@{/login}">Zaloguj się</a></li>
+					<li><a href="/" th:href="@{/registration}">Zarejestruj się</a></li>
 				</ul>
 			</nav>
 
@@ -44,12 +48,36 @@
 				<section id="banner" >
 					<div class="inner">
 						<header>
-							<h1>Aplikacja eventowa - sposób na efektywną organizację !</h1>
-							<p>-Wspomaga procesy planowania<br />
-                                                            -Nigdy o niczym nie zapomnisz przy organizacji eventu<br />
-                                                            -Minimalizujesz koszty organizacji</br>
-                                                            -Zbierasz statystyki swojego eventu</br>
-                                                        </p>
+							<h1>Zaloguj się</h1>
+                                                    <form th:action="@{/login}" method="post">
+														<!-- error message -->
+														<div th:if="${param.error}">
+															<div class="alert alert-danger">Invalid username or password.</div>
+														</div>
+
+														<!-- logout message -->
+														<div th:if="${param.logout}">
+															<div class="alert alert-info">You have been logged out.</div>
+														</div>
+
+                                                    <fieldset>
+                                                      <label for="username">Twój email</label>
+                                                      <input type="text" id="username" placeholder="Wprowadź email" name="username" required>
+
+                                                      <label for="password">Hasło</label>
+                                                      <input type="password" id="password" placeholder="Wprowadź hasło" name="password" required>
+                                                    </fieldset>
+                                                    <br></br>
+                                                    <button type="submit" class="loginButton">Zaloguj się</button>
+                                                    <br></br>
+                                                          <span class="psw"><a href="#">Zapomniałeś hasła?</a></span> <!--DO ZROBIENIA -->
+                                                    
+                                                  </form>
+
+											<div class="form-group">
+												<span>Nie masz konta? <a href="/" th:href="@{/registration}">Zarejestruj się!</a></span>
+											</div>
+                                                    
 						</header>
 						<!-- <a href="#main" class="button big alt scrolly">Dignissim</a> -->
 					</div>
@@ -102,11 +130,11 @@
 			</footer>
 
 		<!-- Scripts -->
-			<script src="js/jquery.min.js"></script>
-			<script src="js/jquery.scrolly.min.js"></script>
-			<script src="js/skel.min.js"></script>
-			<script src="js/util.js"></script>
-			<script src="js/main.js"></script>
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
 
 	</body>
 </html>
