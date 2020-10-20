@@ -26,12 +26,11 @@ and open the template in the editor.
 <nav id="menu">
     <ul class="links">
         <li><a th:href="@{/index}">Strona główna</a></li>
-        <li><a th:href="@{/list}">Najbliższe wydarzenia</a></li>
-        <li><a th:href="@{/list}">Poprzednie wydarzenia</a></li>
-        <li><a th:href="@{/pomoc}">Pomoc</a></li>
-        <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj się</a></li>
-        <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Wyloguj się</a></li>
-        <li sec:authorize="isAnonymous()"><a href="/" th:href="@{/registration}">Zarejestruj się</a></li>
+        <li><a href="generic.html">Najbliższe wydarzenia</a></li>
+        <li><a href="elements.html">Poprzednie wydarzenia</a></li>
+        <li><a href="pomoc.html">Pomoc</a></li>
+        <li><a th:href="@{/login}">Zaloguj się</a></li>
+        <li><a href="/" th:href="@{/registration}">Zarejestruj się</a></li>
     </ul>
 </nav>
 
@@ -48,25 +47,27 @@ and open the template in the editor.
 
 
 
-                <h1>Wydarzenia</h1>
+            <h1>Wydarzenia</h1>
             <a th:href = "@{/showNewEventForm}" class="btn btn-primary btn-sm mb-3"> Dodaj wydarzenie </a>
-                <table border="1" class = "table table-striped table-responsive-md">
-                    <thead>
-                    <tr>
-                        <th>City</th>
-                        <th>Date</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="event : ${listEvents}">
-                        <td th:text="${event.city}"></td>
-                        <td th:text="${event.date}"></td>
-                        <td><a th:href="@{/showFormForUpdate/{id}(id=${event.id})}" class="btn btn-primary">Update</a>
+            <table border="1" class = "table table-striped table-responsive-md">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>City</th>
+                    <th>Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="event : ${listEvents}">
+                    <td><a th:text="${event.name}" th:href="@{/showDescription/{id}(id=${event.id})}" class="btn btn-primary"></a></td>
+                    <td th:text="${event.city}"></td>
+                    <td th:text="${event.date}"></td>
+                    <td><a th:href="@{/showFormForUpdate/{id}(id=${event.id})}" class="btn btn-primary">Update</a>
                         <a th:href="@{/deleteEvent/{id}(id=${event.id})}" class="btn btn-danger">Delete</a></td>
-                    </tr>
-                    </tr>
-                    </tbody>
-                </table>
+                </tr>
+                </tr>
+                </tbody>
+            </table>
 
             </form>
         </header>

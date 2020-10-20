@@ -44,22 +44,9 @@ and open the template in the editor.
     <div class="inner">
 
         <header>
-            <h1>Update</h1>
+            <h1>Description</h1>
 
-            <form action="#" th:action="@{/saveEvent}" th:object="${event}" method="POST">
-
-                <input type="hidden" th:field="*{id}" />
-
-                <input type="text" th:field="*{name}"  class="form-control mb-4 col-4">
-
-                <input type="text" th:field="*{city}"  class="form-control mb-4 col-4">
-
-                <input type="text" th:field="*{date}"  class="form-control mb-4 col-4">
-
-                <input type="text" th:field="*{description}"  class="form-control mb-4 col-4">
-
-                <button type="submit" class="btn btn-info col-2"> Update Event</button>
-            </form>
+            <a th:text="${event.description}"></a>
 
             <hr>
 
