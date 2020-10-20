@@ -48,11 +48,13 @@ and open the template in the editor.
 
                 <form action="#" th:action="@{/saveEvent}" th:object="${event}" method="POST">
                     <br/>
+                    <input type="text" th:field="*{name}" placeholder="Name" class="form-control mb-4 col-4">
+                    <br/>
                     <input type="text" th:field="*{city}" placeholder="City" class="form-control mb-4 col-4">
-
                     <br/>
                     <input type="text" th:field="*{date}" placeholder="Date" class="form-control mb-4 col-4">
                     <br/>
+                    <input type="text" th:field="*{description}" placeholder="Description" class="form-control mb-4 col-4">
                     <br/>
 
                     <button type="submit" class="registerButton"> Save Event</button>

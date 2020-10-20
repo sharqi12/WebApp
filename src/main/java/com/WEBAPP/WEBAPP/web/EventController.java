@@ -56,4 +56,15 @@ public class EventController {
         this.eventService.deleteEventById(id);
         return "redirect:/list";
     }
+
+    @GetMapping("/showDescription/{id}")
+    public String showDescription(@PathVariable( value = "id") long id, Model model) {
+
+        // get event from the service
+        Event event = eventService.getEventById(id);
+
+        // set event as a model attribute to pre-populate the form
+        model.addAttribute("event", event);
+        return "description";
+    }
 }
