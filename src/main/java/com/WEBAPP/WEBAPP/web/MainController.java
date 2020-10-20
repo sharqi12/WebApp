@@ -17,4 +17,10 @@ public class MainController {
     public String home() {
         return "index";
     }
+
+    @GetMapping("/pomoc")
+    public String pomoc() {
+        return "pomoc";
+    }
+
 }
