@@ -26,12 +26,11 @@ and open the template in the editor.
 <nav id="menu">
     <ul class="links">
         <li><a th:href="@{/index}">Strona główna</a></li>
-        <li><a th:href="@{/list}">Najbliższe wydarzenia</a></li>
-        <li><a th:href="@{/list}">Poprzednie wydarzenia</a></li>
-        <li><a th:href="@{/pomoc}">Pomoc</a></li>
-        <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj się</a></li>
-        <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Wyloguj się</a></li>
-        <li sec:authorize="isAnonymous()"><a href="/" th:href="@{/registration}">Zarejestruj się</a></li>
+        <li><a href="generic.html">Najbliższe wydarzenia</a></li>
+        <li><a href="elements.html">Poprzednie wydarzenia</a></li>
+        <li><a href="pomoc.html">Pomoc</a></li>
+        <li><a th:href="@{/login}">Zaloguj się</a></li>
+        <li><a href="/" th:href="@{/registration}">Zarejestruj się</a></li>
     </ul>
 </nav>
 
@@ -45,23 +44,25 @@ and open the template in the editor.
     <div class="inner">
 
         <header>
-             <h1>Zarejestruj swój event</h1>
+            <h1>Zarejestruj swój event</h1>
 
-                <form action="#" th:action="@{/saveEvent}" th:object="${event}" method="POST">
-                    <br/>
-                    <input type="text" th:field="*{city}" placeholder="City" class="form-control mb-4 col-4">
+            <form action="#" th:action="@{/saveEvent}" th:object="${event}" method="POST">
+                <br/>
+                <input type="text" th:field="*{name}" placeholder="Name" class="form-control mb-4 col-4">
+                <br/>
+                <input type="text" th:field="*{city}" placeholder="City" class="form-control mb-4 col-4">
+                <br/>
+                <input type="text" th:field="*{date}" placeholder="Date" class="form-control mb-4 col-4">
+                <br/>
+                <input type="text" th:field="*{description}" placeholder="Description" class="form-control mb-4 col-4">
+                <br/>
 
-                    <br/>
-                    <input type="text" th:field="*{date}" placeholder="Date" class="form-control mb-4 col-4">
-                    <br/>
-                    <br/>
+                <button type="submit" class="registerButton"> Save Event</button>
+            </form>
 
-                    <button type="submit" class="registerButton"> Save Event</button>
-                </form>
+            <hr>
 
-                <hr>
-
-                <a th:href="@{/list}"> Back to Event List</a>
+            <a th:href="@{/list}"> Back to Event List</a>
 
             </form>
         </header>
