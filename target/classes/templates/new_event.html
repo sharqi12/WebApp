@@ -45,23 +45,25 @@ and open the template in the editor.
     <div class="inner">
 
         <header>
-             <h1>Zarejestruj swój event</h1>
+            <h1>Zarejestruj swój event</h1>
 
-                <form action="#" th:action="@{/saveEvent}" th:object="${event}" method="POST">
-                    <br/>
-                    <input type="text" th:field="*{city}" placeholder="City" class="form-control mb-4 col-4">
+            <form action="#" th:action="@{/saveEvent}" th:object="${event}" method="POST">
+                <br/>
+                <input type="text" th:field="*{name}" placeholder="Name" class="form-control mb-4 col-4">
+                <br/>
+                <input type="text" th:field="*{city}" placeholder="City" class="form-control mb-4 col-4">
+                <br/>
+                <input type="text" th:field="*{date}" placeholder="Date" class="form-control mb-4 col-4">
+                <br/>
+                <input type="text" th:field="*{description}" placeholder="Description" class="form-control mb-4 col-4">
+                <br/>
 
-                    <br/>
-                    <input type="text" th:field="*{date}" placeholder="Date" class="form-control mb-4 col-4">
-                    <br/>
-                    <br/>
+                <button type="submit" class="registerButton"> Save Event</button>
+            </form>
 
-                    <button type="submit" class="registerButton"> Save Event</button>
-                </form>
+            <hr>
 
-                <hr>
-
-                <a th:href="@{/list}"> Back to Event List</a>
+            <a th:href="@{/list}"> Back to Event List</a>
 
             </form>
         </header>
