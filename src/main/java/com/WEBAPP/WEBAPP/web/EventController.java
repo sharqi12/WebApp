@@ -16,7 +16,7 @@ public class EventController {
     @Autowired
     private EventService eventService;
 
-    // display list of employees
+    // display list of events
     @GetMapping("/list")
     public String viewHomePage(Model model) {
         model.addAttribute("listEvents", eventService.getAllEvents());
