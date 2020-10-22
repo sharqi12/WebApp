@@ -49,8 +49,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers(
-                "/","/list**","/index","/pomoc" ,"/new_event**", "/showDescription/**","/description/**",
-                "/resources/**",
+                "/","/list**", "/new_event**", "/showNewEventForm**","/saveEvent**","/showFormForUpdate/**","/update_event/**","/deleteEvent/**","/showDescription/**","/description/**", "/resources/**",
+                        "/showComment/**", "/opinion/**" ,    "/newComment/**","/saveComment/**","/showNewCommentForm**", "/showCommentForUpdate/**", "/update_comment/**",
                 "/registration/**",
                 "/assets/**",
                 "/js/**",

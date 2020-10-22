@@ -12,7 +12,7 @@ and open the template in the editor.
     <title>Wspomaganie organizacji konferencji i targów</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/main.css" type="text/css"/>
 </head>
 <body>
 
@@ -22,15 +22,15 @@ and open the template in the editor.
     <a href="#menu">Menu</a>
 </header>
 
+<!-- Nav -->
 <nav id="menu">
     <ul class="links">
         <li><a th:href="@{/index}">Strona główna</a></li>
-        <li><a th:href="@{/list}">Najbliższe wydarzenia</a></li>
-        <li><a th:href="@{/list}">Poprzednie wydarzenia</a></li>
-        <li><a th:href="@{/pomoc}">Pomoc</a></li>
-        <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj się</a></li>
-        <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Wyloguj się</a></li>
-        <li sec:authorize="isAnonymous()"><a href="/" th:href="@{/registration}">Zarejestruj się</a></li>
+        <li><a href="generic.html">Najbliższe wydarzenia</a></li>
+        <li><a href="elements.html">Poprzednie wydarzenia</a></li>
+        <li><a href="pomoc.html">Pomoc</a></li>
+        <li><a th:href="@{/login}">Zaloguj się</a></li>
+        <li><a href="/" th:href="@{/registration}">Zarejestruj się</a></li>
     </ul>
 </nav>
 
@@ -44,13 +44,18 @@ and open the template in the editor.
     <div class="inner">
 
         <header>
-            <h1>Opis</h1>
+            <h1>Description</h1>
 
             <a th:text="${event.description}"></a>
 
             <hr>
 
-            <a th:href="@{/list}"> Back to Event List</a>
+      <!--      <form action="#" th:action="@{/saveComment}" th:object="${comment}" method="POST">
+                <br/>
+                <input type="text" th:field="*{text}" placeholder="Comment" class="form-control mb-4 col-4">
+                <br/> -->
+
+                <a th:href="@{/list}"> Back to Event List</a>
 
             </form>
         </header>
@@ -105,11 +110,12 @@ and open the template in the editor.
 </footer>
 
 <!-- Scripts -->
-<script src="../assets/js/jquery.min.js"></script>
-<script src="../assets/js/jquery.scrolly.min.js"></script>
-<script src="../assets/js/skel.min.js"></script>
-<script src="../assets/js/util.js"></script>
-<script src="../assets/js/main.js"></script>
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/skel.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
 
 </body>
 </html>

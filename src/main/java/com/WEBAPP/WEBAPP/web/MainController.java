@@ -23,9 +23,4 @@ public class MainController {
         return "pomoc";
     }
 
-    @GetMapping("/index")
-    public String index() {
-        return "index";
-    }
-
 }
