@@ -12,9 +12,7 @@ and open the template in the editor.
     <title>Wspomaganie organizacji konferencji i targów</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="assets/css/jquery.datetimepicker.min.css"/>
-    <link rel="stylesheet" href="assets/css/main.css" type="text/css"/>
-
+    <link rel="stylesheet" href="../assets/css/main.css" type="text/css"/>
 </head>
 <body>
 
@@ -46,32 +44,18 @@ and open the template in the editor.
     <div class="inner">
 
         <header>
-            <h1>Zarejestruj swój event</h1>
+            <h1> Opis</h1>
 
-            <form action="#" th:action="@{/saveEvent}" th:object="${event}" method="POST">
-                <br/>
-                <input type="text" th:field="*{name}" placeholder="Name" class="form-control mb-4 col-4">
-                <br/>
-                <input type="text" th:field="*{city}" placeholder="City" class="form-control mb-4 col-4">
-                <br/>
-                <!--<input type="text" th:field="*{date}" placeholder="Date" class="form-control mb-4 col-4">-->
-                <input id="datetime" th:field="*{date}" type="text" placeholder="Date">
-                <script src="assets/js/jquery.js"></script>
-                <script src="assets/js/jquery.datetimepicker.full.js"></script>
-                <script>
-                $("#datetime").datetimepicker({step: 5 });
-                </script>
-                <br/>
-                <input type="text" th:field="*{description}" placeholder="Description" class="form-control mb-4 col-4">
-                <br/>
-
-
-                <button type="submit" class="registerButton"> Save Event</button>
-            </form>
+            <a th:text="${event.description}"></a>
 
             <hr>
 
-            <a th:href="@{/list}"> Back to Event List</a>
+      <!--      <form action="#" th:action="@{/saveComment}" th:object="${comment}" method="POST">
+                <br/>
+                <input type="text" th:field="*{text}" placeholder="Comment" class="form-control mb-4 col-4">
+                <br/> -->
+
+                <a th:href="@{/list}"> Powrót do wydarzeń</a>
 
             </form>
         </header>
