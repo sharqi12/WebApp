@@ -12,7 +12,8 @@ and open the template in the editor.
     <title>Wspomaganie organizacji konferencji i targów</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="assets/css/main.css" type="text/css"/>
+    <link rel="stylesheet" href="../assets/css/jquery.datetimepicker.min.css"/>
+    <link rel="stylesheet" href="../assets/css/main.css" type="text/css"/>
 </head>
 <body>
 
@@ -49,16 +50,22 @@ and open the template in the editor.
             <form action="#" th:action="@{/saveEvent}" th:object="${event}" method="POST">
 
                 <input type="hidden" th:field="*{id}" />
-
+                <br/>
                 <input type="text" th:field="*{name}"  class="form-control mb-4 col-4">
-
+                <br/>
                 <input type="text" th:field="*{city}"  class="form-control mb-4 col-4">
-
-                <input type="text" th:field="*{date}"  class="form-control mb-4 col-4">
-
+                <br/>
+                <!--<input type="text" th:field="*{date}"  class="form-control mb-4 col-4">-->
+                <input id="datetime" th:field="*{date}" type="text" placeholder="Date">
+                <script src="../assets/js/jquery.js"></script>
+                <script src="../assets/js/jquery.datetimepicker.full.js"></script>
+                <script>
+                $("#datetime").datetimepicker({step: 5 });
+                </script>
+                <br/>
                 <input type="text" th:field="*{description}"  class="form-control mb-4 col-4">
-
-                <button type="submit" class="btn btn-info col-2"> Update Event</button>
+                <br/>
+                <button type="submit"> Update Event</button>
             </form>
 
             <hr>
