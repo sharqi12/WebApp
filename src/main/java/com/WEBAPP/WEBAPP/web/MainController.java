@@ -28,4 +28,9 @@ public class MainController {
         return "pomoc";
     }
 
+    @GetMapping("/profile")
+    public String profile() {
+        return "profile";
+    }
+
 }

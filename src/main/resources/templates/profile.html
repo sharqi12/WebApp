@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Wspomaganie organizacji konferencji i targów</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body class="subpage">
+
+<!-- Header -->
+<header id="header">
+    <h1><a th:href="@{/index}">Konferencje i targi<span>   Eventy i organizacja</span></a></h1>
+    <a href="#menu">Menu</a>
+</header>
+
+<!-- Nav -->
+<nav id="menu">
+    <ul class="links">
+        <li><a th:href="@{/index}">Strona główna</a></li>
+        <li><a th:href="@{/list}">Najbliższe wydarzenia</a></li>
+        <li><a th:href="@{/list}">Poprzednie wydarzenia</a></li>
+        <li><a th:href="@{/pomoc}">Pomoc</a></li>
+        <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj się</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/profile}">Twój profil</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Wyloguj się</a></li>
+        <li sec:authorize="isAnonymous()"><a href="/" th:href="@{/registration}">Zarejestruj się</a></li>
+    </ul>
+</nav>
+
+<!-- Main -->
+<div id="main">
+    <section class="wrapper style1">
+        <div class="inner">
+
+            <!-- Elements -->
+            <h2 id="elements">Twój profil</h2>
+            <div class="row 200%">
+                <div class="row 200%">
+                    <div class="6u 12u$(medium)">
+                        Nick:
+                    </div>
+                    <div class="6u$ 12u$(medium)">
+                        test
+                    </div>
+                    <br/>
+
+                    <div class="6u 12u$(medium)">
+                        Imię:
+                    </div>
+                    <div class="6u$ 12u$(medium)">
+                        test
+                    </div>
+                    <br/>
+
+                    <div class="6u 12u$(medium)">
+                        Nazwisko:
+                    </div>
+                    <div class="6u$ 12u$(medium)">
+                        test
+                    </div>
+                    <br/>
+
+
+                    <div class="6u 12u$(medium)">
+                        Email:
+                    </div>
+                    <div class="6u$ 12u$(medium)">
+                        test
+                    </div>
+                    <br/>
+                    <br>
+
+                </div>
+
+            </div>
+
+                    <br>
+                    <br>
+                    <h4 id="password change">Zmień hasło</h4>
+                    <div  class="6u$ 12u$(medium)">
+                        <form action="/" method="post" >
+
+                            <fieldset>
+                                <label for="New_password">Podaj nowe hasło:</label>
+                                <input type="password" id="New_password" />
+
+                                <br>
+                                <label for="New_password2">Powtórz nowe hasło:</label>
+                                <input type="password" id="New_password2" />
+                            </fieldset>
+                            <br>
+                            <button type="submit" class="registerButton">Zmień hasło</button>
+                        </form>
+                    </div>
+        </div>
+
+    </section>
+</div>
+
+
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/skel.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+
+</body>
+</html>

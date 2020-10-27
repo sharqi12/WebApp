@@ -18,7 +18,7 @@ and open the template in the editor.
 
 <!-- Header -->
 <header id="header">
-    <h1><a href="#">Konferencje i targi<span>   Eventy i organizacja</span></a></h1>
+    <h1><a th:href="@{/index}">Konferencje i targi<span>   Eventy i organizacja</span></a></h1>
     <a href="#menu">Menu</a>
 </header>
 
@@ -30,6 +30,7 @@ and open the template in the editor.
         <li><a th:href="@{/list}">Poprzednie wydarzenia</a></li>
         <li><a th:href="@{/pomoc}">Pomoc</a></li>
         <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj się</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/profile}">Twój profil</a></li>
         <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Wyloguj się</a></li>
         <li sec:authorize="isAnonymous()"><a href="/" th:href="@{/registration}">Zarejestruj się</a></li>
     </ul>
@@ -48,7 +49,7 @@ and open the template in the editor.
 
 
 
-                <h1>Wydarzenia</h1>
+            <h1>Wydarzenia</h1>
             <a th:href = "@{/showNewEventForm}" class="btn btn-primary btn-sm mb-3"> Dodaj wydarzenie </a>
             <table border="1" class = "table table-striped table-responsive-md">
                 <thead>
@@ -62,9 +63,9 @@ and open the template in the editor.
                 <tr th:each="event : ${listEvents}">
                     <td><a th:text="${event.name}" th:href="@{/showDescription/{id}(id=${event.id})}" class="btn btn-primary"></a></td>
                     <td th:text="${event.city}"></td>
-                    <td th:text="${event.date}"></td><td></td><td></td>
-                    <td><a th:href="@{/showFormForUpdate/{id}(id=${event.id})}" class="btn btn-primary">Zaktualizuj </a></td>
-                        <td><a th:href="@{/deleteEvent/{id}(id=${event.id})}" class="btn btn-danger">Usuń</a></td>
+                    <td th:text="${event.date}"></td>
+                    <td><a th:href="@{/showFormForUpdate/{id}(id=${event.id})}" class="btn btn-primary">Update</a>
+                        <a th:href="@{/deleteEvent/{id}(id=${event.id})}" class="btn btn-danger">Delete</a></td>
                 </tr>
                 </tr>
                 </tbody>
