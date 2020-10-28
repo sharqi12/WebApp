@@ -19,7 +19,7 @@ and open the template in the editor.
 
 <!-- Header -->
 <header id="header">
-    <h1><a href="#">Konferencje i targi<span>   Eventy i organizacja</span></a></h1>
+    <h1><a th:href="@{/index}">Konferencje i targi<span>   Eventy i organizacja</span></a></h1>
     <a href="#menu">Menu</a>
 </header>
 
@@ -27,11 +27,12 @@ and open the template in the editor.
 <nav id="menu">
     <ul class="links">
         <li><a th:href="@{/index}">Strona główna</a></li>
-        <li><a href="generic.html">Najbliższe wydarzenia</a></li>
-        <li><a href="elements.html">Poprzednie wydarzenia</a></li>
-        <li><a href="pomoc.html">Pomoc</a></li>
-        <li><a th:href="@{/login}">Zaloguj się</a></li>
-        <li><a href="/" th:href="@{/registration}">Zarejestruj się</a></li>
+        <li><a th:href="@{/list}">Najbliższe wydarzenia</a></li>
+        <li><a th:href="@{/list}">Poprzednie wydarzenia</a></li>
+        <li><a th:href="@{/showNewContactForm}">Pomoc</a></li>
+        <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj się</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Wyloguj się</a></li>
+        <li sec:authorize="isAnonymous()"><a href="/" th:href="@{/registration}">Zarejestruj się</a></li>
     </ul>
 </nav>
 
@@ -47,13 +48,15 @@ and open the template in the editor.
         <header>
             <h1>Update</h1>
 
-            <form action="#" th:action="@{/saveEvent}" th:object="${event}" method="POST">
+            <form action="#" th:action="@{/saveEvent}" th:object="${event}" method="POST" enctype="multipart/form-data">
 
                 <input type="hidden" th:field="*{id}" />
                 <br/>
                 <input type="text" th:field="*{name}"  class="form-control mb-4 col-4">
+                <a th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></a>
                 <br/>
                 <input type="text" th:field="*{city}"  class="form-control mb-4 col-4">
+                <a th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></a>
                 <br/>
                 <!--<input type="text" th:field="*{date}"  class="form-control mb-4 col-4">-->
                 <input id="datetime" th:field="*{date}" type="text" placeholder="Date">
@@ -62,8 +65,13 @@ and open the template in the editor.
                 <script>
                 $("#datetime").datetimepicker({step: 5 });
                 </script>
+                <a th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></a>
                 <br/>
                 <input type="text" th:field="*{description}"  class="form-control mb-4 col-4">
+                <a th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></a>
+                <br/>
+                <input type="file" name="file" class="custom-file-input" id="customFile">
+                <label class="custom-file-label" for="customFile">Wybierz plik</label>
                 <br/>
                 <button type="submit"> Update Event</button>
             </form>
