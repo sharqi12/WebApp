@@ -12,7 +12,7 @@ and open the template in the editor.
     <title>Wspomaganie organizacji konferencji i targów</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="jquery.datetimepicker.min.css"/>
+    <link rel="stylesheet" href="../assets/css/jquery.datetimepicker.min.css"/>
     <link rel="stylesheet" href="../assets/css/main.css" type="text/css"/>
 </head>
 <body>
@@ -29,7 +29,7 @@ and open the template in the editor.
         <li><a th:href="@{/index}">Strona główna</a></li>
         <li><a th:href="@{/list}">Najbliższe wydarzenia</a></li>
         <li><a th:href="@{/list}">Poprzednie wydarzenia</a></li>
-        <li><a th:href="@{/pomoc}">Pomoc</a></li>
+        <li><a th:href="@{/showNewContactForm}">Pomoc</a></li>
         <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj się</a></li>
         <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Wyloguj się</a></li>
         <li sec:authorize="isAnonymous()"><a href="/" th:href="@{/registration}">Zarejestruj się</a></li>
@@ -48,35 +48,40 @@ and open the template in the editor.
         <header>
             <h1>Zarejestruj swój event</h1>
 
-            <form action="#" th:action="@{/saveEvent}" th:object="${event}" method="POST">
+            <form action="#" th:action="@{/saveEvent}" th:object="${event}" method="POST" enctype="multipart/form-data">
                 <br/>
                 <input type="text" th:field="*{name}" placeholder="Name" class="form-control mb-4 col-4">
+                <a th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></a>
                 <br/>
                 <input type="text" th:field="*{city}" placeholder="City" class="form-control mb-4 col-4">
+                <a th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></a>
                 <br/>
                 <!--<input type="text" th:field="*{date}" placeholder="Date" class="form-control mb-4 col-4">-->
-                <input id="datetime" type="text" placeholder="Date">
-
-                <script src="jquery.js"></script>
-                <script src="jquery.datetimepicker.full.js"></script>
+                <input id="datetime" th:field="*{date}" type="text" placeholder="Date">
+                <script src="../assets/js/jquery.js"></script>
+                <script src="../assets/js/jquery.datetimepicker.full.js"></script>
                 <script>
-                $("#datetime").datetimepicker();
+                $("#datetime").datetimepicker({step: 5 });
                 </script>
+                <a th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></a>
                 <br/>
                 <input type="text" th:field="*{description}" placeholder="Description" class="form-control mb-4 col-4">
+                <a th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></a>
                 <br/>
+                <input type="file" name="file" class="custom-file-input" id="customFile">
+                 <label class="custom-file-label" for="customFile">Wybierz plik</label>
+                 <br/>
 
+                 <button type="submit" class="registerButton"> Save Event</button>
+             </form>
 
-                <button type="submit" class="registerButton"> Save Event</button>
-            </form>
+             <hr>
 
-            <hr>
+             <a th:href="@{/list}"> Back to Event List</a>
 
-            <a th:href="@{/list}"> Back to Event List</a>
-
-            </form>
-        </header>
-        <!-- <a href="#main" class="button big alt scrolly">Dignissim</a> -->
+             </form>
+         </header>
+         <!-- <a href="#main" class="button big alt scrolly">Dignissim</a> -->
     </div>
 
 </section>

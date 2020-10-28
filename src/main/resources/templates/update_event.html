@@ -29,7 +29,7 @@ and open the template in the editor.
         <li><a th:href="@{/index}">Strona główna</a></li>
         <li><a th:href="@{/list}">Najbliższe wydarzenia</a></li>
         <li><a th:href="@{/list}">Poprzednie wydarzenia</a></li>
-        <li><a th:href="@{/pomoc}">Pomoc</a></li>
+        <li><a th:href="@{/showNewContactForm}">Pomoc</a></li>
         <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj się</a></li>
         <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Wyloguj się</a></li>
         <li sec:authorize="isAnonymous()"><a href="/" th:href="@{/registration}">Zarejestruj się</a></li>
@@ -48,13 +48,15 @@ and open the template in the editor.
         <header>
             <h1>Update</h1>
 
-            <form action="#" th:action="@{/saveEvent}" th:object="${event}" method="POST">
+            <form action="#" th:action="@{/saveEvent}" th:object="${event}" method="POST" enctype="multipart/form-data">
 
                 <input type="hidden" th:field="*{id}" />
                 <br/>
                 <input type="text" th:field="*{name}"  class="form-control mb-4 col-4">
+                <a th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></a>
                 <br/>
                 <input type="text" th:field="*{city}"  class="form-control mb-4 col-4">
+                <a th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></a>
                 <br/>
                 <!--<input type="text" th:field="*{date}"  class="form-control mb-4 col-4">-->
                 <input id="datetime" th:field="*{date}" type="text" placeholder="Date">
@@ -63,8 +65,13 @@ and open the template in the editor.
                 <script>
                 $("#datetime").datetimepicker({step: 5 });
                 </script>
+                <a th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></a>
                 <br/>
                 <input type="text" th:field="*{description}"  class="form-control mb-4 col-4">
+                <a th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></a>
+                <br/>
+                <input type="file" name="file" class="custom-file-input" id="customFile">
+                <label class="custom-file-label" for="customFile">Wybierz plik</label>
                 <br/>
                 <button type="submit"> Update Event</button>
             </form>
