@@ -1,7 +1,5 @@
 package com.WEBAPP.WEBAPP.model;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -9,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "email")) //Email musi byc unikalny - jeden email do jednego uzytkownika
-public class User implements UserDetails {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -18,7 +16,6 @@ public class User implements UserDetails {
 
     private String name;
 
-    @Column(unique=true)
     private String email;
 
     private String password;
@@ -36,14 +33,6 @@ public class User implements UserDetails {
 
 
     public User() {
-    }
-
-    public User(User user){
-        this.id=user.getId();
-        this.nick=user.getNick();
-        this.name=user.getName();
-        this.email=user.getEmail();
-        this.password=user.getPassword();
     }
 
     public User(String nick, String name, String email, String password, Collection<Role> roles) {
@@ -79,39 +68,7 @@ public class User implements UserDetails {
     public void setEmail(String email){
         this.email=email;
     }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-
     public String getPassword(){return password;}
-
-    @Override
-    public String getUsername() {
-        return null;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return false;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return false;
-    }
-
     public void setPassword(String password){
         this.password=password;
     }
