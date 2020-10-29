@@ -12,7 +12,7 @@ and open the template in the editor.
     <title>Wspomaganie organizacji konferencji i targów</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="assets/css/main.css" type="text/css"/>
+    <link rel="stylesheet" href="../assets/css/main.css" type="text/css"/>
 </head>
 <body>
 
@@ -46,26 +46,26 @@ and open the template in the editor.
     <div class="inner">
 
         <header>
-            <h1>Update</h1>
+            <h1>Zaktualizuj wydarzenie</h1>
 
             <form action="#" th:action="@{/saveEvent}" th:object="${event}" method="POST">
 
                 <input type="hidden" th:field="*{id}" />
-
+                <br>
                 <input type="text" th:field="*{name}"  class="form-control mb-4 col-4">
-
+                <br>
                 <input type="text" th:field="*{city}"  class="form-control mb-4 col-4">
-
+                <br>
                 <input type="text" th:field="*{date}"  class="form-control mb-4 col-4">
-
+                <br>
                 <input type="text" th:field="*{description}"  class="form-control mb-4 col-4">
-
-                <button type="submit" class="btn btn-info col-2"> Update Event</button>
+                <br>
+                <button type="submit" class="registerButton"> Zaktualizuj</button>
             </form>
 
             <hr>
 
-            <a th:href="@{/list}"> Back to Event List</a>
+            <a th:href="@{/list}"> Powrót do listy wydarzeń</a>
 
             </form>
         </header>
@@ -121,11 +121,11 @@ and open the template in the editor.
 
 <!-- Scripts -->
 <!-- Scripts -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/jquery.scrolly.min.js"></script>
-<script src="assets/js/skel.min.js"></script>
-<script src="assets/js/util.js"></script>
-<script src="assets/js/main.js"></script>
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/jquery.scrolly.min.js"></script>
+<script src="../assets/js/skel.min.js"></script>
+<script src="../assets/js/util.js"></script>
+<script src="../assets/js/main.js"></script>
 
 </body>
 </html>
