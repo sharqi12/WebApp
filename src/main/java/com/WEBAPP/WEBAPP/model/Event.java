@@ -13,6 +13,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "events")
@@ -23,16 +26,26 @@ public class Event {
     private long id;
 
     @Column(name = "name")
+    @Size(min=2, max=40, message = "Wprowadz nazwe!")
     private String name;
 
     @Column(name = "city")
+    @NotBlank(message = "")
+    @Size(min = 2, message = "Za malo liter!")
+    @Pattern(regexp = "^([a-zA-Z]+|[a-zA-Z]+\\s[a-zA-Z]+)$", message = "Wprowadz miasto!")
     private String city;
 
     @Column(name = "date")
+    @NotBlank(message = "Podaj date!")
     private String date;
 
     @Column(name = "description")
+    @Size(min = 10, message = "Wprowadz opis!")
     private String description;
+
+    @Lob
+    @Column(columnDefinition = "MEDIUMBLOB")
+    private String image;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_events", referencedColumnName = "id")
@@ -69,4 +82,12 @@ public class Event {
     }
     public List<Comment> getComments() { return comments;}
     public void setComments(List<Comment> comments) {this.comments = comments;}
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 }

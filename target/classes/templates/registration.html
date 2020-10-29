@@ -22,7 +22,7 @@ and open the template in the editor.
 
 <!-- Header -->
 <header id="header">
-	<h1><a href="#">Konferencje i targi<span>   Eventy i organizacja</span></a></h1>
+	<h1><a th:href="@{/index}">Konferencje i targi<span>   Eventy i organizacja</span></a></h1>
 	<a href="#menu">Menu</a>
 </header>
 
@@ -32,7 +32,7 @@ and open the template in the editor.
 		<li><a th:href="@{/index}">Strona główna</a></li>
 		<li><a th:href="@{/list}">Najbliższe wydarzenia</a></li>
 		<li><a th:href="@{/list}">Poprzednie wydarzenia</a></li>
-		<li><a th:href="@{/pomoc}">Pomoc</a></li>
+		<li><a th:href="@{/showNewContactForm}">Pomoc</a></li>
 		<li sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj się</a></li>
 		<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Wyloguj się</a></li>
 		<li sec:authorize="isAnonymous()"><a href="/" th:href="@{/registration}">Zarejestruj się</a></li>

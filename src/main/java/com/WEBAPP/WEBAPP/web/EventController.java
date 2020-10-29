@@ -5,10 +5,11 @@ import com.WEBAPP.WEBAPP.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.validation.Valid;
 
 @Controller
 public class EventController {
@@ -32,10 +33,13 @@ public class EventController {
     }
 
     @PostMapping("/saveEvent")
-    public String saveEvent(@ModelAttribute("event") Event event) {
-        // save event to database
-        eventService.saveEvent(event);
+    public String saveEvent(@RequestParam("file") MultipartFile file, @ModelAttribute @Valid Event event, Errors errors) {
+        if(errors.hasErrors()){
+            return "update_event";
+        } else {
+        eventService.saveEvent(file, event);
         return "redirect:/list";
+        }
     }
 
     @GetMapping("/showFormForUpdate/{id}")
