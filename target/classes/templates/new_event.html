@@ -31,6 +31,7 @@ and open the template in the editor.
         <li><a th:href="@{/list}">Poprzednie wydarzenia</a></li>
         <li><a th:href="@{/showNewContactForm}">Pomoc</a></li>
         <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj się</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/profile}">Twój profil</a></li>
         <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Wyloguj się</a></li>
         <li sec:authorize="isAnonymous()"><a href="/" th:href="@{/registration}">Zarejestruj się</a></li>
     </ul>
@@ -50,14 +51,14 @@ and open the template in the editor.
 
             <form action="#" th:action="@{/saveEvent}" th:object="${event}" method="POST" enctype="multipart/form-data">
                 <br/>
-                <input type="text" th:field="*{name}" placeholder="Name" class="form-control mb-4 col-4">
+                <input type="text" th:field="*{name}" placeholder="Nazwa" class="form-control mb-4 col-4">
                 <a th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></a>
                 <br/>
-                <input type="text" th:field="*{city}" placeholder="City" class="form-control mb-4 col-4">
+                <input type="text" th:field="*{city}" placeholder="Miasto" class="form-control mb-4 col-4">
                 <a th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></a>
                 <br/>
                 <!--<input type="text" th:field="*{date}" placeholder="Date" class="form-control mb-4 col-4">-->
-                <input id="datetime" th:field="*{date}" type="text" placeholder="Date">
+                <input id="datetime" th:field="*{date}" type="text" placeholder="Data">
                 <script src="../assets/js/jquery.js"></script>
                 <script src="../assets/js/jquery.datetimepicker.full.js"></script>
                 <script>
@@ -65,14 +66,15 @@ and open the template in the editor.
                 </script>
                 <a th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></a>
                 <br/>
-                <input type="text" th:field="*{description}" placeholder="Description" class="form-control mb-4 col-4">
+                <input type="text" th:field="*{description}" placeholder="Opis" class="form-control mb-4 col-4">
                 <a th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></a>
                 <br/>
+                <h5>Dodaj zdjęcie</h5>
                 <input type="file" name="file" class="custom-file-input" id="customFile">
                  <label class="custom-file-label" for="customFile">Wybierz plik</label>
                  <br/>
 
-                 <button type="submit" class="registerButton"> Save Event</button>
+                 <button type="submit" class="registerButton"> Zapisz Event</button>
              </form>
 
              <hr>
