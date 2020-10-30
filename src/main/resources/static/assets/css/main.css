@@ -1563,7 +1563,7 @@
 	}
 
 	body {
-		background: #020B13;
+		background: #ffffff;
 	}
 
 		body.is-loading *, body.is-loading *:before, body.is-loading *:after {
@@ -1580,7 +1580,7 @@
 /* Type */
 
 	body {
-		background-color: #020B13;
+		background-color: #ffffff;
 		color: #c0c2c4;
 	}
 
@@ -2827,16 +2827,16 @@
 			}
 
 		.wrapper.style1 {
-			background-color: #062038;
-			color: #c1c7cd;
+			background-color: #ffffff; /*KOLOR TŁA wrapper style1 */
+			color: #000000;
 		}
 
 			.wrapper.style1 input, .wrapper.style1 select, .wrapper.style1 textarea {
-				color: #ffffff;
+				color: #000000;
 			}
 
 			.wrapper.style1 a {
-				color: #ffffff;
+				color: #000000;
 			}
 
 				.wrapper.style1 a:hover {
@@ -2844,11 +2844,11 @@
 				}
 
 			.wrapper.style1 strong, .wrapper.style1 b {
-				color: #ffffff;
+				color: #000000;
 			}
 
 			.wrapper.style1 h1, .wrapper.style1 h2, .wrapper.style1 h3, .wrapper.style1 h4, .wrapper.style1 h5, .wrapper.style1 h6 {
-				color: #ffffff;
+				color: #000000;
 			}
 
 			.wrapper.style1 blockquote {
@@ -2939,7 +2939,7 @@
 				}
 
 			.wrapper.style1 label {
-				color: #ffffff;
+				color: #000000;
 			}
 
 			.wrapper.style1 input[type="text"],
@@ -2948,7 +2948,7 @@
 			.wrapper.style1 select,
 			.wrapper.style1 textarea {
 				background: rgba(255, 255, 255, 0.075);
-				border-color: rgba(255, 255, 255, 0.15);
+				border-color: #000000;
 			}
 
 				.wrapper.style1 input[type="text"]:focus,
@@ -2956,7 +2956,7 @@
 				.wrapper.style1 input[type="email"]:focus,
 				.wrapper.style1 select:focus,
 				.wrapper.style1 textarea:focus {
-					border-color: #ffffff;
+					border-color: #000000;
 					box-shadow: 0 0 0 1px #ffffff;
 				}
 
@@ -2977,14 +2977,14 @@
 
 			.wrapper.style1 input[type="checkbox"]:checked + label:before,
 			.wrapper.style1 input[type="radio"]:checked + label:before {
-				background-color: #ffffff;
+				background-color: #000000;
 				border-color: #ffffff;
 				color: #062038;
 			}
 
 			.wrapper.style1 input[type="checkbox"]:focus + label:before,
 			.wrapper.style1 input[type="radio"]:focus + label:before {
-				border-color: #ffffff;
+				border-color: #000000;
 				box-shadow: 0 0 0 1px #ffffff;
 			}
 
