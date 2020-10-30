@@ -30,7 +30,6 @@ public class Event {
     private String name;
 
     @Column(name = "city")
-    @NotBlank(message = "")
     @Size(min = 2, message = "Za malo liter!")
     @Pattern(regexp = "^([a-zA-Z]+|[a-zA-Z]+\\s[a-zA-Z]+)$", message = "Wprowadz miasto!")
     private String city;

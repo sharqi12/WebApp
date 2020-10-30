@@ -32,13 +32,24 @@ public class EventController {
         return "new_event";
     }
 
+
     @PostMapping("/saveEvent")
     public String saveEvent(@RequestParam("file") MultipartFile file, @ModelAttribute @Valid Event event, Errors errors) {
         if(errors.hasErrors()){
-            return "update_event";
+            return "new_event";
         } else {
         eventService.saveEvent(file, event);
         return "redirect:/list";
+        }
+    }
+
+    @PostMapping("/saveEvent2")
+    public String saveEvent2(@RequestParam("file") MultipartFile file, @ModelAttribute @Valid Event event, Errors errors) {
+        if(errors.hasErrors()){
+            return "update_event";
+        } else {
+            eventService.saveEvent(file, event);
+            return "redirect:/list";
         }
     }
 

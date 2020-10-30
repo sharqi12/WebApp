@@ -16,12 +16,12 @@ public class Contact {
 
     @Column(name = "name")
     @Pattern(regexp = "[a-zA-Z]*[\\s]{1}[a-zA-Z].*",  message = "wprowadz imie i nazwisko!")
-    @Size(min=6, message = "")
+    @Size(min=6, message = "Minimum 6 znakow!")
     private String name;
 
     @Column(name = "email")
     @Email(regexp = "^(.+)@(.+)$", message = "Nieprawidłowy email!")
-    @Size(min=8, message = "")
+    @Size(min=8, message = "Minimum 8 znakow!")
     private String email;
 
     @Column(name = "category")
