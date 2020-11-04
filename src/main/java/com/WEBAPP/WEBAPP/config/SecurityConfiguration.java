@@ -33,9 +33,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         this.service=service;
     }
 
-    /*
-        @Autowired
-        private UserService userService;*/
+/*
+    @Autowired
+    private UserService userService;*/
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(service).passwordEncoder(passwordEncoder());}
@@ -63,14 +63,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers(
-                        "/","/list**", "/showDescription/**","/description/**","/index",
-                        "/profile",/* TYMCZASOWO */
+                "/","/list**", "/showDescription/**","/description/**","/index",
                         "/showComment/**",
-                        "/registration/**",
-                        "/assets/**",
-                        "/js/**",
-                        "/css/**",
-                        "/img/**").permitAll()
+                "/registration/**",
+                "/assets/**",
+                "/js/**",
+                "/css/**",
+                "/img/**").permitAll()
 
                 .anyRequest().authenticated()
 
