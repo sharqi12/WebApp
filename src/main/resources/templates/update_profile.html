@@ -45,7 +45,13 @@
                         <h4>Nick:</h4>
                     </div>
                     <div class="6u$ 12u$(medium)">
-                        <span th:text="${#authentication.getPrincipal().getNick()}"></span>
+                        <div th:with="localNick=${#authentication.getPrincipal().getNick()}">
+                            <form th:action="@{/update_nick}" th:object="${user}" method="POST" >
+                                <fieldset>
+                                    <input type="text" id="nick" th:field="*{nick}"  th:value="${localNick}" th:placeholder="${localNick}"/>
+                                </fieldset>
+                            </form>
+                        </div>
                     </div>
                     <br/>
 
@@ -53,8 +59,13 @@
                         <h4>Imię i nazwisko lub nazwa:</h4>
                     </div>
                     <div class="6u$ 12u$(medium)">
-                        <br>
-                        <span th:text="${#authentication.getPrincipal().getName()}"></span>
+                        <form action="/" method="post" >
+                            <div th:with="localName=${#authentication.getPrincipal().getName()}">
+                                <fieldset>
+                                    <input type="text" id="New_Name" th:value="${localName}" th:placeholder="${localName}"/>
+                                </fieldset>
+                            </div>
+                        </form>
                     </div>
                     <br/>
 
@@ -62,11 +73,21 @@
                         <h4>Email:</h4>
                     </div>
                     <div class="6u$ 12u$(medium)">
-                        <span th:text="${#authentication.getPrincipal().getEmail()}"></span>
-                        <br/>
-                        <br>
-                    </div>
+                        <form action="/" method="post" >
+                            <div th:with="localemail=${#authentication.getPrincipal().getUsername()}">
+                                <fieldset>
+                                    <input type="text" id="New_email" th:value="${localemail}" th:placeholder="${localemail}"/>
+                                </fieldset>
+                            </div>
 
+                        </form>
+                        <br/>
+                        <button type="submit" onclick="location.href = 'profile';" id="myButton" class="registerButton" >Zapisz profil</button>
+                        <br>
+                        <br>
+                        <br>
+                        <a th:href="@{/profile}"> Powrót do profilu</a>
+                    </div>
 
                 </div>
 
@@ -74,31 +95,16 @@
                     <div class="col-sm-3">
                         <div class="text-center">
                             <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+                            <h5>Załaduj inne zdjęcie...</h5>
+                            <input type="file" class="text-center center-block file-upload">
                         </div></hr><br>
                     </div>
-
                 </div>
 
 
 
                 <br>
                 <br>
-                <div  class="6u$ 12u$(medium)">
-
-                </div>
-
-                <br>
-                <br>
-                <div  class="6u$ 12u$(medium)">
-
-                    <button type="submit" th:onclick="location.href = 'update_profile';" id="myButton" class="registerButton" >Edytuj profil</button>
-                    <!--
-                   <td><a  th:href="@{update_profile/{id}(id=${#authentication.getPrincipal().getId()})}" class="btn btn-primary">Edytuj profil</a></td>
-                   -->
-                    <br>
-                    <br>
-                    <button type="submit" onclick="location.href = 'change_user_password';" id="myButton2" class="registerButton" >Zmień hasło</button>
-                </div>
             </div>
         </div>
     </section>
