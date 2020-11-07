@@ -47,6 +47,9 @@
                 <div class="row 200%">
                     <div class="6u 12u$(medium)">
                         <h4>Nick:</h4>
+                        <h4>Imię i nazwisko lub nazwa:</h4>
+                        <h4>Email:</h4>
+
                     </div>
                     <div class="6u$ 12u$(medium)">
 
@@ -61,11 +64,13 @@
                                     <fieldset>
                                         <input type="text" id="nick" th:field="*{nick}"  th:value="${localNick}" th:placeholder="${localNick}"/>
                                         <input type="hidden" id="id" th:field="*{id}"  th:value="${localId}" th:placeholder="${localId}"/>
-                                        <input type="hidden" id="name" th:field="*{name}"  th:value="${localName}" th:placeholder="${localName}"/>
-                                        <input type="hidden" id="email" th:field="*{email}"  th:value="${localEmail}" th:placeholder="${localEmail}"/>
+                                        <br>
+                                        <input type="text" id="name" th:field="*{name}"  th:value="${localName}" th:placeholder="${localName}"/>
+                                        <br>
+                                        <input type="text" id="email" th:field="*{email}"  th:value="${localEmail}" th:placeholder="${localEmail}"/>
                                         <input type="hidden" id="password" th:field="*{password}"  th:value="${localPassword}" th:placeholder="${localPassword}"/>
                                     </fieldset>
-                                </form>
+
                                         </div>
                                     </div>
                                 </div>
@@ -76,37 +81,16 @@
                     <br/>
 
                     <div class="6u 12u$(medium)">
-                        <h4>Imię i nazwisko lub nazwa:</h4>
+                        <br>
                     </div>
                     <div class="6u$ 12u$(medium)">
-                        <form action="/" method="post" >
-                            <div th:with="localName=${#authentication.getPrincipal().getName()}">
-                                <fieldset>
-                                    <input type="text" id="New_Name" th:value="${localName}" th:placeholder="${localName}"/>
-                                </fieldset>
-                            </div>
-                        </form>
-                    </div>
-                    <br/>
-
-                    <div class="6u 12u$(medium)">
-                        <h4>Email:</h4>
-                    </div>
-                    <div class="6u$ 12u$(medium)">
-                        <form action="/" method="post" >
-                            <div th:with="localemail=${#authentication.getPrincipal().getUsername()}">
-                                <fieldset>
-                                    <input type="text" id="New_email" th:value="${localemail}" th:placeholder="${localemail}"/>
-                                </fieldset>
-                            </div>
-
-                        </form>
                         <br/>
                         <button type="submit" onclick="location.href = 'profile';" id="myButton" class="registerButton" >Zapisz profil</button>
+                        </form>
                         <br>
                         <br>
                         <br>
-                        <a th:href="@{/profile}"> Powrót do profilu</a>
+                        <a th:href="@{/show_profile}"> Powrót do profilu</a>
                     </div>
 
                 </div>

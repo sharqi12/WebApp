@@ -76,7 +76,7 @@ public class CurrentUserControllerAdvice {
     @PostMapping("/saveNick")
     public String saveNick(@ModelAttribute("user") User user, Principal principal){
         userService.save(user);
-        return "@{/logout}";
+        return "/profile";
     }
 
     /*
