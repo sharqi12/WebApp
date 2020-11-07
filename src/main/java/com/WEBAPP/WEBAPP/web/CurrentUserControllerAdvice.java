@@ -30,18 +30,18 @@ public class CurrentUserControllerAdvice {
                     .getAuthentication()
                     .getPrincipal();*/
 
-    @Autowired
+    //@Autowired
     private UserService userService;
 
-    @Autowired
-    private UserRepository userRepository;
+    //@Autowired
+    //private UserRepository userRepository;
 
     public CurrentUserControllerAdvice(UserService userService) {
         super();
         this.userService = userService;
     }
 
-    @RequestMapping("/profile")
+    @GetMapping("/show_profile")
     public String showProfilePage(Model model, Principal principal){
 
         //String email = principal.getName();
@@ -64,14 +64,22 @@ public class CurrentUserControllerAdvice {
         return "change_user_password";
     }
 
-    @RequestMapping("/update_profile")
+    @GetMapping("/show_update_profile")
     public String showUpdateProfilePage(Model model, Principal principal){
 
         //String email = principal.getName();
-        // User user = userService.loadUserByUsername(email);
+        //User user = (User) userService.loadUserByUsername(principal.getName());
         model.addAttribute("user", userService.loadUserByUsername(principal.getName()));
         return "update_profile";
     }
+
+    @PostMapping("/saveNick")
+    public String saveNick(@ModelAttribute("user") User user, Principal principal){
+        userService.save(user);
+        return "@{/logout}";
+    }
+
+    /*
 
     @RequestMapping(value = "/update_nick", method = RequestMethod.POST)
     //public String update_nick(@ModelAttribute("user")UserRegistrationDto user, Principal principal){
@@ -80,5 +88,6 @@ public class CurrentUserControllerAdvice {
         //user.setNick("bghcvbcv");
         this.userService.save(user);
     return "index";
-    }
+    }*/
+
 }

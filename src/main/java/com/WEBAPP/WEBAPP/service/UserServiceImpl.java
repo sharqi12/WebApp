@@ -43,6 +43,7 @@ public class UserServiceImpl implements UserService{
         return userRepository.save(user);
     }
 
+    @Override
     public User save(User user) {
         return userRepository.save(user);
     }
@@ -55,7 +56,8 @@ public class UserServiceImpl implements UserService{
             throw new UsernameNotFoundException("Niepoprawna nazwa lub hasło");
         }
 
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
+        //return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
+        return user;
     }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){

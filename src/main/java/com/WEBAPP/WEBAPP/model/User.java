@@ -18,7 +18,6 @@ public class User implements UserDetails {
 
     private String name;
 
-    @Column(unique=true)
     private String email;
 
     private String password;
@@ -38,14 +37,6 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(User user){
-        this.id=user.getId();
-        this.nick=user.getNick();
-        this.name=user.getName();
-        this.email=user.getEmail();
-        this.password=user.getPassword();
-    }
-
     public User(String nick, String name, String email, String password, Collection<Role> roles) {
         super();
         this.nick = nick;
@@ -54,6 +45,15 @@ public class User implements UserDetails {
         this.password = password;
         this.roles = roles;
     }
+
+    public User(User user){
+        this.id=user.getId();
+        this.nick=user.getNick();
+        this.name=user.getName();
+        this.email=user.getEmail();
+        this.password=user.getPassword();
+    }
+
 
     public String getNick(){
         return nick;

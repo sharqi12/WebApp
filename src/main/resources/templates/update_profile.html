@@ -1,12 +1,16 @@
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <title>Wspomaganie organizacji konferencji i targów</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--<link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">-->
     <link rel="stylesheet" href="assets/css/main.css" />
 </head>
 <body class="subpage">
@@ -25,7 +29,7 @@
         <li><a th:href="@{/list}">Poprzednie wydarzenia</a></li>
         <li><a th:href="@{/pomoc}">Pomoc</a></li>
         <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj się</a></li>
-        <li sec:authorize="isAuthenticated()"><a th:href="@{/profile}">Twój profil</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/show_profile}">Twój profil</a></li>
         <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Wyloguj się</a></li>
         <li sec:authorize="isAnonymous()"><a href="/" th:href="@{/registration}">Zarejestruj się</a></li>
     </ul>
@@ -45,13 +49,29 @@
                         <h4>Nick:</h4>
                     </div>
                     <div class="6u$ 12u$(medium)">
+
                         <div th:with="localNick=${#authentication.getPrincipal().getNick()}">
-                            <form action="/" method="post" >
+                            <div th:with="localId=${#authentication.getPrincipal().getId()}">
+                                <div th:with="localName=${#authentication.getPrincipal().getName()}">
+                                    <div th:with="localEmail=${#authentication.getPrincipal().getEmail()}">
+                                        <div th:with="localPassword=${#authentication.getPrincipal().getPassword()}">
+
+                                <form th:action="@{/saveNick}" th:object="${user}" method="post" >
+
                                     <fieldset>
-                                        <input type="text" id="nick"  th:value="${localNick}" th:placeholder="${localNick}"/>
+                                        <input type="text" id="nick" th:field="*{nick}"  th:value="${localNick}" th:placeholder="${localNick}"/>
+                                        <input type="hidden" id="id" th:field="*{id}"  th:value="${localId}" th:placeholder="${localId}"/>
+                                        <input type="hidden" id="name" th:field="*{name}"  th:value="${localName}" th:placeholder="${localName}"/>
+                                        <input type="hidden" id="email" th:field="*{email}"  th:value="${localEmail}" th:placeholder="${localEmail}"/>
+                                        <input type="hidden" id="password" th:field="*{password}"  th:value="${localPassword}" th:placeholder="${localPassword}"/>
                                     </fieldset>
-                            </form>
+                                </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
                     <br/>
 

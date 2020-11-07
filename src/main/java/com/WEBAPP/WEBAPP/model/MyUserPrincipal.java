@@ -55,7 +55,7 @@ public class MyUserPrincipal extends User implements UserDetails {
     @Override
     public String getUsername() {
         return this.user.getEmail();
-    } //NIE WIEM CZY TU MA BYĆ .getUsername() CZY .getEmail()
+    }
 
     @Override
     public String getPassword() {
@@ -66,14 +66,7 @@ public class MyUserPrincipal extends User implements UserDetails {
 
     public String getNick(){return this.user.getNick();}
 
-
-
-
-    public void setNick(){
-        this.user.setNick("dooooooooooooooooooooo");
-
-       // registrationDto.setNick(user.getNick());
-    }
+    public void setNick(String nick){this.user.setNick(nick);}
 
 
     // Just an example to put some addititional Data to your logged in user

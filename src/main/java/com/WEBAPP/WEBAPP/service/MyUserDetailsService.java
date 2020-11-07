@@ -13,6 +13,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 import java.nio.file.attribute.UserPrincipal;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -42,6 +44,17 @@ public class MyUserDetailsService implements UserDetailsService {
             return new MyUserPrincipal(user);
         }
     }
+
+    /*
+    public void updateNick(Integer id, User user){
+        user.setId(id);
+        userRepository.save(user);
+    }*/
+
+    public User save(User user) {
+        return userRepository.save(user);
+    }
+
 }
 /*
     Integer rolaa(String user){

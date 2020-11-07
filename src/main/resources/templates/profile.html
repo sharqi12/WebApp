@@ -25,7 +25,7 @@
         <li><a th:href="@{/list}">Poprzednie wydarzenia</a></li>
         <li><a th:href="@{/pomoc}">Pomoc</a></li>
         <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj się</a></li>
-        <li sec:authorize="isAuthenticated()"><a th:href="@{/profile}">Twój profil</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/show_profile}">Twój profil</a></li>
         <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Wyloguj się</a></li>
         <li sec:authorize="isAnonymous()"><a href="/" th:href="@{/registration}">Zarejestruj się</a></li>
     </ul>
@@ -91,9 +91,9 @@
                 <br>
                 <div  class="6u$ 12u$(medium)">
 
-                    <button type="submit" th:onclick="location.href = 'update_profile';" id="myButton" class="registerButton" >Edytuj profil</button>
+                    <button type="submit" th:onclick="location.href = 'show_update_profile';" id="myButton" class="registerButton" >Edytuj profil</button>
                      <!--
-                    <td><a  th:href="@{update_profile/{id}(id=${#authentication.getPrincipal().getId()})}" class="btn btn-primary">Edytuj profil</a></td>
+                    <td><a  th:href="@{update_profile/{username}(username=${#authentication.getPrincipal().getEmail()})}" class="btn btn-primary">Edytuj profil</a></td>
                     -->
                     <br>
                     <br>
