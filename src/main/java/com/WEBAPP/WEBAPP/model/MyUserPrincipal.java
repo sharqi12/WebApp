@@ -1,19 +1,24 @@
 package com.WEBAPP.WEBAPP.model;
 
+import com.WEBAPP.WEBAPP.service.EventService;
+import com.WEBAPP.WEBAPP.service.UserService;
+import com.WEBAPP.WEBAPP.service.UserServiceImpl;
+import com.WEBAPP.WEBAPP.web.dto.UserRegistrationDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 // You want to extend your User class here
 public class MyUserPrincipal extends User implements UserDetails {
     private static final long serialVersionUID = 1L;
     private User user;
+
+    @Autowired
+    private UserServiceImpl userService;
 
     public MyUserPrincipal(User user) {
         super(user);
@@ -60,6 +65,16 @@ public class MyUserPrincipal extends User implements UserDetails {
     public String getName(){return this.user.getName();}
 
     public String getNick(){return this.user.getNick();}
+
+
+
+
+    public void setNick(){
+        this.user.setNick("dooooooooooooooooooooo");
+
+       // registrationDto.setNick(user.getNick());
+    }
+
 
     // Just an example to put some addititional Data to your logged in user
 

@@ -45,13 +45,7 @@
                         <h4>Nick:</h4>
                     </div>
                     <div class="6u$ 12u$(medium)">
-                        <form action="/" method="post" >
-                            <div th:with="localNick=${#authentication.getPrincipal().getNick()}">
-                                <fieldset>
-                                    <input type="text" id="New_Nick" th:placeholder="${localNick}"/>
-                                </fieldset>
-                            </div>
-                        </form>
+                        <span th:text="${#authentication.getPrincipal().getNick()}"></span>
                     </div>
                     <br/>
 
@@ -59,12 +53,8 @@
                         <h4>Imię i nazwisko lub nazwa:</h4>
                     </div>
                     <div class="6u$ 12u$(medium)">
-                        <div th:with="localName=${#authentication.getPrincipal().getName()}">
-                            <fieldset>
-                                <input type="text" id="New_Name" th:placeholder="${localName}"/>
-                            </fieldset>
-                        </div>
-                        </form>
+                        <br>
+                        <span th:text="${#authentication.getPrincipal().getName()}"></span>
                     </div>
                     <br/>
 
@@ -72,16 +62,11 @@
                             <h4>Email:</h4>
                         </div>
                         <div class="6u$ 12u$(medium)">
-                            <form action="/" method="post" >
-                                <div th:with="localemail=${#authentication.getPrincipal().getUsername()}">
-                                    <fieldset>
-                                    <input type="text" id="New_email" th:placeholder="${localemail}"/>
-                                    </fieldset>
-                                </div>
-                            </form>
+                            <span th:text="${#authentication.getPrincipal().getEmail()}"></span>
                             <br/>
                             <br>
                         </div>
+
 
             </div>
 
@@ -89,32 +74,31 @@
                     <div class="col-sm-3">
                         <div class="text-center">
                             <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
-                            <h5>Załaduj inne zdjęcie...</h5>
-                            <input type="file" class="text-center center-block file-upload">
                         </div></hr><br>
                     </div>
+
                 </div>
 
 
 
+                <br>
+                <br>
+                <div  class="6u$ 12u$(medium)">
+
+                </div>
+
+                <br>
+                <br>
+                <div  class="6u$ 12u$(medium)">
+
+                    <button type="submit" th:onclick="location.href = 'update_profile';" id="myButton" class="registerButton" >Edytuj profil</button>
+                     <!--
+                    <td><a  th:href="@{update_profile/{id}(id=${#authentication.getPrincipal().getId()})}" class="btn btn-primary">Edytuj profil</a></td>
+                    -->
                     <br>
                     <br>
-
-                    <div  class="6u$ 12u$(medium)">
-                        <form action="/" method="post" >
-                            <h4 id="password change">Zmień hasło</h4>
-                            <fieldset>
-                                <label for="New_password">Podaj nowe hasło:</label>
-                                <input type="password" id="New_password" />
-
-                                <br>
-                                <label for="New_password2">Powtórz nowe hasło:</label>
-                                <input type="password" id="New_password2" />
-                            </fieldset>
-                            <br>
-                            <button type="submit" class="registerButton">Zmień hasło</button>
-                        </form>
-                    </div>
+                    <button type="submit" onclick="location.href = 'change_user_password';" id="myButton2" class="registerButton" >Zmień hasło</button>
+                </div>
             </div>
         </div>
     </section>

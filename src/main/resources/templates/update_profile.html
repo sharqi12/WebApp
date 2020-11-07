@@ -46,10 +46,10 @@
                     </div>
                     <div class="6u$ 12u$(medium)">
                         <div th:with="localNick=${#authentication.getPrincipal().getNick()}">
-                            <form th:action="@{/update_nick}" th:object="${user}" method="POST" >
-                                <fieldset>
-                                    <input type="text" id="nick" th:field="*{nick}"  th:value="${localNick}" th:placeholder="${localNick}"/>
-                                </fieldset>
+                            <form action="/" method="post" >
+                                    <fieldset>
+                                        <input type="text" id="nick"  th:value="${localNick}" th:placeholder="${localNick}"/>
+                                    </fieldset>
                             </form>
                         </div>
                     </div>
