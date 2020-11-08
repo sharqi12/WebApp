@@ -8,15 +8,20 @@ import com.WEBAPP.WEBAPP.service.UserService;
 import com.WEBAPP.WEBAPP.service.UserServiceImpl;
 import com.WEBAPP.WEBAPP.web.dto.UserRegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 public class CurrentUserControllerAdvice {
@@ -76,7 +81,20 @@ public class CurrentUserControllerAdvice {
     @PostMapping("/saveNick")
     public String saveNick(@ModelAttribute("user") User user, Principal principal){
         userService.save(user);
+        Authentication authentication = new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
         return "/profile";
+    }
+    @PostMapping("/savePassword")
+    public String savePassword(@ModelAttribute("user") User user, Errors errors, Principal principal){
+        if(errors.hasErrors()){
+            return "change_user_password";
+        } else {
+            userService.save(user);
+            Authentication authentication = new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            return "/profile";
+        }
     }
 
     /*

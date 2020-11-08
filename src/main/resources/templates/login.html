@@ -62,6 +62,10 @@ and open the template in the editor.
 															<div class="alert alert-info">Wylogowano pomyślnie</div>
 														</div>
 
+														<div th:if="${param.logout_update}">
+															<div class="alert alert-info">Ze względów beczpieczeństwa użytkownik został wylogowany. Zaloguj się ponownie</div>
+														</div>
+
                                                     <fieldset>
                                                       <label for="username">Twój email</label>
                                                       <input type="text" id="username" placeholder="Wprowadź email" name="username" required>
