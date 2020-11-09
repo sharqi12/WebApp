@@ -27,10 +27,10 @@ public class MainController {
     public String pomoc() {
         return "pomoc";
     }
-
+/*
     @GetMapping("/profile")
     public String profile() {
         return "profile";
-    }
+    }*/
 
 }
