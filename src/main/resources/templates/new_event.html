@@ -31,7 +31,7 @@ and open the template in the editor.
         <li><a th:href="@{/list}">Poprzednie wydarzenia</a></li>
         <li><a th:href="@{/showNewContactForm}">Pomoc</a></li>
         <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj się</a></li>
-        <li sec:authorize="isAuthenticated()"><a th:href="@{/profile}">Twój profil</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/show_profile}">Twój profil</a></li>
         <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Wyloguj się</a></li>
         <li sec:authorize="isAnonymous()"><a href="/" th:href="@{/registration}">Zarejestruj się</a></li>
     </ul>
@@ -62,7 +62,7 @@ and open the template in the editor.
                 <script src="../assets/js/jquery.js"></script>
                 <script src="../assets/js/jquery.datetimepicker.full.js"></script>
                 <script>
-                    $("#datetime").datetimepicker({step: 5 });
+                $("#datetime").datetimepicker({step: 5 });
                 </script>
                 <a th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></a>
                 <br/>
@@ -71,19 +71,19 @@ and open the template in the editor.
                 <br/>
                 <h5>Dodaj zdjęcie</h5>
                 <input type="file" name="file" class="custom-file-input" id="customFile">
-                <label class="custom-file-label" for="customFile">Wybierz plik</label>
-                <br/>
+                 <label class="custom-file-label" for="customFile">Wybierz plik</label>
+                 <br/>
 
-                <button type="submit" class="registerButton"> Zapisz Event</button>
-            </form>
+                 <button type="submit" class="registerButton"> Zapisz Event</button>
+             </form>
 
-            <hr>
+             <hr>
 
-            <a th:href="@{/list}"> Back to Event List</a>
+             <a th:href="@{/list}"> Back to Event List</a>
 
-            </form>
-        </header>
-        <!-- <a href="#main" class="button big alt scrolly">Dignissim</a> -->
+             </form>
+         </header>
+         <!-- <a href="#main" class="button big alt scrolly">Dignissim</a> -->
     </div>
 
 </section>

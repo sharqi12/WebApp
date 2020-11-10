@@ -1,25 +1,25 @@
 package com.WEBAPP.WEBAPP.model;
-import java.util.ArrayList;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import java.util.Collection;
-import java.util.List;
 import javax.persistence.*;
-import javax.validation.constraints.Size;
-import javax.validation.constraints.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "email")) //Email musi byc unikalny - jeden email do jednego uzytkownika
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String nick;
-    private String name;
-    private String email;
-    private String password;
 
+    private String nick;
+
+    private String name;
+
+    private String email;
+
+    private String password;
     @Transient
     private String passwordConfirmation;
 
@@ -33,11 +33,7 @@ public class User {
 
     private Collection<Role> roles;
 
-    /*@ManyToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_comment", referencedColumnName = "id")
 
-    List<Comment> comments = new ArrayList<>();
-*/
     public User() {
     }
 
@@ -47,9 +43,18 @@ public class User {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.passwordConfirmation = passwordConfirmation;
         this.roles = roles;
+        this.passwordConfirmation = passwordConfirmation;
     }
+
+    public User(User user){
+        this.id=user.getId();
+        this.nick=user.getNick();
+        this.name=user.getName();
+        this.email=user.getEmail();
+        this.password=user.getPassword();
+    }
+
 
     public String getNick(){
         return nick;
@@ -75,7 +80,45 @@ public class User {
     public void setEmail(String email){
         this.email=email;
     }
-    public String getPassword(){return password;}
+    public String getPasswordConfirmation() {
+        return passwordConfirmation;
+    }
+
+    public void setPasswordConfirmation(String passwordConfirmation) {
+        this.passwordConfirmation = passwordConfirmation;
+    }
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    public String getPassword(){ return password; }
+
+    @Override
+    public String getUsername() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
+
     public void setPassword(String password){
         this.password=password;
     }
@@ -84,19 +127,5 @@ public class User {
     }
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
-    }
-   /* public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }*/
-    public String getPasswordConfirmation() {
-        return passwordConfirmation;
-    }
-
-    public void setPasswordConfirmation(String passwordConfirmation) {
-        this.passwordConfirmation = passwordConfirmation;
     }
 }

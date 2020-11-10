@@ -26,12 +26,13 @@ and open the template in the editor.
 <nav id="menu">
     <ul class="links">
         <li><a th:href="@{/index}">Strona główna</a></li>
-        <li><a href="generic.html">Najbliższe wydarzenia</a></li>
-        <li><a href="elements.html">Poprzednie wydarzenia</a></li>
-        <li><a href="pomoc.html">Pomoc</a></li>
-        <li><a th:href="@{/login}">Zaloguj się</a></li>
-        <li><a href="/" th:href="@{/registration}">Zarejestruj się</a></li>
-
+        <li><a th:href="@{/list}">Najbliższe wydarzenia</a></li>
+        <li><a th:href="@{/list}">Poprzednie wydarzenia</a></li>
+        <li><a th:href="@{/showNewContactForm}">Pomoc</a></li>
+        <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj się</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/show_profile}">Twój profil</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Wyloguj się</a></li>
+        <li sec:authorize="isAnonymous()"><a href="/" th:href="@{/registration}">Zarejestruj się</a></li>
     </ul>
 </nav>
 
@@ -45,11 +46,15 @@ and open the template in the editor.
     <div class="inner">
 
         <header>
-            <h1>Wydarzenie</h1>
-            <h3>Opis</h3>
+            <h1> Opis</h1>
+
             <a th:text="${event.description}"></a>
             <br/>
-             <br/>
+            <br/>
+            <img alt="" th:src="*{'data:image/jpeg;base64,'+{event.image}}" style="width: 100px;height: 100px;">
+
+            <hr>
+
             <table>
                 <thead>
                 <tr>
@@ -68,34 +73,33 @@ and open the template in the editor.
             </table>
 
 
-             <hr>
+            <hr>
 
-             <form action="#" th:action="@{/saveComment/{id}(id=${event.id})}" th:object="${comment}" method="POST">
-                 <br/>
-                 <input type="text" th:field="*{text}" placeholder="Komentarz" class="form-control mb-4 col-4">
-                 <p th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></p>
-                 <br/>
-                 <div class="rating">
-                     <legend>Oceń:</legend>
-                     <input type="radio" id="star5" name="rating" th:value="5" th:field="*{rating}" /><label for="star5" title="Wspaniale!">5 stars</label>
-                     <input type="radio" id="star4" name="rating" th:value="4" th:field="*{rating}" /><label for="star4" title="Całkiem nieźle">4 stars</label>
-                     <input type="radio" id="star3" name="rating" th:value="3" th:field="*{rating}" /><label for="star3" title="Przeciętnie">3 stars</label>
-                     <input type="radio" id="star2" name="rating" th:value="2" th:field="*{rating}" /><label for="star2" title="Słabo">2 stars</label>
-                     <input type="radio" id="star1" name="rating" th:value="1" th:field="*{rating}" /><label for="star1" title="Fatalnie">1 star</label>
-                 </div>
-                 <br/>
-                 <hr>
+            <form action="#" th:action="@{/saveComment/{id}(id=${event.id})}" th:object="${comment}" method="POST">
+                <br/>
+                <input type="text" th:field="*{text}" placeholder="Komentarz" class="form-control mb-4 col-4">
+                <p th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></p>
+                <br/>
+                <div class="rating">
+                    <legend>Oceń:</legend>
+                    <input type="radio" id="star5" name="rating" th:value="5" th:field="*{rating}" /><label for="star5" title="Wspaniale!">5 stars</label>
+                    <input type="radio" id="star4" name="rating" th:value="4" th:field="*{rating}" /><label for="star4" title="Całkiem nieźle">4 stars</label>
+                    <input type="radio" id="star3" name="rating" th:value="3" th:field="*{rating}" /><label for="star3" title="Przeciętnie">3 stars</label>
+                    <input type="radio" id="star2" name="rating" th:value="2" th:field="*{rating}" /><label for="star2" title="Słabo">2 stars</label>
+                    <input type="radio" id="star1" name="rating" th:value="1" th:field="*{rating}" /><label for="star1" title="Fatalnie">1 star</label>
+                </div>
+                <br/>
+                <hr>
 
-                 <button type="submit" class="addCommentButton"> Dodaj komentarz</button>
+                <button type="submit" class="addCommentButton"> Dodaj komentarz</button>
 
-             </form>
+            </form>
 
+                <a th:href="@{/list}"> Powrót do wydarzeń</a>
 
-
-             <a th:href="@{/list}"> Back to Event List</a>
-
-         </header>
-         <!-- <a href="#main" class="button big alt scrolly">Dignissim</a> -->
+            </form>
+        </header>
+        <!-- <a href="#main" class="button big alt scrolly">Dignissim</a> -->
     </div>
 
 </section>

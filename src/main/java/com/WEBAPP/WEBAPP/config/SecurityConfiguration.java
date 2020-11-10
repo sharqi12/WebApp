@@ -1,6 +1,7 @@
 package com.WEBAPP.WEBAPP.config;
 
 
+import com.WEBAPP.WEBAPP.service.MyUserDetailsService;
 import com.WEBAPP.WEBAPP.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -22,9 +23,16 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
-    @Autowired
-    private UserService userService;
+    private final MyUserDetailsService service;
 
+    @Autowired
+    public SecurityConfiguration(MyUserDetailsService service){
+        this.service=service;
+    }
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(service).passwordEncoder(passwordEncoder());}
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -34,7 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
-        auth.setUserDetailsService(userService);
+        auth.setUserDetailsService(service);
         auth.setPasswordEncoder(passwordEncoder());
         return auth;
     }
@@ -49,8 +57,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers(
-                "/","/list**", "/new_event**", "/showNewEventForm**","/saveEvent**","/showFormForUpdate/**","/update_event/**","/deleteEvent/**","/showDescription/**","/description/**", "/resources/**",
-                        "/showComment/**", "/opinion/**" ,    "/newComment/**","/createComment/**","/showNewCommentForm**", "/showCommentForUpdate/**", "/update_comment/**",
+                "/","/list**", "/showDescription/**","/description/**","/index",
+                        "/showComment/**",
                 "/registration/**",
                 "/assets/**",
                 "/js/**",
@@ -80,7 +88,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         //Web resources
         web.ignoring().antMatchers("/assets/**", "/css/**","/scripts/**","/images/**");
     }
-
-
 
 }
