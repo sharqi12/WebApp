@@ -80,10 +80,9 @@ public class CurrentUserControllerAdvice {
 
     @PostMapping("/saveNick")
     public String saveNick(@ModelAttribute("user") User user, Principal principal){
-
-        Authentication authentication = new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
+        Authentication authentication =new  UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        userService.save(user);
+        userService.saveWithouPassword(user);
         return "/profile";
     }
     @PostMapping("/savePassword")
@@ -91,7 +90,6 @@ public class CurrentUserControllerAdvice {
         if(errors.hasErrors()){
             return "change_user_password";
         } else {
-
             Authentication authentication = new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
             userService.save(user);

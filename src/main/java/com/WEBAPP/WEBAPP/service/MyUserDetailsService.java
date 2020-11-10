@@ -40,7 +40,6 @@ public class MyUserDetailsService implements UserDetailsService {
         if (null == user || ! user.getEmail().equals(username)) {
             throw new UsernameNotFoundException("No user present with username: " + username);
         } else {
-
             return new MyUserPrincipal(user);
         }
     }
@@ -50,10 +49,10 @@ public class MyUserDetailsService implements UserDetailsService {
         user.setId(id);
         userRepository.save(user);
     }*/
-
+/*
     public User save(User user) {
         return userRepository.save(user);
-    }
+    }*/
 
 }
 /*
