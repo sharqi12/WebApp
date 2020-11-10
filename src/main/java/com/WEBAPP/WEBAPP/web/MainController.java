@@ -18,19 +18,9 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping("/index")
-    public String homepage() {
-        return "index";
-    }
-
     @GetMapping("/pomoc")
     public String pomoc() {
         return "pomoc";
-    }
-
-    @GetMapping("/profile")
-    public String profile() {
-        return "profile";
     }
 
 }

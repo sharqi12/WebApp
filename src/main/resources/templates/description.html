@@ -26,13 +26,12 @@ and open the template in the editor.
 <nav id="menu">
     <ul class="links">
         <li><a th:href="@{/index}">Strona główna</a></li>
-        <li><a th:href="@{/list}">Najbliższe wydarzenia</a></li>
-        <li><a th:href="@{/list}">Poprzednie wydarzenia</a></li>
-        <li><a th:href="@{/showNewContactForm}">Pomoc</a></li>
-        <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj się</a></li>
-        <li sec:authorize="isAuthenticated()"><a th:href="@{/profile}">Twój profil</a></li>
-        <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Wyloguj się</a></li>
-        <li sec:authorize="isAnonymous()"><a href="/" th:href="@{/registration}">Zarejestruj się</a></li>
+        <li><a href="generic.html">Najbliższe wydarzenia</a></li>
+        <li><a href="elements.html">Poprzednie wydarzenia</a></li>
+        <li><a href="pomoc.html">Pomoc</a></li>
+        <li><a th:href="@{/login}">Zaloguj się</a></li>
+        <li><a href="/" th:href="@{/registration}">Zarejestruj się</a></li>
+
     </ul>
 </nav>
 
@@ -46,38 +45,57 @@ and open the template in the editor.
     <div class="inner">
 
         <header>
-            <h1> Opis</h1>
-
+            <h1>Wydarzenie</h1>
+            <h3>Opis</h3>
             <a th:text="${event.description}"></a>
             <br/>
-            <br/>
-            <img alt="" th:src="*{'data:image/jpeg;base64,'+{event.image}}" style="width: 100px;height: 100px;">
+             <br/>
+            <table>
+                <thead>
+                <tr>
+                    <th>text</th>
+                    <th>rating</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="comments : ${allComments}">
+                    <td><span th:text="${comments.text}">text</span></td>
+                    <td><span th:text="${comments.rating}">rating</span></td>
+                    <td><span><a th:href="@{/deleteComment/{idC}/event/{id}(idC=${comments.id}, id=${event.id})}"  class="btn btn-danger">Delete</a></span></td>
 
-            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-                <input type="hidden" name="cmd" value="_s-xclick">
-                <input type="hidden" name="hosted_button_id" value="QJ5VSG6BM2AJE">
-                <table>
-                    <tr><td><input type="hidden" name="on0" value="Bilet">Bilet</td></tr><tr><td><select name="os0">
-                    <option value="Normalny">Normalny 20,00 PLN</option>
-                    <option value="Ulgowy">Ulgowy 10,00 PLN</option>
-                </select> </td></tr>
-                </table>
-                <input type="hidden" name="currency_code" value="PLN">
-                <input type="image" src="https://www.paypalobjects.com/pl_PL/PL/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal – Płać wygodnie i bezpiecznie">
-                <img alt="" border="0" src="https://www.paypalobjects.com/pl_PL/i/scr/pixel.gif" width="1" height="1">
-            </form>
-            <hr>
+                </tr>
+                </tbody>
+            </table>
 
-      <!--      <form action="#" th:action="@{/saveComment}" th:object="${comment}" method="POST">
-                <br/>
-                <input type="text" th:field="*{text}" placeholder="Comment" class="form-control mb-4 col-4">
-                <br/> -->
 
-                <a th:href="@{/list}"> Powrót do wydarzeń</a>
+             <hr>
 
-            </form>
-        </header>
-        <!-- <a href="#main" class="button big alt scrolly">Dignissim</a> -->
+             <form action="#" th:action="@{/saveComment/{id}(id=${event.id})}" th:object="${comment}" method="POST">
+                 <br/>
+                 <input type="text" th:field="*{text}" placeholder="Komentarz" class="form-control mb-4 col-4">
+                 <p th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></p>
+                 <br/>
+                 <div class="rating">
+                     <legend>Oceń:</legend>
+                     <input type="radio" id="star5" name="rating" th:value="5" th:field="*{rating}" /><label for="star5" title="Wspaniale!">5 stars</label>
+                     <input type="radio" id="star4" name="rating" th:value="4" th:field="*{rating}" /><label for="star4" title="Całkiem nieźle">4 stars</label>
+                     <input type="radio" id="star3" name="rating" th:value="3" th:field="*{rating}" /><label for="star3" title="Przeciętnie">3 stars</label>
+                     <input type="radio" id="star2" name="rating" th:value="2" th:field="*{rating}" /><label for="star2" title="Słabo">2 stars</label>
+                     <input type="radio" id="star1" name="rating" th:value="1" th:field="*{rating}" /><label for="star1" title="Fatalnie">1 star</label>
+                 </div>
+                 <br/>
+                 <hr>
+
+                 <button type="submit" class="addCommentButton"> Dodaj komentarz</button>
+
+             </form>
+
+
+
+             <a th:href="@{/list}"> Back to Event List</a>
+
+         </header>
+         <!-- <a href="#main" class="button big alt scrolly">Dignissim</a> -->
     </div>
 
 </section>

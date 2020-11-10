@@ -7,15 +7,13 @@ import com.WEBAPP.WEBAPP.web.dto.UserRegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import com.WEBAPP.WEBAPP.service.UserService;
 import com.WEBAPP.WEBAPP.web.dto.UserRegistrationDto;
+import javax.validation.Valid;
 
 @Controller // This means that this class is a Controller
 @RequestMapping("/registration") // This means URL's start with /registration (after Application path)
@@ -37,9 +35,18 @@ public class RegistrationController {
     public String showRegistrationForm(){ return "registration"; }
 
     @PostMapping
-    public String registerUserAccount(@ModelAttribute("user")UserRegistrationDto registrationDto){
-        userService.save(registrationDto);
-        return "/registrationsuccess";
+    public String registerUserAccount(@ModelAttribute("user") @Valid UserRegistrationDto registrationDto, Errors errors){
+        if(errors.hasErrors()){
+            return "registration";
+        } else if (registrationDto.getPasswordConfirmation().equals(registrationDto.getPassword())){
+            userService.save(registrationDto);
+            return "/registrationsuccess";
+        }
+        else {
+            return "registration";
+        }
+
+
     }
 
 }

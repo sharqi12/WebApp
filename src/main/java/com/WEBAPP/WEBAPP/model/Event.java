@@ -1,8 +1,6 @@
 package com.WEBAPP.WEBAPP.model;
 
-import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -23,10 +21,10 @@ public class Event {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name = "name")
-    @Size(min=2, max=40, message = "Wprowadz nazwe!")
+    @Size(min = 2, max = 40, message = "Wprowadz nazwe!")
     private String name;
 
     @Column(name = "city")
@@ -42,51 +40,72 @@ public class Event {
     @Size(min = 10, message = "Wprowadz opis!")
     private String description;
 
-    @Lob
-    @Column(columnDefinition = "MEDIUMBLOB")
-    private String image;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_events", referencedColumnName = "id")
 
     List<Comment> comments = new ArrayList<>();
 
-    public long getId() {
+   /* @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "event_cities", referencedColumnName = "cities")
+
+    List<Cities> cities = new ArrayList<>();
+*/
+
+    public Long getId() {
         return id;
     }
-    public void setId(long id) {
+
+    public void setId(Long id) {
         this.id = id;
     }
-    public String getName() { return name;}
+
+    public String getName() {
+        return name;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public String getCity() {
         return city;
     }
+
     public void setCity(String city) {
         this.city = city;
     }
+
     public String getDate() {
         return date;
     }
+
     public void setDate(String date) {
         this.date = date;
     }
+
     public String getDescription() {
         return description;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
-    public List<Comment> getComments() { return comments;}
-    public void setComments(List<Comment> comments) {this.comments = comments;}
 
-    public String getImage() {
-        return image;
+    public List<Comment> getComments() {
+        return comments;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
+
+    /*public List<Cities> getCities() {
+        return cities;
+    }
+
+    public void setCities(List<Cities> cities) {
+        this.cities = cities;
+    }*/
+
 }

@@ -1,17 +1,17 @@
 package com.WEBAPP.WEBAPP.service;
 
-import java.io.IOException;
-import java.util.Base64;
 import java.util.List;
 
 import java.util.Optional;
+import java.util.Map;
 
+import com.WEBAPP.WEBAPP.model.Comment;
 import com.WEBAPP.WEBAPP.model.Event;
 import com.WEBAPP.WEBAPP.repository.EventRepository;
+import com.WEBAPP.WEBAPP.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.PutMapping;
 
 
 @Service
@@ -19,6 +19,8 @@ public class EventServiceImpl implements EventService {
 
     @Autowired
     private EventRepository eventRepository;
+    @Autowired
+    private CommentRepository commentRepository;
 
     @Override
     public List <Event> getAllEvents() {
@@ -26,23 +28,13 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void saveEvent(MultipartFile file, Event event)
-    {
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        if(fileName.contains(".."))
-        {
-            System.out.println("not a a valid file");
-        }
-        try {
-            event.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void saveEvent(Event event) {
         this.eventRepository.save(event);
     }
 
     @Override
-    public Event getEventById(long id) {
+    @PutMapping
+    public Event getEventById(Long id) {
         Optional < Event > optional = eventRepository.findById(id);
         Event event = null;
         if (optional.isPresent()) {
@@ -54,7 +46,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void deleteEventById(long id) {
+    public void deleteEventById(Long id) {
         this.eventRepository.deleteById(id);
     }
 }
