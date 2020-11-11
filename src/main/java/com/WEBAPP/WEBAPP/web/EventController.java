@@ -1,6 +1,8 @@
 package com.WEBAPP.WEBAPP.web;
 
+import com.WEBAPP.WEBAPP.model.Comment;
 import com.WEBAPP.WEBAPP.model.Event;
+import com.WEBAPP.WEBAPP.repository.CommentRepository;
 import com.WEBAPP.WEBAPP.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,8 @@ public class EventController {
 
     @Autowired
     private EventService eventService;
+    @Autowired
+    private CommentRepository commentRepository;
 
     // display list of employees
     @GetMapping("/list")
@@ -54,7 +58,7 @@ public class EventController {
     }
 
     @GetMapping("/showFormForUpdate/{id}")
-    public String showFormForUpdate(@PathVariable( value = "id") long id, Model model) {
+    public String showFormForUpdate(@PathVariable( value = "id") Long id, Model model) {
 
         // get event from the service
         Event event = eventService.getEventById(id);
@@ -65,7 +69,7 @@ public class EventController {
     }
 
     @GetMapping("/deleteEvent/{id}")
-    public String deleteEvent(@PathVariable (value = "id") long id) {
+    public String deleteEvent(@PathVariable (value = "id") Long id) {
 
         // call delete event method
         this.eventService.deleteEventById(id);
@@ -73,13 +77,14 @@ public class EventController {
     }
 
     @GetMapping("/showDescription/{id}")
-    public String showDescription(@PathVariable( value = "id") long id, Model model) {
-
+    public String showDescription(@PathVariable(value = "id") Long id, Model model, Model model2, Model model3) {
         // get event from the service
         Event event = eventService.getEventById(id);
-
+        Comment comment = new Comment();
         // set event as a model attribute to pre-populate the form
         model.addAttribute("event", event);
+        model2.addAttribute("comment", comment);
+        model3.addAttribute("allComments", commentRepository.findByEventId(id));
         return "description";
     }
 }

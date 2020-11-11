@@ -21,6 +21,11 @@ public class User implements UserDetails {
 
     private String password;
 
+    @Transient
+    private String passwordConfirmation;
+
+    @Transient
+    private String oldPassword;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
@@ -36,13 +41,14 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String nick, String name, String email, String password, Collection<Role> roles) {
+    public User(String nick, String name, String email, String password, Collection<Role> roles, String passwordConfirmation) {
         super();
         this.nick = nick;
         this.name = name;
         this.email = email;
         this.password = password;
         this.roles = roles;
+        this.passwordConfirmation = passwordConfirmation;
     }
 
     public User(User user){
@@ -77,6 +83,21 @@ public class User implements UserDetails {
     }
     public void setEmail(String email){
         this.email=email;
+    }
+    public String getPasswordConfirmation() {
+        return passwordConfirmation;
+    }
+
+    public void setPasswordConfirmation(String passwordConfirmation) {
+        this.passwordConfirmation = passwordConfirmation;
+    }
+
+    public String getOldPassword() {
+        return oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
     }
 
     @Override

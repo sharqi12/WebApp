@@ -1,7 +1,6 @@
 package com.WEBAPP.WEBAPP.repository;
+import com.WEBAPP.WEBAPP.model.Cities;
 
-import com.WEBAPP.WEBAPP.model.Comment;
-import com.WEBAPP.WEBAPP.model.Event;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,11 +11,9 @@ import java.util.List;
 import java.lang.Long;
 import java.util.Optional;
 
-
 @Repository
-public interface CommentRepository extends JpaRepository<Comment, Long>{
+public interface CitiesRepository extends JpaRepository<Cities, Long>{
     //@Query(value = "SELECT * FROM comments where rating=5", nativeQuery = true)
 
-    List<Comment> findByEventId(Long id);
-    //Optional<Comment> findByIdAndEventId(Long idC, Long id);
+    List<Cities> findByEventId(Long id);
 }

@@ -7,6 +7,6 @@ import java.util.List;
 public interface EventService {
     List<Event> getAllEvents();
     void saveEvent(MultipartFile file, Event event);
-    Event getEventById(long id);
-    void deleteEventById(long id);
+    Event getEventById(Long id);
+    void deleteEventById(Long id);
 }

@@ -55,10 +55,45 @@ and open the template in the editor.
 
             <hr>
 
-      <!--      <form action="#" th:action="@{/saveComment}" th:object="${comment}" method="POST">
+            <table>
+                <thead>
+                <tr>
+                    <th>text</th>
+                    <th>rating</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="comments : ${allComments}">
+                    <td><span th:text="${comments.text}">text</span></td>
+                    <td><span th:text="${comments.rating}">rating</span></td>
+                    <td><span><a th:href="@{/deleteComment/{idC}/event/{id}(idC=${comments.id}, id=${event.id})}"  class="btn btn-danger">Delete</a></span></td>
+
+                </tr>
+                </tbody>
+            </table>
+
+
+            <hr>
+
+            <form action="#" th:action="@{/saveComment/{id}(id=${event.id})}" th:object="${comment}" method="POST">
                 <br/>
-                <input type="text" th:field="*{text}" placeholder="Comment" class="form-control mb-4 col-4">
-                <br/> -->
+                <input type="text" th:field="*{text}" placeholder="Komentarz" class="form-control mb-4 col-4">
+                <p th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></p>
+                <br/>
+                <div class="rating">
+                    <legend>Oceń:</legend>
+                    <input type="radio" id="star5" name="rating" th:value="5" th:field="*{rating}" /><label for="star5" title="Wspaniale!">5 stars</label>
+                    <input type="radio" id="star4" name="rating" th:value="4" th:field="*{rating}" /><label for="star4" title="Całkiem nieźle">4 stars</label>
+                    <input type="radio" id="star3" name="rating" th:value="3" th:field="*{rating}" /><label for="star3" title="Przeciętnie">3 stars</label>
+                    <input type="radio" id="star2" name="rating" th:value="2" th:field="*{rating}" /><label for="star2" title="Słabo">2 stars</label>
+                    <input type="radio" id="star1" name="rating" th:value="1" th:field="*{rating}" /><label for="star1" title="Fatalnie">1 star</label>
+                </div>
+                <br/>
+                <hr>
+
+                <button type="submit" class="addCommentButton"> Dodaj komentarz</button>
+
+            </form>
 
                 <a th:href="@{/list}"> Powrót do wydarzeń</a>
 

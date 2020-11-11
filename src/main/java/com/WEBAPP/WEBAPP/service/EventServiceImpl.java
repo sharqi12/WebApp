@@ -42,7 +42,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Event getEventById(long id) {
+    public Event getEventById(Long id) {
         Optional < Event > optional = eventRepository.findById(id);
         Event event = null;
         if (optional.isPresent()) {
@@ -54,7 +54,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void deleteEventById(long id) {
+    public void deleteEventById(Long id) {
         this.eventRepository.deleteById(id);
     }
 }

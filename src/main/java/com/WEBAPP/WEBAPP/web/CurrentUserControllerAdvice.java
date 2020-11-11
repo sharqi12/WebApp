@@ -12,6 +12,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -85,15 +87,28 @@ public class CurrentUserControllerAdvice {
         userService.saveWithouPassword(user);
         return "/profile";
     }
+
+    public boolean userPasswordCheck(String password, String password2) {
+        PasswordEncoder passencoder = new BCryptPasswordEncoder();
+        return passencoder.matches(password, password2);
+    }
+
     @PostMapping("/savePassword")
     public String savePassword(@ModelAttribute("user") User user, Errors errors, Principal principal){
         if(errors.hasErrors()){
             return "change_user_password";
-        } else {
-            Authentication authentication = new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-            userService.save(user);
-            return "/profile";
+        } else if(user.getPassword().equals(user.getPasswordConfirmation())){
+
+            if( userPasswordCheck(user.getOldPassword(), userService.loadUserByUsername(principal.getName()).getPassword()) )  {
+                Authentication authentication = new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+                userService.save(user);
+                return "profile";
+            }
+            else { return "redirect:change_user_password?passwordNotEqual"; }
+        }
+        else{
+            return "redirect:change_user_password?newPassNotEqual";
         }
     }
 

@@ -51,22 +51,34 @@ and open the template in the editor.
 
 		<header>
 
-			<form th:action="@{/registration}" th:object="${user}" method="post" >
+			<form action="#" th:action="@{/registration}" th:object="${user}" method="post" >
 
 				<h1>Zarejestruj się</h1>
+				<div th:if="${param.error}">
+					<div class="alert alert-danger">Wystąpił błąd przy rejestracji</div>
+				</div>
+				<div th:if="${param.errorPass}">
+					<div class="alert alert-danger">Hasła nie są takie same!</div>
+				</div>
 
 				<fieldset>
 					<label for="nick">Twój nick</label>
-					<input type="text" id="nick" th:field="*{nick}"/>
-
+					<input type="text" id="nick" th:field="*{nick}"class="form-control mb-4 col-4">
+					<a th:if="${#fields.hasErrors('nick')}" th:errors="*{nick}"></a>
+					<br/>
 					<label for="name">Imię i nazwisko lub nazwa organizatora</label>
-					<input type="text" id="name" th:field="*{name}"/>
-
+					<input type="text" id="name" th:field="*{name}"class="form-control mb-4 col-4">
+					<a th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></a>
+					<br/>
 					<label for="email">Email</label>
-					<input type="email" id="email" th:field="*{email}"/>
-
+					<input type="email" id="email" th:field="*{email}" class="form-control mb-4 col-4">
+					<a th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></a>
+					<br/>
 					<label for="password">Hasło</label>
 					<input type="password" id="password" th:field="*{password}"/>
+					<br/>
+					<label for="password">Potwierdź hasło</label>
+					<input type="password" id="passwordConfirmation" th:field="*{passwordConfirmation}"/>
 				</fieldset>
 				<h1></h1>
 

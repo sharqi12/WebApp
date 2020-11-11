@@ -1,13 +1,17 @@
+com\WEBAPP\WEBAPP\service\CitiesServiceImpl.class
 com\WEBAPP\WEBAPP\web\RegistrationController.class
 com\WEBAPP\WEBAPP\web\MainController.class
 com\WEBAPP\WEBAPP\repository\CommentRepository.class
 com\WEBAPP\WEBAPP\model\Event.class
 com\WEBAPP\WEBAPP\config\SecurityConfiguration.class
+com\WEBAPP\WEBAPP\repository\CitiesRepository.class
+com\WEBAPP\WEBAPP\service\CitiesService.class
 com\WEBAPP\WEBAPP\service\UserServiceImpl.class
 com\WEBAPP\WEBAPP\service\EventService.class
 com\WEBAPP\WEBAPP\repository\ContactRepository.class
 com\WEBAPP\WEBAPP\config\WebConfig.class
 com\WEBAPP\WEBAPP\model\Comment.class
+com\WEBAPP\WEBAPP\model\Cities.class
 com\WEBAPP\WEBAPP\repository\UserRepository.class
 com\WEBAPP\WEBAPP\service\ContactServiceImpl.class
 com\WEBAPP\WEBAPP\WebappApplication.class
