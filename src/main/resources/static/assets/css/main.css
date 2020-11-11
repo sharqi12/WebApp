@@ -2042,6 +2042,7 @@
 			-webkit-align-items: stretch;
 			-ms-align-items: stretch;
 			align-items: stretch;
+			margin-top: 300px;
 		}
 
 		.flex.flex-2 .col {
@@ -3665,6 +3666,7 @@
 			position: relative;
 			z-index: 2;
                         color: #000000;
+                        height: 100%;
                         
 		}
 
