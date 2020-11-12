@@ -16,8 +16,12 @@ import org.springframework.stereotype.Service;
 import com.WEBAPP.WEBAPP.model.User;
 import com.WEBAPP.WEBAPP.repository.UserRepository;
 import  com.WEBAPP.WEBAPP.web.dto.UserRegistrationDto;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -36,10 +40,20 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User save(UserRegistrationDto registrationDto) {
+    public User save(MultipartFile file, UserRegistrationDto registrationDto) {
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         User user = new User(registrationDto.getNick(),
                 registrationDto.getName(), registrationDto.getEmail(),
                 passwordEncoder.encode(registrationDto.getPassword()), Arrays.asList(new Role("ROLE_USER")), registrationDto.getPasswordConfirmation());
+        if(fileName.contains(".."))
+        {
+            System.out.println("not a a valid file");
+        }
+        try {
+            user.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return userRepository.save(user);
     }
 
@@ -48,8 +62,19 @@ public class UserServiceImpl implements UserService{
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
+
     @Override
-    public User saveWithouPassword(User user) {
+    public User saveWithouPassword(MultipartFile file, User user) {
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        if(fileName.contains(".."))
+        {
+            System.out.println("not a a valid file");
+        }
+        try {
+            user.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return userRepository.save(user);
     }
 

@@ -51,7 +51,7 @@ and open the template in the editor.
 
 		<header>
 
-			<form action="#" th:action="@{/registration}" th:object="${user}" method="post" >
+			<form action="#" th:action="@{/registration}" th:object="${user}" method="post" enctype="multipart/form-data">
 
 				<h1>Zarejestruj się</h1>
 				<div th:if="${param.error}">
@@ -79,6 +79,9 @@ and open the template in the editor.
 					<br/>
 					<label for="password">Potwierdź hasło</label>
 					<input type="password" id="passwordConfirmation" th:field="*{passwordConfirmation}"/>
+
+					<input type="file" name="file" class="custom-file-input" id="customFileUser">
+
 				</fieldset>
 				<h1></h1>
 

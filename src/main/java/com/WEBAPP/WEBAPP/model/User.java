@@ -21,6 +21,10 @@ public class User implements UserDetails {
 
     private String password;
 
+    @Lob
+    @Column(columnDefinition = "MEDIUMBLOB")
+    private String image;
+
     @Transient
     private String passwordConfirmation;
 
@@ -140,5 +144,13 @@ public class User implements UserDetails {
     }
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

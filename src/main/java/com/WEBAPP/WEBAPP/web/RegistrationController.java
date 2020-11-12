@@ -13,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import com.WEBAPP.WEBAPP.service.UserService;
 import com.WEBAPP.WEBAPP.web.dto.UserRegistrationDto;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.validation.Valid;
 
 @Controller // This means that this class is a Controller
@@ -35,11 +37,11 @@ public class RegistrationController {
     public String showRegistrationForm(){ return "registration"; }
 
     @PostMapping
-    public String registerUserAccount(@ModelAttribute("user") @Valid UserRegistrationDto registrationDto, Errors errors){
+    public String registerUserAccount(@RequestParam("file") MultipartFile file, @ModelAttribute("user") @Valid UserRegistrationDto registrationDto, Errors errors){
         if(errors.hasErrors()){
             return "registration";
         } else if (registrationDto.getPasswordConfirmation().equals(registrationDto.getPassword())){
-            userService.save(registrationDto);
+            userService.save(file, registrationDto);
             return "/registrationsuccess";
         }
         else {
