@@ -59,7 +59,7 @@
                                     <div th:with="localEmail=${#authentication.getPrincipal().getEmail()}">
                                         <div th:with="localPassword=${#authentication.getPrincipal().getPassword()}">
 
-                                            <form th:action="@{/saveNick}" th:object="${user}" method="post" >
+                                            <form th:action="@{/saveNick}" th:object="${user}" method="post" enctype="multipart/form-data">
 
                                                 <fieldset>
                                                     <input type="text" id="nick" th:field="*{nick}"  th:value="${localNick}" th:placeholder="${localNick}"/>
@@ -87,7 +87,7 @@
                     <div class="6u$ 12u$(medium)">
                         <br/>
                         <button type="submit" id="myButton" class="registerButton" >Zapisz profil</button>
-                        </form>
+
                         <br>
                         <br>
                         <br>
@@ -99,9 +99,11 @@
                 <div class="row"> <!-- ZDJĘCIE PROFILOWE -->
                     <div class="col-sm-3">
                         <div class="text-center">
-                            <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
-                            <h5>Załaduj inne zdjęcie...</h5>
-                            <input type="file" class="text-center center-block file-upload">
+                            <!-- <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">-->
+                            <img alt="" th:src="*{'data:image/jpeg;base64,'+{user.image}}" style="width: 100px;height: 100px;">
+                            <br>
+                            <input type="file" name="file" class="custom-file-input" id="customFileUser">
+                            </form>
                         </div></hr><br>
                     </div>
                 </div>

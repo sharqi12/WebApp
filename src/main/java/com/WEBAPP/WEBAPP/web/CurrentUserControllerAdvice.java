@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -81,10 +82,10 @@ public class CurrentUserControllerAdvice {
     }
 
     @PostMapping("/saveNick")
-    public String saveNick(@ModelAttribute("user") User user, Principal principal){
+    public String saveNick(@RequestParam("file") MultipartFile file, @ModelAttribute("user") User user, Principal principal){
         Authentication authentication =new  UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        userService.saveWithouPassword(user);
+        userService.saveWithouPassword(file, user);
         return "/profile";
     }
 
