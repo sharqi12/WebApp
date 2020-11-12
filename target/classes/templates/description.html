@@ -48,8 +48,19 @@ and open the template in the editor.
         <header>
             <h1> Opis</h1>
 
-            <a th:text="${event.description}"></a>
-            <br/>
+            <a th:text="${event.description}"></a><br/><br/>
+            <form action="#" th:action="@{/saveEvent}" th:object="${event}" method="POST" enctype="multipart/form-data">
+            Bilet normalny/ulgowy
+            <div class="12u$">
+                <div class="select-wrapper">
+                    <select id="ticket" >
+                        <option th:value="*{ticket1}" th:text="*{ticket1}"></option>
+                        <option th:value="*{ticket2}" th:text="*{ticket2}"></option>
+                    </select>
+                </div>
+            </div>
+            </form>
+                <br/>
             <br/>
             <img alt="" th:src="*{'data:image/jpeg;base64,'+{event.image}}" style="width: 100px;height: 100px;">
 
@@ -60,6 +71,7 @@ and open the template in the editor.
             <script src="https://www.paypal.com/sdk/js?client-id=sb"></script>
 
             <script>
+            var ticket = document.getElementById("ticket");
         // Render the PayPal button into #paypal-button-container
         paypal.Buttons({
 
@@ -68,7 +80,7 @@ and open the template in the editor.
                 return actions.order.create({
                     purchase_units: [{
                         amount: {
-                            value: '5'
+                            value: ticket.value
                         }
                     }]
                 });
