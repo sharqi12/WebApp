@@ -51,7 +51,7 @@ public class Event {
 
     List<Comment> comments = new ArrayList<>();
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
     public void setId(Long id) {

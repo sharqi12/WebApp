@@ -27,6 +27,11 @@ public class MainController {
     public String pomoc() {
         return "pomoc";
     }
+
+    @GetMapping("/todo")
+    public String todo() {
+        return "todo";
+    }
 /*
     @GetMapping("/profile")
     public String profile() {
