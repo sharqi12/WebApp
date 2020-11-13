@@ -48,12 +48,56 @@ and open the template in the editor.
         <header>
             <h1> Opis</h1>
 
-            <a th:text="${event.description}"></a>
-            <br/>
+            <a th:text="${event.description}"></a><br/><br/>
+            <form action="#" th:action="@{/saveEvent}" th:object="${event}" method="POST" enctype="multipart/form-data">
+            Bilet normalny/ulgowy
+            <div class="12u$">
+                <div class="select-wrapper">
+                    <select id="ticket" >
+                        <option th:value="*{ticket1}" th:text="*{ticket1}"></option>
+                        <option th:value="*{ticket2}" th:text="*{ticket2}"></option>
+                    </select>
+                </div>
+            </div>
+            </form>
+                <br/>
             <br/>
             <img alt="" th:src="*{'data:image/jpeg;base64,'+{event.image}}" style="width: 100px;height: 100px;">
 
-            <hr>
+            <!-- Set up a container element for the button -->
+            <div id="paypal-button-container"></div>
+
+            <!-- Include the PayPal JavaScript SDK -->
+            <script src="https://www.paypal.com/sdk/js?client-id=sb"></script>
+
+            <script>
+            var ticket = document.getElementById("ticket");
+        // Render the PayPal button into #paypal-button-container
+        paypal.Buttons({
+
+            // Set up the transaction
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: ticket.value
+                        }
+                    }]
+                });
+            },
+
+            // Finalize the transaction
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    // Show a success message to the buyer
+                    alert('Transaction completed by ' + details.payer.name.given_name + '!');
+                });
+            }
+
+
+        }).render('#paypal-button-container');
+    </script>
+
 
             <table>
                 <thead>
@@ -72,9 +116,6 @@ and open the template in the editor.
                 </tbody>
             </table>
 
-
-            <hr>
-
             <form action="#" th:action="@{/saveComment/{id}(id=${event.id})}" th:object="${comment}" method="POST">
                 <br/>
                 <input type="text" th:field="*{text}" placeholder="Komentarz" class="form-control mb-4 col-4">
@@ -89,7 +130,7 @@ and open the template in the editor.
                     <input type="radio" id="star1" name="rating" th:value="1" th:field="*{rating}" /><label for="star1" title="Fatalnie">1 star</label>
                 </div>
                 <br/>
-                <hr>
+
 
                 <button type="submit" class="addCommentButton"> Dodaj komentarz</button>
 
@@ -100,7 +141,7 @@ and open the template in the editor.
             </form>
         </header>
         <!-- <a href="#main" class="button big alt scrolly">Dignissim</a> -->
-    </div>
+</div>
 
 </section>
 
