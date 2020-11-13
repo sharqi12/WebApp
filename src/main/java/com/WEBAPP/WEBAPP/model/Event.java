@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -45,6 +46,14 @@ public class Event {
     @Lob
     @Column(columnDefinition = "MEDIUMBLOB")
     private String image;
+
+    @Column(name = "ticket1")
+    @NotNull
+    private Integer ticket1;
+
+    @Column(name = "ticket2")
+    @NotNull
+    private Integer ticket2;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_events", referencedColumnName = "id")
@@ -88,5 +97,21 @@ public class Event {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public Integer getTicket1() {
+        return ticket1;
+    }
+
+    public void setTicket1(Integer ticket1) {
+        this.ticket1 = ticket1;
+    }
+
+    public Integer getTicket2() {
+        return ticket2;
+    }
+
+    public void setTicket2(Integer ticket2) {
+        this.ticket2 = ticket2;
     }
 }
