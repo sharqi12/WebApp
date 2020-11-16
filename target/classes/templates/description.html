@@ -12,7 +12,7 @@ and open the template in the editor.
     <title>Wspomaganie organizacji konferencji i targów</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="../assets/css/main.css" type="text/css"/>
+    <link rel="stylesheet" href="/assets/css/main.css" type="text/css"/>
 </head>
 <body>
 
@@ -44,11 +44,32 @@ and open the template in the editor.
 -->
 <section id="banner" >
     <div class="inner">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
 
         <header>
             <h1> Opis</h1>
 
+            <img alt="" th:src="*{'data:image/jpeg;base64,'+{event.image}}" style="width: 100px;height: 100px;">
+            <br>
+
             <a th:text="${event.description}"></a><br/><br/>
+            <br>
+            Kup Bilet:
+            <br>
             <form action="#" th:action="@{/saveEvent}" th:object="${event}" method="POST" enctype="multipart/form-data">
             Bilet normalny/ulgowy
             <div class="12u$">
@@ -60,10 +81,6 @@ and open the template in the editor.
                 </div>
             </div>
             </form>
-                <br/>
-            <br/>
-            <img alt="" th:src="*{'data:image/jpeg;base64,'+{event.image}}" style="width: 100px;height: 100px;">
-
             <!-- Set up a container element for the button -->
             <div id="paypal-button-container"></div>
 
@@ -116,7 +133,7 @@ and open the template in the editor.
                 </tbody>
             </table>
 
-            <form action="#" th:action="@{/saveComment/{id}(id=${event.id})}" th:object="${comment}" method="POST">
+            <form th:action="@{/saveComment/{id}(id=${event.id})}" th:object="${comment}" method="POST">
                 <br/>
                 <input type="text" th:field="*{text}" placeholder="Komentarz" class="form-control mb-4 col-4">
                 <p th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></p>
@@ -145,40 +162,40 @@ and open the template in the editor.
 
 </section>
 
-
-<!-- Footer -->
+<!--
+Footer
 <footer id="footer">
-    <div class="inner">
-        <div class="flex flex-3">
-            <div class="col">
-                <h3>Vestibullum</h3>
-                <ul class="alt">
-                    <li><a href="#">Nascetur nunc varius commodo.</a></li>
-                    <li><a href="#">Vis id faucibus montes tempor</a></li>
-                    <li><a href="#">Massa amet lobortis vel.</a></li>
-                    <li><a href="#">Nascetur nunc varius commodo.</a></li>
-                </ul>
-            </div>
-            <div class="col">
-                <h3>Lobortis</h3>
-                <ul class="alt">
-                    <li><a href="#">Nascetur nunc varius commodo.</a></li>
-                    <li><a href="#">Vis id faucibus montes tempor</a></li>
-                    <li><a href="#">Massa amet lobortis vel.</a></li>
-                    <li><a href="#">Nascetur nunc varius commodo.</a></li>
-                </ul>
-            </div>
-            <div class="col">
-                <h3>Accumsan</h3>
-                <ul class="alt">
-                    <li><a href="#">Nascetur nunc varius commodo.</a></li>
-                    <li><a href="#">Vis id faucibus montes tempor</a></li>
-                    <li><a href="#">Massa amet lobortis vel.</a></li>
-                    <li><a href="#">Nascetur nunc varius commodo.</a></li>
-                </ul>
+        <div class="inner">
+            <div class="flex flex-3">
+                <div class="col">
+                    <h3>Vestibullum</h3>
+                    <ul class="alt">
+                        <li><a href="#">Nascetur nunc varius commodo.</a></li>
+                        <li><a href="#">Vis id faucibus montes tempor</a></li>
+                        <li><a href="#">Massa amet lobortis vel.</a></li>
+                        <li><a href="#">Nascetur nunc varius commodo.</a></li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>Lobortis</h3>
+                    <ul class="alt">
+                        <li><a href="#">Nascetur nunc varius commodo.</a></li>
+                        <li><a href="#">Vis id faucibus montes tempor</a></li>
+                        <li><a href="#">Massa amet lobortis vel.</a></li>
+                        <li><a href="#">Nascetur nunc varius commodo.</a></li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>Accumsan</h3>
+                    <ul class="alt">
+                        <li><a href="#">Nascetur nunc varius commodo.</a></li>
+                        <li><a href="#">Vis id faucibus montes tempor</a></li>
+                        <li><a href="#">Massa amet lobortis vel.</a></li>
+                        <li><a href="#">Nascetur nunc varius commodo.</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
     <div class="copyright">
         <ul class="icons">
             <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
@@ -188,15 +205,16 @@ and open the template in the editor.
         </ul>
         &copy; Untitled. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com">Coverr</a>. Video: <a href="https://coverr.co">Coverr</a>.
     </div>
-</footer>
+</footer>-->
+
 
 <!-- Scripts -->
 <!-- Scripts -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/jquery.scrolly.min.js"></script>
-<script src="assets/js/skel.min.js"></script>
-<script src="assets/js/util.js"></script>
-<script src="assets/js/main.js"></script>
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/jquery.scrolly.min.js"></script>
+<script src="/assets/js/skel.min.js"></script>
+<script src="/assets/js/util.js"></script>
+<script src="/assets/js/main.js"></script>
 
 </body>
 </html>
