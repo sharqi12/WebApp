@@ -4,6 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.HashSet;
 import javax.persistence.*;
 
 @Entity
@@ -39,8 +40,8 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"))
 
-    private Collection<Role> roles;
-
+    //private Collection<Role> roles;
+    private Collection<Role> roles = new HashSet<>();
 
     public User() {
     }

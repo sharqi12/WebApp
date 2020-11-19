@@ -63,6 +63,10 @@ public class UserServiceImpl implements UserService{
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
+    @Override
+    public void promoToCreator(Integer id){
+        userRepository.promoteUserToCreator(id);
+    }
 
     @Override
     public User saveWithouPassword(MultipartFile file, User user) {

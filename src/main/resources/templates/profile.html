@@ -102,6 +102,11 @@
                     <br>
                     <br>
                     <button type="submit" onclick="location.href = 'change_user_password';" id="myButton2" class="registerButton" >Zmień hasło</button>
+                    <br>
+                    <br>
+                    <div sec:authorize="hasAuthority('ROLE_ADMIN')">
+                        <button type="submit" th:onclick="location.href = 'creatorProm';" id="myButton1" class="registerButton" >Dodaj organizatora</button>
+                    </div>
                 </div>
             </div>
         </div>

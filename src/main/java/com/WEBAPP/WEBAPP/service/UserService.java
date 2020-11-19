@@ -9,4 +9,5 @@ public interface UserService extends UserDetailsService {
     User save(MultipartFile file, UserRegistrationDto registrationDto);
     User save(User user);
     User saveWithouPassword(MultipartFile file, User user);
+    void promoToCreator(Integer id);
 }

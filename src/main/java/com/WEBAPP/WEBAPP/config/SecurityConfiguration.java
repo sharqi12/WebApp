@@ -1,6 +1,7 @@
 package com.WEBAPP.WEBAPP.config;
 
 
+import com.WEBAPP.WEBAPP.handlers.CustomAccessDeniedHandler;
 import com.WEBAPP.WEBAPP.service.MyUserDetailsService;
 import com.WEBAPP.WEBAPP.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -47,6 +49,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return auth;
     }
 
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler(){
+        return new CustomAccessDeniedHandler();
+    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
@@ -64,6 +71,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 "/js/**",
                 "/css/**",
                 "/img/**").permitAll()
+
+                .antMatchers("/new_event", "/showNewEventForm").hasAnyAuthority("ROLE_ADMIN", "ROLE_CREATOR")
+                .antMatchers("/creatorProm","promoteUser").hasAnyAuthority("ROLE_ADMIN")
 
                 .anyRequest().authenticated()
 
