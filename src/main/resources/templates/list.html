@@ -50,7 +50,9 @@ and open the template in the editor.
 
 
             <h1>Wydarzenia</h1>
+            <div sec:authorize="hasAuthority('ROLE_CREATOR')">
             <a th:href = "@{/showNewEventForm}" class="btn btn-primary btn-sm mb-3"> Dodaj wydarzenie </a>
+            </div>
             <table border="1" class = "table table-striped table-responsive-md">
                 <thead>
                 <tr>
@@ -64,8 +66,10 @@ and open the template in the editor.
                     <td><a th:text="${event.name}" th:href="@{/showDescription/{id}(id=${event.id})}" class="btn btn-primary"></a></td>
                     <td th:text="${event.city}"></td>
                     <td th:text="${event.date}"></td>
-                    <td><a th:href="@{/showFormForUpdate/{id}(id=${event.id})}" class="btn btn-primary">Update</a>
-                        <a th:href="@{/deleteEvent/{id}(id=${event.id})}" class="btn btn-danger">Delete</a></td>
+                    <div sec:authorize="hasAuthority('ROLE_CREATOR')">
+                        <td><a th:href="@{/showFormForUpdate/{id}(id=${event.id})}" class="btn btn-primary">Update</a>
+                            <a th:href="@{/deleteEvent/{id}(id=${event.id})}" class="btn btn-danger">Delete</a></td>
+                    </div>
                 </tr>
                 </tr>
                 </tbody>
