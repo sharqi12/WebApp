@@ -2,9 +2,13 @@ package com.WEBAPP.WEBAPP.web;
 
 import com.WEBAPP.WEBAPP.model.Comment;
 import com.WEBAPP.WEBAPP.model.Event;
+import com.WEBAPP.WEBAPP.model.User;
 import com.WEBAPP.WEBAPP.repository.CommentRepository;
+import com.WEBAPP.WEBAPP.repository.EventRepository;
+import com.WEBAPP.WEBAPP.repository.UserRepository;
 import com.WEBAPP.WEBAPP.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 public class EventController {
@@ -20,10 +25,15 @@ public class EventController {
     private EventService eventService;
     @Autowired
     private CommentRepository commentRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     // display list of employees
     @GetMapping("/list")
-    public String viewHomePage(Model model) {
+    public String viewHomePage(Model model, Principal principal) {
+        if(principal != null)
+           model.addAttribute("activeUser",userRepository.findByEmail(principal.getName()));
+        else model.addAttribute("activeUser",null);;
         model.addAttribute("listEvents", eventService.getAllEvents());
         return "list";
     }
@@ -38,10 +48,12 @@ public class EventController {
 
 
     @PostMapping("/saveEvent")
-    public String saveEvent(@RequestParam("file") MultipartFile file, @ModelAttribute @Valid Event event, Errors errors) {
+    public String saveEvent(@RequestParam("file") MultipartFile file, @ModelAttribute @Valid Event event, Errors errors, Principal principal) {
         if(errors.hasErrors()){
             return "new_event";
         } else {
+            User user = userRepository.findByEmail(principal.getName());
+            event.setUser(user);
         eventService.saveEvent(file, event);
         return "redirect:/list";
         }

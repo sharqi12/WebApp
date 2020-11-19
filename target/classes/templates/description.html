@@ -50,24 +50,16 @@ and open the template in the editor.
         <br>
         <br>
         <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
 
         <header>
-            <h1> Opis</h1>
+            <h1>Opis wydarzenia</h1>
 
             <img alt="" th:src="*{'data:image/jpeg;base64,'+{event.image}}" style="width: 100px;height: 100px;">
             <br>
 
             <a th:text="${event.description}"></a><br/><br/>
             <br>
+            <div sec:authorize="isAuthenticated()">
             Kup Bilet:
             <br>
             <form action="#" th:action="@{/saveEvent}" th:object="${event}" method="POST" enctype="multipart/form-data">
@@ -152,12 +144,18 @@ and open the template in the editor.
                 <button type="submit" class="addCommentButton"> Dodaj komentarz</button>
 
             </form>
+    </div>
+
+            <div sec:authorize="isAnonymous()" class="inner">
+                <button type="submit" onclick="location.href = '/login';"  class="loginButton"> Kup Bilet</button>
+                <br>
+            </div>
+
 
                 <a th:href="@{/list}"> Powrót do wydarzeń</a>
-
-            </form>
         </header>
         <!-- <a href="#main" class="button big alt scrolly">Dignissim</a> -->
+
 </div>
 
 </section>

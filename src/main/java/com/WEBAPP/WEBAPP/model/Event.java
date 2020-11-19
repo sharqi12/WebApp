@@ -60,6 +60,20 @@ public class Event {
 
     List<Comment> comments = new ArrayList<>();
 
+
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_user", referencedColumnName = "id")
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Long getId() {
         return id;
     }
