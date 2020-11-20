@@ -75,14 +75,15 @@ and open the template in the editor.
                         <td><a th:href="@{/showFormForUpdate/{id}(id=${event.id})}" class="btn btn-primary">Update</a>
                             <a th:href="@{/deleteEvent/{id}(id=${event.id})}" class="btn btn-danger">Delete</a></td>
                     </div>
-                    <div sec:authorize="hasAuthority('ROLE_CREATOR')">
+
                         <td>
-                            <div th:if="${event.user.getId()==activeUser.getId()} ">
-                            <a th:href="@{/showFormForUpdate/{id}(id=${event.id})}" class="btn btn-primary">Update</a>
-                            <a th:href="@{/deleteEvent/{id}(id=${event.id})}" class="btn btn-danger">Delete</a>
-                            </div>
+                            <div sec:authorize="isAuthenticated()">
+                                <div th:if="${event.user.getId()==activeUser.getId()} ">
+                                <a th:href="@{/showFormForUpdate/{id}(id=${event.id})}" class="btn btn-primary">Update</a>
+                                <a th:href="@{/deleteEvent/{id}(id=${event.id})}" class="btn btn-danger">Delete</a>
+                                </div>
+                             </div>
                         </td>
-                    </div>
 
                 </tr>
                 </tr>
