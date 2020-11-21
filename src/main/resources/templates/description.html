@@ -74,12 +74,14 @@ and open the template in the editor.
             </div>
             </form>
             <!-- Set up a container element for the button -->
+
             <div id="paypal-button-container"></div>
 
             <!-- Include the PayPal JavaScript SDK -->
-            <script src="https://www.paypal.com/sdk/js?client-id=sb"></script>
-
-            <script>
+            <script src="https://www.paypal.com/sdk/js?client-id=AZY-1WtRQ5nISTIb7YZYX31PYlrqHk2d5MvDqWGYs2kG8szLdZghbj0vCc-BNAMa-x1VEtjHfmtHxBSy&currency=PLN"></script>
+                <div th:with="localId=${#authentication.getPrincipal().getId()}">
+                    <div th:with="localEventId=${event.id}">
+            <script th:inline="javascript">
             var ticket = document.getElementById("ticket");
         // Render the PayPal button into #paypal-button-container
         paypal.Buttons({
@@ -100,12 +102,36 @@ and open the template in the editor.
                 return actions.order.capture().then(function(details) {
                     // Show a success message to the buyer
                     alert('Transaction completed by ' + details.payer.name.given_name + '!');
+
+                        var tempId = ticket.value;
+                        var tempUserId = [[${localId}]];
+                        var tempEventId = [[${localEventId}]];
+
+                            $.ajax({
+                                type : "POST",
+                                url : "/acceptedPayment/"+tempId,
+                                data : {value:tempId , user_id:tempUserId , event_id:tempEventId},
+                                timeout : 100000,
+                                success : function() {
+                                    console.log("SUCCESS: ");
+                                    alert(response);
+                                },
+                                error : function(e) {
+                                    console.log("ERROR");
+                                },
+                                done : function(e) {
+                                    console.log("DONE");
+                                }
+                            });
+
                 });
             }
 
 
         }).render('#paypal-button-container');
     </script>
+                    </div>
+                </div>
 
 
             <table>

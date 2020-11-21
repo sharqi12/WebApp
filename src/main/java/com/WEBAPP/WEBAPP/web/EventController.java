@@ -7,6 +7,7 @@ import com.WEBAPP.WEBAPP.repository.CommentRepository;
 import com.WEBAPP.WEBAPP.repository.EventRepository;
 import com.WEBAPP.WEBAPP.repository.UserRepository;
 import com.WEBAPP.WEBAPP.service.EventService;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -31,9 +32,10 @@ public class EventController {
     // display list of employees
     @GetMapping("/list")
     public String viewHomePage(Model model, Principal principal) {
-        if(principal != null)
-           model.addAttribute("activeUser",userRepository.findByEmail(principal.getName()));
-        else model.addAttribute("activeUser",null);;
+        if (principal != null)
+            model.addAttribute("activeUser", userRepository.findByEmail(principal.getName()));
+        else model.addAttribute("activeUser", null);
+        ;
         model.addAttribute("listEvents", eventService.getAllEvents());
         return "list";
     }
@@ -49,19 +51,19 @@ public class EventController {
 
     @PostMapping("/saveEvent")
     public String saveEvent(@RequestParam("file") MultipartFile file, @ModelAttribute @Valid Event event, Errors errors, Principal principal) {
-        if(errors.hasErrors()){
+        if (errors.hasErrors()) {
             return "new_event";
         } else {
             User user = userRepository.findByEmail(principal.getName());
             event.setUser(user);
-        eventService.saveEvent(file, event);
-        return "redirect:/list";
+            eventService.saveEvent(file, event);
+            return "redirect:/list";
         }
     }
 
     @PostMapping("/saveEvent2")
     public String saveEvent2(@RequestParam("file") MultipartFile file, @ModelAttribute @Valid Event event, Errors errors) {
-        if(errors.hasErrors()){
+        if (errors.hasErrors()) {
             return "update_event";
         } else {
             eventService.saveEvent(file, event);
@@ -70,7 +72,7 @@ public class EventController {
     }
 
     @GetMapping("/showFormForUpdate/{id}")
-    public String showFormForUpdate(@PathVariable( value = "id") Long id, Model model) {
+    public String showFormForUpdate(@PathVariable(value = "id") Long id, Model model) {
 
         // get event from the service
         Event event = eventService.getEventById(id);
@@ -81,7 +83,7 @@ public class EventController {
     }
 
     @GetMapping("/deleteEvent/{id}")
-    public String deleteEvent(@PathVariable (value = "id") Long id) {
+    public String deleteEvent(@PathVariable(value = "id") Long id) {
 
         // call delete event method
         this.eventService.deleteEventById(id);
@@ -99,4 +101,15 @@ public class EventController {
         model3.addAttribute("allComments", commentRepository.findByEventId(id));
         return "description";
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/acceptedPayment/{value}", method = RequestMethod.POST)
+    public String getSearchResultViaAjax(@RequestParam(value = "value") Integer value, @RequestParam(value = "user_id") Integer user_id, @RequestParam(value = "event_id") Long event_id)
+    {
+
+        System.out.println("Cena: "+value+" UserId: "+user_id+" EventId: "+ event_id);
+        return String.valueOf(value);
+    }
+
 }
+
