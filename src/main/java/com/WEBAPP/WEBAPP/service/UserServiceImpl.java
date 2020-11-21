@@ -1,5 +1,6 @@
 package com.WEBAPP.WEBAPP.service;
 
+import com.WEBAPP.WEBAPP.model.Event;
 import com.WEBAPP.WEBAPP.model.Role;
 import com.WEBAPP.WEBAPP.model.User;
 import com.WEBAPP.WEBAPP.repository.UserRepository;
@@ -23,6 +24,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.Collection;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -90,6 +92,18 @@ public class UserServiceImpl implements UserService{
             throw new UsernameNotFoundException("Niepoprawna nazwa lub hasło");
         }
         //return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
+        return user;
+    }
+
+    @Override
+    public User getUserById(Integer id) {
+        Optional< User > optional = userRepository.findById(id);
+        User user = null;
+        if (optional.isPresent()) {
+            user = optional.get();
+        } else {
+            throw new RuntimeException(" user not found for id :: " + id);
+        }
         return user;
     }
 

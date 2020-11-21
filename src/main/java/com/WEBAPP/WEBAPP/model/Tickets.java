@@ -20,6 +20,15 @@ public class Tickets {
 
     private Integer ticketPrice;
 
+    public Tickets(){
+
+    }
+    public Tickets(User user, Event event, Integer ticketPrice){
+        this.event = event;
+        this.user = user;
+        this.ticketPrice=ticketPrice;
+    }
+
     public Long getId() {
         return id;
     }

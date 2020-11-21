@@ -2,11 +2,15 @@ package com.WEBAPP.WEBAPP.web;
 
 import com.WEBAPP.WEBAPP.model.Comment;
 import com.WEBAPP.WEBAPP.model.Event;
+import com.WEBAPP.WEBAPP.model.Tickets;
 import com.WEBAPP.WEBAPP.model.User;
 import com.WEBAPP.WEBAPP.repository.CommentRepository;
 import com.WEBAPP.WEBAPP.repository.EventRepository;
+import com.WEBAPP.WEBAPP.repository.TicketRepository;
 import com.WEBAPP.WEBAPP.repository.UserRepository;
 import com.WEBAPP.WEBAPP.service.EventService;
+import com.WEBAPP.WEBAPP.service.TicketService;
+import com.WEBAPP.WEBAPP.service.UserService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -28,6 +32,13 @@ public class EventController {
     private CommentRepository commentRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private TicketRepository ticketRepository;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private TicketService ticketService;
+
 
     // display list of employees
     @GetMapping("/list")
@@ -106,9 +117,13 @@ public class EventController {
     @RequestMapping(value = "/acceptedPayment/{value}", method = RequestMethod.POST)
     public String getSearchResultViaAjax(@RequestParam(value = "value") Integer value, @RequestParam(value = "user_id") Integer user_id, @RequestParam(value = "event_id") Long event_id)
     {
+        //User user = userRepository.findById(user_id);
+
+        Tickets ticket = new Tickets(userService.getUserById(user_id), eventService.getEventById(event_id), value);
+        ticketService.saveTicket(ticket);
 
         System.out.println("Cena: "+value+" UserId: "+user_id+" EventId: "+ event_id);
-        return String.valueOf(value);
+        return "description";
     }
 
 }

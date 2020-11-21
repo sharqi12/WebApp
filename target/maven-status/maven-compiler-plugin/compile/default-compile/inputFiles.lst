@@ -30,6 +30,7 @@ E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\WebappApplication.ja
 E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\handlers\CustomAccessDeniedHandler.java
 E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\model\Comment.java
 E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\web\PromoteUserController.java
+E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\model\Tickets.java
 E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\repository\CommentRepository.java
 E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\web\CommentController.java
 E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\web\RegistrationController.java
