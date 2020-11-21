@@ -3,9 +3,11 @@ package com.WEBAPP.WEBAPP.web;
 import com.WEBAPP.WEBAPP.model.MyUserPrincipal;
 import com.WEBAPP.WEBAPP.model.User;
 import com.WEBAPP.WEBAPP.repository.UserRepository;
+import com.WEBAPP.WEBAPP.service.EventService;
 import com.WEBAPP.WEBAPP.service.MyUserDetailsService;
 import com.WEBAPP.WEBAPP.service.UserService;
 import com.WEBAPP.WEBAPP.service.UserServiceImpl;
+import com.WEBAPP.WEBAPP.web.dto.UserPromoDto;
 import com.WEBAPP.WEBAPP.web.dto.UserRegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -38,11 +40,15 @@ public class CurrentUserControllerAdvice {
                     .getAuthentication()
                     .getPrincipal();*/
 
-    //@Autowired
+    @Autowired
     private UserService userService;
 
     //@Autowired
     //private UserRepository userRepository;
+
+    @Autowired
+    private EventService eventService;
+
 
     public CurrentUserControllerAdvice(UserService userService) {
         super();
@@ -57,6 +63,26 @@ public class CurrentUserControllerAdvice {
         model.addAttribute("user", userService.loadUserByUsername(principal.getName()));
         return "profile";
     }
+
+    @GetMapping("/listOfUserEvent")
+    public String showCreatorPromPage(Model model, Principal principal){
+        if (principal != null)
+            model.addAttribute("activeUser", userService.loadUserByUsername(principal.getName()));
+        else model.addAttribute("activeUser", null);
+        ;
+        model.addAttribute("listEvents", eventService.getAllEvents());
+        return "listOfUserEvents";
+    }
+
+    /*@GetMapping("/list")
+    public String viewHomePage(Model model, Principal principal) {
+        if (principal != null)
+            model.addAttribute("activeUser", userRepository.findByEmail(principal.getName()));
+        else model.addAttribute("activeUser", null);
+        ;
+        model.addAttribute("listEvents", eventService.getAllEvents());
+        return "list";
+    }*/
 
     @ModelAttribute("currentUser")
     public UserDetails getCurrentUser(Authentication authentication) {

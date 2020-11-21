@@ -107,6 +107,9 @@
                     <div sec:authorize="hasAuthority('ROLE_ADMIN')">
                         <button type="submit" th:onclick="location.href = 'creatorProm';" id="myButton1" class="registerButton" >Dodaj organizatora</button>
                     </div>
+                    <div sec:authorize="hasAuthority('ROLE_CREATOR')">
+                        <button type="submit" th:onclick="location.href = 'listOfUserEvent';" id="myButton3" class="registerButton" >Twoje wydarzenia</button>
+                    </div>
                 </div>
             </div>
         </div>

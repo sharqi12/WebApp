@@ -15,6 +15,7 @@ E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\service\ContactServi
 E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\service\CitiesServiceImpl.java
 E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\service\MyUserDetailsService.java
 E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\repository\CitiesRepository.java
+E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\service\TicketService.java
 E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\web\CurrentUserControllerAdvice.java
 E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\config\WebConfig.java
 E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\web\EventController.java
@@ -25,10 +26,12 @@ E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\web\dto\UserRegistra
 E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\model\Role.java
 E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\service\CommentService.java
 E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\model\MyUserPrincipal.java
+E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\repository\TicketRepository.java
 E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\service\UserServiceImpl.java
 E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\WebappApplication.java
 E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\handlers\CustomAccessDeniedHandler.java
 E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\model\Comment.java
+E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\service\TicketServiceImpl.java
 E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\web\PromoteUserController.java
 E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\model\Tickets.java
 E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\repository\CommentRepository.java
