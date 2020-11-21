@@ -28,6 +28,11 @@ public class TicketServiceImpl implements TicketService{
     }
 
     @Override
+    public List<Tickets> getAllTicketsByUserId(Integer id) {
+        return ticketRepository.findByUserId(id);
+    }
+
+    @Override
     public void saveTicket(Tickets ticket){
         this.ticketRepository.save(ticket);
     }

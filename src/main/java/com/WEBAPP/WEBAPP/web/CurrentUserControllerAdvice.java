@@ -76,6 +76,13 @@ public class CurrentUserControllerAdvice {
         return "listOfUserEvents";
     }
 
+    @GetMapping("/listOfUserTickets")
+    public String showUserTickets(Model model, Principal principal){
+        User user = (User) userService.loadUserByUsername(principal.getName());
+        model.addAttribute("listTickets", ticketService.getAllTicketsByUserId(user.getId()));
+        return "listOfUserTickets";
+    }
+
     @GetMapping("/showTicketsForEvent/{id}")
     public String showTicketsForEvent(@PathVariable(value = "id") Long id, Model model) {
         model.addAttribute("listTickets", ticketService.getAllTickets(id));

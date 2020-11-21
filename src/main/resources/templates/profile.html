@@ -110,6 +110,9 @@
                     <div sec:authorize="hasAuthority('ROLE_CREATOR')">
                         <button type="submit" th:onclick="location.href = 'listOfUserEvent';" id="myButton3" class="registerButton" >Twoje wydarzenia</button>
                     </div>
+                    <div sec:authorize="hasAuthority('ROLE_USER')">
+                        <button type="submit" th:onclick="location.href = 'listOfUserTickets';" id="myButton4" class="registerButton" >Twoje bilety</button>
+                    </div>
                 </div>
             </div>
         </div>

@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface TicketService {
     List<Tickets> getAllTickets(Long id);
+    List<Tickets> getAllTicketsByUserId(Integer id);
     void saveTicket(Tickets ticket);
 }
