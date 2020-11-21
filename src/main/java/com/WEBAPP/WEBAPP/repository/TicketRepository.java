@@ -18,11 +18,11 @@ public interface TicketRepository extends JpaRepository<Tickets, Long> {
 
     @Modifying
     @Query(value = "SELECT * FROM tickets WHERE user_id =:em",nativeQuery = true)
-    void findByUserId(@Param("em")Integer id);
+    List <Tickets> findByUserId(@Param("em")Integer id);
 
     @Modifying
     @Query(value = "SELECT * FROM tickets WHERE event_id =:em",nativeQuery = true)
-    void findByEventId(@Param("em")Long id);
+    List <Tickets> findByEventId(@Param("em")Long id);
 
 
 }

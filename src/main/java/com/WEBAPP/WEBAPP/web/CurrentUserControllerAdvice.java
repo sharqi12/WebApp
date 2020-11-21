@@ -1,12 +1,11 @@
 package com.WEBAPP.WEBAPP.web;
 
+import com.WEBAPP.WEBAPP.model.Event;
 import com.WEBAPP.WEBAPP.model.MyUserPrincipal;
+import com.WEBAPP.WEBAPP.model.Tickets;
 import com.WEBAPP.WEBAPP.model.User;
 import com.WEBAPP.WEBAPP.repository.UserRepository;
-import com.WEBAPP.WEBAPP.service.EventService;
-import com.WEBAPP.WEBAPP.service.MyUserDetailsService;
-import com.WEBAPP.WEBAPP.service.UserService;
-import com.WEBAPP.WEBAPP.service.UserServiceImpl;
+import com.WEBAPP.WEBAPP.service.*;
 import com.WEBAPP.WEBAPP.web.dto.UserPromoDto;
 import com.WEBAPP.WEBAPP.web.dto.UserRegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +48,9 @@ public class CurrentUserControllerAdvice {
     @Autowired
     private EventService eventService;
 
+    @Autowired
+    private TicketService ticketService;
+
 
     public CurrentUserControllerAdvice(UserService userService) {
         super();
@@ -74,15 +76,11 @@ public class CurrentUserControllerAdvice {
         return "listOfUserEvents";
     }
 
-    /*@GetMapping("/list")
-    public String viewHomePage(Model model, Principal principal) {
-        if (principal != null)
-            model.addAttribute("activeUser", userRepository.findByEmail(principal.getName()));
-        else model.addAttribute("activeUser", null);
-        ;
-        model.addAttribute("listEvents", eventService.getAllEvents());
-        return "list";
-    }*/
+    @GetMapping("/showTicketsForEvent/{id}")
+    public String showTicketsForEvent(@PathVariable(value = "id") Long id, Model model) {
+        model.addAttribute("listTickets", ticketService.getAllTickets(id));
+        return "ticketList";
+    }
 
     @ModelAttribute("currentUser")
     public UserDetails getCurrentUser(Authentication authentication) {

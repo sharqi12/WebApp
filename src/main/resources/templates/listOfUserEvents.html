@@ -73,13 +73,15 @@ and open the template in the editor.
                         <td th:text="${event.date}"></td>
 
                         <div sec:authorize="hasAuthority('ROLE_ADMIN')">
-                            <td><a th:href="@{/showFormForUpdate/{id}(id=${event.id})}" class="btn btn-primary">Update</a>
+                            <td><a th:href="@{/showTicketsForEvent/{id}(id=${event.id})}" class="btn btn-primary">Tickets</a>
+                                <a th:href="@{/showFormForUpdate/{id}(id=${event.id})}" class="btn btn-primary">Update</a>
                                 <a th:href="@{/deleteEvent/{id}(id=${event.id})}" class="btn btn-danger">Delete</a></td>
                         </div>
 
                         <td>
                             <div sec:authorize="isAuthenticated()">
                                 <div th:if="${event.user.getId()==activeUser.getId()} ">
+                                    <a th:href="@{/showTicketsForEvent/{id}(id=${event.id})}" class="btn btn-primary">Tickets</a>
                                     <a th:href="@{/showFormForUpdate/{id}(id=${event.id})}" class="btn btn-primary">Update</a>
                                     <a th:href="@{/deleteEvent/{id}(id=${event.id})}" class="btn btn-danger">Delete</a>
                                 </div>

@@ -40,7 +40,6 @@ public class EventController {
     private TicketService ticketService;
 
 
-    // display list of employees
     @GetMapping("/list")
     public String viewHomePage(Model model, Principal principal) {
         if (principal != null)
