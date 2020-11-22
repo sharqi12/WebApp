@@ -118,6 +118,8 @@ public class CurrentUserControllerAdvice {
     public String saveNick(@RequestParam("file") MultipartFile file, @ModelAttribute("user") User user, Principal principal){
         Authentication authentication =new  UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
+        User user1 = userService.getUserById(user.getId());
+        user.setRoles(user1.getRoles());
         userService.saveWithouPassword(file, user);
         return "/profile";
     }
@@ -136,6 +138,8 @@ public class CurrentUserControllerAdvice {
             if( userPasswordCheck(user.getOldPassword(), userService.loadUserByUsername(principal.getName()).getPassword()) )  {
                 Authentication authentication = new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
+                User user1 = userService.getUserById(user.getId());
+                user.setRoles(user1.getRoles());
                 userService.save(user);
                 return "profile";
             }
