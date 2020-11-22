@@ -9,4 +9,6 @@ public interface TicketService {
     List<Tickets> getAllTickets(Long id);
     List<Tickets> getAllTicketsByUserId(Integer id);
     void saveTicket(Tickets ticket);
+    Integer howManyTicketsBoughtByEventId(Long id);
+    Integer sumOfTicketsPriceByEventId(Long id);
 }

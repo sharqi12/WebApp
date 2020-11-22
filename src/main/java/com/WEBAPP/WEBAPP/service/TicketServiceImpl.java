@@ -31,6 +31,14 @@ public class TicketServiceImpl implements TicketService{
     public List<Tickets> getAllTicketsByUserId(Integer id) {
         return ticketRepository.findByUserId(id);
     }
+    @Override
+    public Integer howManyTicketsBoughtByEventId(Long id){
+        return ticketRepository.howManyTicketsBoughtByEventId(id);
+    }
+    @Override
+    public Integer sumOfTicketsPriceByEventId(Long id){
+        return ticketRepository.sumOfTicketsPriceByEventId(id);
+    }
 
     @Override
     public void saveTicket(Tickets ticket){
