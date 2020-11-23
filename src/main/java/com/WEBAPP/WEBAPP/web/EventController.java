@@ -1,6 +1,9 @@
 package com.WEBAPP.WEBAPP.web;
 
-import com.WEBAPP.WEBAPP.model.*;
+import com.WEBAPP.WEBAPP.model.Comment;
+import com.WEBAPP.WEBAPP.model.Event;
+import com.WEBAPP.WEBAPP.model.Tickets;
+import com.WEBAPP.WEBAPP.model.User;
 import com.WEBAPP.WEBAPP.repository.CommentRepository;
 import com.WEBAPP.WEBAPP.repository.EventRepository;
 import com.WEBAPP.WEBAPP.repository.TicketRepository;
@@ -8,7 +11,6 @@ import com.WEBAPP.WEBAPP.repository.UserRepository;
 import com.WEBAPP.WEBAPP.service.EventService;
 import com.WEBAPP.WEBAPP.service.TicketService;
 import com.WEBAPP.WEBAPP.service.UserService;
-import com.lowagie.text.DocumentException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -18,14 +20,8 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.IOException;
 import java.security.Principal;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 
 @Controller
 public class EventController {
@@ -125,33 +121,9 @@ public class EventController {
         Tickets ticket = new Tickets(userService.getUserById(user_id), eventService.getEventById(event_id), value);
         ticketService.saveTicket(ticket);
 
-        //System.out.println("Cena: "+value+" UserId: "+user_id+" EventId: "+ event_id);
+        System.out.println("Cena: "+value+" UserId: "+user_id+" EventId: "+ event_id);
         return "description";
     }
-    @GetMapping("/showTicketsForEvent/{id}")
-    public String showTicketsForEvent(@PathVariable(value = "id") Long id, Model model,Model model2, Model model3, Model model4) {
-        model.addAttribute("listTickets", ticketService.getAllTickets(id));
-        model2.addAttribute("howManyTickets", ticketService.howManyTicketsBoughtByEventId(id));
-        model3.addAttribute("sumOfTicketsValue", ticketService.sumOfTicketsPriceByEventId(id));
-        model4.addAttribute("event", eventService.getEventById(id));
-        return "ticketList";
-    }
 
-    @GetMapping("/users/export/pdf/{id}")
-    public void exportToPDF(@PathVariable(value = "id") Long id, HttpServletResponse response) throws DocumentException, IOException {
-        response.setContentType("application/pdf");
-        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
-        String currentDateTime = dateFormatter.format(new Date());
-
-        String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=Tickets_" + currentDateTime + ".pdf";
-        response.setHeader(headerKey, headerValue);
-
-        List<Tickets> listTickets =  ticketService.getAllTickets(id);
-
-        TicketPDFExporter exporter = new TicketPDFExporter(listTickets, eventService.getEventById(id).getName());
-        exporter.export(response);
-
-    }
 }
 

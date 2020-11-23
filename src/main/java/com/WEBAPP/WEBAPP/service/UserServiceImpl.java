@@ -63,7 +63,6 @@ public class UserServiceImpl implements UserService{
     public User save(User user) {
         user.setImage(userRepository.findByEmail(user.getEmail()).getImage());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-
         return userRepository.save(user);
     }
     @Override
