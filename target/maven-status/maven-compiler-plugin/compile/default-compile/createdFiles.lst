@@ -5,7 +5,8 @@ com\WEBAPP\WEBAPP\repository\CommentRepository.class
 com\WEBAPP\WEBAPP\model\Event.class
 com\WEBAPP\WEBAPP\config\SecurityConfiguration.class
 com\WEBAPP\WEBAPP\repository\CitiesRepository.class
-com\WEBAPP\WEBAPP\model\TicketPDFExporter.class
+com\WEBAPP\WEBAPP\model\Tickets.class
+com\WEBAPP\WEBAPP\web\dto\UserPromoDto.class
 com\WEBAPP\WEBAPP\service\CitiesService.class
 com\WEBAPP\WEBAPP\service\UserServiceImpl.class
 com\WEBAPP\WEBAPP\service\EventService.class
@@ -23,11 +24,13 @@ com\WEBAPP\WEBAPP\model\User.class
 com\WEBAPP\WEBAPP\model\Contact.class
 com\WEBAPP\WEBAPP\web\ContactController.class
 com\WEBAPP\WEBAPP\web\CurrentUserControllerAdvice.class
+com\WEBAPP\WEBAPP\web\PromoteUserController.class
 com\WEBAPP\WEBAPP\service\EventServiceImpl.class
 com\WEBAPP\WEBAPP\model\MyUserPrincipal.class
 com\WEBAPP\WEBAPP\repository\EventRepository.class
 com\WEBAPP\WEBAPP\service\CommentService.class
 com\WEBAPP\WEBAPP\web\EventController.class
+com\WEBAPP\WEBAPP\handlers\CustomAccessDeniedHandler.class
 com\WEBAPP\WEBAPP\web\dto\UserRegistrationDto.class
 com\WEBAPP\WEBAPP\service\UserService.class
 com\WEBAPP\WEBAPP\model\Role.class

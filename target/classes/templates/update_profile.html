@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Wspomaganie organizacji konferencji i targów</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--<link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">-->
+    <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body class="subpage">
+
+<!-- Header -->
+<header id="header">
+    <h1><a th:href="@{/index}">Konferencje i targi<span>   Eventy i organizacja</span></a></h1>
+    <a href="#menu">Menu</a>
+</header>
+
+<!-- Nav -->
+<nav id="menu">
+    <ul class="links">
+        <li><a th:href="@{/index}">Strona główna</a></li>
+        <li><a th:href="@{/list}">Najbliższe wydarzenia</a></li>
+        <li><a th:href="@{/list}">Poprzednie wydarzenia</a></li>
+        <li><a th:href="@{/pomoc}">Pomoc</a></li>
+        <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj się</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/show_profile}">Twój profil</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Wyloguj się</a></li>
+        <li sec:authorize="isAnonymous()"><a href="/" th:href="@{/registration}">Zarejestruj się</a></li>
+    </ul>
+</nav>
+
+<!-- Main -->
+<div id="main">
+    <section class="wrapper style1">
+        <div class="inner">
+
+            <!-- Elements -->
+            <h2 id="elements">Twój profil </h2>
+            <h3><span th:text="${#authentication.getPrincipal().getNick()}"></span></h3>
+            <div class="row 200%">
+                <div class="row 200%">
+                    <div class="6u 12u$(medium)">
+                        <h4>Nick:</h4>
+                        <h4>Imię i nazwisko lub nazwa:</h4>
+                        <h4>Email:</h4>
+
+                    </div>
+                    <div class="6u$ 12u$(medium)">
+
+                        <div th:with="localNick=${#authentication.getPrincipal().getNick()}">
+                            <div th:with="localId=${#authentication.getPrincipal().getId()}">
+                                <div th:with="localName=${#authentication.getPrincipal().getName()}">
+                                    <div th:with="localEmail=${#authentication.getPrincipal().getEmail()}">
+                                        <div th:with="localPassword=${#authentication.getPrincipal().getPassword()}">
+
+                                            <form th:action="@{/saveNick}" th:object="${user}" method="post" enctype="multipart/form-data">
+
+                                                <fieldset>
+                                                    <input type="text" id="nick" th:field="*{nick}"  th:value="${localNick}" th:placeholder="${localNick}"/>
+                                                    <input type="hidden" id="id" th:field="*{id}"  th:value="${localId}" th:placeholder="${localId}"/>
+                                                    <br>
+                                                    <input type="text" id="name" th:field="*{name}"  th:value="${localName}" th:placeholder="${localName}"/>
+                                                    <br>
+                                                    <input type="text" id="email" th:field="*{email}"  th:value="${localEmail}" th:placeholder="${localEmail}"/>
+                                                    <input type="hidden" id="password" th:field="*{password}"  th:value="${localPassword}" th:placeholder="${localPassword}"/>
+
+                                                </fieldset>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <br/>
+
+                    <div class="6u 12u$(medium)">
+                        <br>
+                    </div>
+                    <div class="6u$ 12u$(medium)">
+                        <br/>
+                        <button type="submit" id="myButton" class="registerButton" >Zapisz profil</button>
+
+                        <br>
+                        <br>
+                        <br>
+                        <a th:href="@{/show_profile}"> Powrót do profilu</a>
+                    </div>
+
+                </div>
+
+                <div class="row"> <!-- ZDJĘCIE PROFILOWE -->
+                    <div class="col-sm-3">
+                        <div class="text-center">
+                            <!-- <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">-->
+                            <img alt="" th:src="*{'data:image/jpeg;base64,'+{user.image}}" style="width: 100px;height: 100px;">
+                            <br>
+                            <input type="file" name="file" class="custom-file-input" id="customFileUser">
+                            </form>
+                        </div></hr><br>
+                    </div>
+                </div>
+
+
+
+                <br>
+                <br>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/skel.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Wspomaganie organizacji konferencji i targów</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="assets/css/main.css" type="text/css"/>
+    <link rel="stylesheet" href="../assets/css/timetablejs.css">
+</head>
+<body>
+
+<!-- Header -->
+<header id="header">
+    <h1><a th:href="@{/index}">Konferencje i targi<span>   Eventy i organizacja</span></a></h1>
+    <a href="#menu">Menu</a>
+</header>
+
+<!-- Nav -->
+<nav id="menu">
+    <ul class="links">
+        <li><a th:href="@{/index}">Strona główna</a></li>
+        <li><a th:href="@{/list}">Najbliższe wydarzenia</a></li>
+        <li><a th:href="@{/list}">Poprzednie wydarzenia</a></li>
+        <li><a th:href="@{/showNewContactForm}">Pomoc</a></li>
+        <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj się</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/show_profile}">Twój profil</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Wyloguj się</a></li>
+        <li sec:authorize="isAnonymous()"><a href="/" th:href="@{/registration}">Zarejestruj się</a></li>
+    </ul>
+</nav>
+
+<!-- Banner -->
+<!--
+    To use a video as your background, set data-video to the name of your video without
+    its extension (eg. images/banner). Your video must be available in both .mp4 and .webm
+    formats to work correctly.
+-->
+<section id="banner" >
+     <div class="inner">
+
+        <header>
+
+
+
+            <h1>Harmonogram</h1>
+            <!--<table border="1" class = "table table-striped table-responsive-md">
+                 <thead>
+                 <tr>
+                     <th>Godzina</th>
+                     <th>Opis</th>
+                 </tr>
+                 </thead>
+                 <tbody>
+                 <tr th:each="timetable : ${listTimetables}">
+                     <td th:text="${timetable.hour}"></td>
+                     <td th:text="${timetable.description}"></td>
+
+
+                 </tr>
+                 </tr>
+                 </tbody>
+             </table>-->
+
+
+             <form action="#" th:action="@{/saveTimetable}" th:object="${timetable}" method="POST">
+                 <br/>
+                 <input type="text" th:field="*{stage}" placeholder="Sala" class="form-control mb-4 col-4">
+                 <a th:if="${#fields.hasErrors('stage')}" th:errors="*{stage}"></a>
+                 <br/>
+                 <input type="text" th:field="*{exhibit}" placeholder="Wystawa" class="form-control mb-4 col-4">
+                 <a th:if="${#fields.hasErrors('exhibit')}" th:errors="*{exhibit}"></a>
+                 <br/>
+                 <input type="text" th:field="*{begin}" placeholder="Godzina rozpoczęcia" class="form-control mb-4 col-4">
+                 <a th:if="${#fields.hasErrors('begin')}" th:errors="*{begin}"></a>
+                 <br/>
+                 <input type="text" th:field="*{end}" placeholder="Godzina zakończenia" class="form-control mb-4 col-4">
+                 <a th:if="${#fields.hasErrors('end')}" th:errors="*{end}"></a>
+                 <br/>
+
+
+                 <button type="submit" class="registerButton"> Zapisz Harmonogram</button>
+             </form>
+         </header>
+         <a href="#main" class="button big alt scrolly">Dignissim</a>
+
+    <br/><br/>
+    <div class="timetable">
+
+    <script src="../assets/js/timetable.js"></script>
+
+    <script th:inline="javascript">
+    var begin = document.getElementById("begin");
+
+      /*<![CDATA[*/
+        var harmonogram = /*[[${timetable}]]*/ 'test1';
+
+
+        var end = /*[[${timetable.end}]]*/ 'test2';
+        alert(begin);
+      /*]]>*/
+
+      var timetableDiv = document.getElementById("inner");
+      for(i=0; i<harmonogram.lenght; i++){
+      var t = document.createTextNode(harmonogram[i].begin + ' ' + harmonogram[i].end);
+      var p = document.createElement("P");
+      p.appendChild(t);
+      timetableDiv.appendChild(p);}
+
+      var timetable = new Timetable();
+
+      timetable.setScope(9,23)
+
+      timetable.addLocations(['Warsaw Expo']);
+
+      timetable.addEvent('Wystawa 1', 'Warsaw Expo', new Date(2015,7,17,9,00), new Date(2015,7,17,10,00), { url: '#' });
+
+
+
+      var renderer = new Timetable.Renderer(timetable);
+      renderer.draw('.timetable');
+    </script>
+    </div>
+     </div>
+
+</section>
+
+
+<!-- Footer -->
+<footer id="footer">
+    <div class="inner">
+        <div class="flex flex-3">
+            <div class="col">
+                <h3>Vestibullum</h3>
+                <ul class="alt">
+                    <li><a href="#">Nascetur nunc varius commodo.</a></li>
+                    <li><a href="#">Vis id faucibus montes tempor</a></li>
+                    <li><a href="#">Massa amet lobortis vel.</a></li>
+                    <li><a href="#">Nascetur nunc varius commodo.</a></li>
+                </ul>
+            </div>
+            <div class="col">
+                <h3>Lobortis</h3>
+                <ul class="alt">
+                    <li><a href="#">Nascetur nunc varius commodo.</a></li>
+                    <li><a href="#">Vis id faucibus montes tempor</a></li>
+                    <li><a href="#">Massa amet lobortis vel.</a></li>
+                    <li><a href="#">Nascetur nunc varius commodo.</a></li>
+                </ul>
+            </div>
+            <div class="col">
+                <h3>Accumsan</h3>
+                <ul class="alt">
+                    <li><a href="#">Nascetur nunc varius commodo.</a></li>
+                    <li><a href="#">Vis id faucibus montes tempor</a></li>
+                    <li><a href="#">Massa amet lobortis vel.</a></li>
+                    <li><a href="#">Nascetur nunc varius commodo.</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        <ul class="icons">
+            <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+            <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+            <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+            <li><a href="#" class="icon fa-snapchat"><span class="label">Snapchat</span></a></li>
+        </ul>
+        &copy; Untitled. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com">Coverr</a>. Video: <a href="https://coverr.co">Coverr</a>.
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/skel.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+
+</body>
+</html>
