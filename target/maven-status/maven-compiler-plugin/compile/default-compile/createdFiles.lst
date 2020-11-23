@@ -1,13 +1,16 @@
 com\WEBAPP\WEBAPP\service\CitiesServiceImpl.class
 com\WEBAPP\WEBAPP\web\RegistrationController.class
+com\WEBAPP\WEBAPP\model\Timetable.class
 com\WEBAPP\WEBAPP\web\MainController.class
 com\WEBAPP\WEBAPP\repository\CommentRepository.class
 com\WEBAPP\WEBAPP\model\Event.class
 com\WEBAPP\WEBAPP\config\SecurityConfiguration.class
 com\WEBAPP\WEBAPP\repository\CitiesRepository.class
 com\WEBAPP\WEBAPP\model\TicketPDFExporter.class
+com\WEBAPP\WEBAPP\service\TimetableService.class
 com\WEBAPP\WEBAPP\service\CitiesService.class
 com\WEBAPP\WEBAPP\service\UserServiceImpl.class
+com\WEBAPP\WEBAPP\repository\TimetableRepository.class
 com\WEBAPP\WEBAPP\service\EventService.class
 com\WEBAPP\WEBAPP\repository\ContactRepository.class
 com\WEBAPP\WEBAPP\config\WebConfig.class
@@ -30,6 +33,7 @@ com\WEBAPP\WEBAPP\service\CommentService.class
 com\WEBAPP\WEBAPP\web\EventController.class
 com\WEBAPP\WEBAPP\web\dto\UserRegistrationDto.class
 com\WEBAPP\WEBAPP\service\UserService.class
+com\WEBAPP\WEBAPP\service\TimetableServiceImpl.class
 com\WEBAPP\WEBAPP\model\Role.class
 com\WEBAPP\WEBAPP\service\TicketServiceImpl.class
 com\WEBAPP\WEBAPP\web\CommentController.class

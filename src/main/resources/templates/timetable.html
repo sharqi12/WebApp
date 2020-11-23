@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Wspomaganie organizacji konferencji i targów</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../assets/css/main.css" type="text/css"/>
+</head>
+<body>
+
+<!-- Header -->
+<header id="header">
+    <h1><a th:href="@{/index}">Konferencje i targi<span>   Eventy i organizacja</span></a></h1>
+    <a href="#menu">Menu</a>
+</header>
+
+<!-- Nav -->
+<nav id="menu">
+    <ul class="links">
+        <li><a th:href="@{/index}">Strona główna</a></li>
+        <li><a th:href="@{/list}">Najbliższe wydarzenia</a></li>
+        <li><a th:href="@{/list}">Poprzednie wydarzenia</a></li>
+        <li><a th:href="@{/showNewContactForm}">Pomoc</a></li>
+        <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj się</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/show_profile}">Twój profil</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Wyloguj się</a></li>
+        <li sec:authorize="isAnonymous()"><a href="/" th:href="@{/registration}">Zarejestruj się</a></li>
+    </ul>
+</nav>
+
+<section id="banner" >
+    <div class="inner">
+
+        <header>
+            <div sec:authorize="isAuthenticated()">
+                <div th:if="${event.user.getId()==activeUser.getId()} ">
+                        <h4>Dodawanie Harmonogramu</h4>
+                        <form action="#" th:action="@{/saveTimetable/{id}(id=${event.id})}" th:object="${timetable}" method="POST">
+                            <br/>
+                            <input type="text" th:field="*{stage}" placeholder="Sala" class="form-control mb-4 col-4">
+                            <a th:if="${#fields.hasErrors('stage')}" th:errors="*{stage}"></a>
+                            <br/>
+                            <input type="text" th:field="*{exhibit}" placeholder="Wystawa" class="form-control mb-4 col-4">
+                            <a th:if="${#fields.hasErrors('exhibit')}" th:errors="*{exhibit}"></a>
+                            <br/>
+                            <input type="text" th:field="*{begin}" placeholder="Godzina rozpoczęcia" class="form-control mb-4 col-4">
+                            <a th:if="${#fields.hasErrors('begin')}" th:errors="*{begin}"></a>
+                            <br/>
+                            <input type="text" th:field="*{end}" placeholder="Godzina zakończenia" class="form-control mb-4 col-4">
+                            <a th:if="${#fields.hasErrors('end')}" th:errors="*{end}"></a>
+                            <br/>
+                            <button type="submit" class="registerButton"> Dodaj Harmonogram</button>
+                        </form>
+                </div>
+            </div>
+
+
+            <h1>Harmonogram wydarzenia</h1>
+            <table border="1" class = "table table-striped table-responsive-md">
+                 <thead>
+                 <tr>
+                     <th>Miejsce</th>
+                     <th>Opis</th>
+                     <th>Godzina rozpoczęcia</th>
+                     <th>Godzina zakończenia</th>
+                 </tr>
+                 </thead>
+                 <tbody>
+                 <tr th:each="timetable : ${listTimetables}">
+                     <td th:text="${timetable.stage}"></td>
+                     <td th:text="${timetable.exhibit}"></td>
+                     <td th:text="${timetable.begin}"></td>
+                     <td th:text="${timetable.end}"></td>
+                 </tr>
+                 </tr>
+                 </tbody>
+             </table>
+
+        </header>
+        <br/><br/>
+
+    </div>
+
+
+
+
+
+</section>
+
+
+                <!-- Scripts -->
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/jquery.scrolly.min.js"></script>
+<script src="/assets/js/skel.min.js"></script>
+<script src="/assets/js/util.js"></script>
+<script src="/assets/js/main.js"></script>
+
+</body>
+</html>

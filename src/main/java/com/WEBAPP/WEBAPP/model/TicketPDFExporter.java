@@ -34,7 +34,7 @@ public class TicketPDFExporter {
         Font font = FontFactory.getFont(FontFactory.HELVETICA);
         font.setColor(Color.WHITE);
 
-        cell.setPhrase(new Phrase("Imię i nazwisko", font));
+        cell.setPhrase(new Phrase("Imie i nazwisko", font));
         table.addCell(cell);
 
         cell.setPhrase(new Phrase("E-mail", font));

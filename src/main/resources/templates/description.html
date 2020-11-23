@@ -50,7 +50,12 @@ and open the template in the editor.
         <br>
         <br>
         <br>
-
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
         <header>
             <h1>Opis wydarzenia</h1>
 
@@ -59,6 +64,14 @@ and open the template in the editor.
 
             <a th:text="${event.description}"></a><br/><br/>
             <br>
+            <div>
+                <form th:action="@{/showTimetableForm/{id}(id=${event.id})}">
+                <button type="submit" class="loginButton"> Harmonogram</button>
+                </form>
+                <button type="submit" onclick="location.href = '/login';"  class="loginButton"> Mapa</button>
+                <br>
+                <br>
+            </div>
             <div sec:authorize="isAuthenticated()">
             Kup Bilet:
             <br>
@@ -74,6 +87,9 @@ and open the template in the editor.
             </div>
             </form>
             <!-- Set up a container element for the button -->
+
+
+
 
             <div id="paypal-button-container"></div>
 
@@ -137,14 +153,14 @@ and open the template in the editor.
             <table>
                 <thead>
                 <tr>
-                    <th>text</th>
-                    <th>rating</th>
+                    <th></th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="comments : ${allComments}">
-                    <td><span th:text="${comments.text}">text</span></td>
-                    <td><span th:text="${comments.rating}">rating</span></td>
+                    <td><span th:text="${comments.text}"></span></td>
+                    <td><span th:text="${comments.rating}"></span></td>
                     <td><span><a th:href="@{/deleteComment/{idC}/event/{id}(idC=${comments.id}, id=${event.id})}"  class="btn btn-danger">Delete</a></span></td>
 
                 </tr>
