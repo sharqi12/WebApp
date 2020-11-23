@@ -29,6 +29,7 @@ E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\model\MyUserPrincipa
 E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\repository\TicketRepository.java
 E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\service\UserServiceImpl.java
 E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\WebappApplication.java
+E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\model\TicketPDFExporter.java
 E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\handlers\CustomAccessDeniedHandler.java
 E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\model\Comment.java
 E:\Studia\In퓓nierka\WebApp\src\main\java\com\WEBAPP\WEBAPP\service\TicketServiceImpl.java

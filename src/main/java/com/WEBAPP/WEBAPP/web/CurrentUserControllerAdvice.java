@@ -83,13 +83,6 @@ public class CurrentUserControllerAdvice {
         return "listOfUserTickets";
     }
 
-    @GetMapping("/showTicketsForEvent/{id}")
-    public String showTicketsForEvent(@PathVariable(value = "id") Long id, Model model,Model model2, Model model3) {
-        model.addAttribute("listTickets", ticketService.getAllTickets(id));
-        model2.addAttribute("howManyTickets", ticketService.howManyTicketsBoughtByEventId(id));
-        model3.addAttribute("sumOfTicketsValue", ticketService.sumOfTicketsPriceByEventId(id));
-        return "ticketList";
-    }
 
     @ModelAttribute("currentUser")
     public UserDetails getCurrentUser(Authentication authentication) {

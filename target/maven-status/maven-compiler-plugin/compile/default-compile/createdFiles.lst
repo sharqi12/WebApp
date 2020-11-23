@@ -5,6 +5,7 @@ com\WEBAPP\WEBAPP\repository\CommentRepository.class
 com\WEBAPP\WEBAPP\model\Event.class
 com\WEBAPP\WEBAPP\config\SecurityConfiguration.class
 com\WEBAPP\WEBAPP\repository\CitiesRepository.class
+com\WEBAPP\WEBAPP\model\TicketPDFExporter.class
 com\WEBAPP\WEBAPP\service\CitiesService.class
 com\WEBAPP\WEBAPP\service\UserServiceImpl.class
 com\WEBAPP\WEBAPP\service\EventService.class

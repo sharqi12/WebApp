@@ -50,6 +50,10 @@ and open the template in the editor.
             <h3 class="m-0 font-weight-bold text-primary">Liczba kupionych biletów: <span th:text="${howManyTickets}"></span></h3>
             <h3 class="m-0 font-weight-bold text-primary">Na łączną kwotę: <span th:text="${sumOfTicketsValue}"></span>PLN</h3>
             <div class="card-header py-3">
+                    <a th:href="@{/users/export/pdf/{id}(id=${event.id})}">Pobierz PDF</a>
+
+                <br>
+                <br>
                 <h3 class="m-0 font-weight-bold text-primary">Lista uczestników którzy kupili bilety:</h3>
             </div>
             <div class="card-body">
