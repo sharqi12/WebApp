@@ -36,7 +36,6 @@ public class TimetableServiceImpl implements TimetableService{
 
     @Override
     public void saveTimetable(TimeTableDto timeTableDto, Long id) {
-
         Timetable timetable = new Timetable(timeTableDto);
         timetable.setEvent(eventService.getEventById(id));
         timetableRepository.save(timetable);

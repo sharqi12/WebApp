@@ -42,21 +42,44 @@ and open the template in the editor.
         <header>
             <div sec:authorize="isAuthenticated()">
                 <div th:if="${event.user.getId()==activeUser.getId()} ">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
                         <h4>Dodawanie Harmonogramu</h4>
                         <form action="#" th:action="@{/saveTimetable/{id}(id=${event.id})}" th:object="${timetable}" method="POST">
                             <br/>
+
                             <input type="text" th:field="*{stage}" placeholder="Sala" class="form-control mb-4 col-4">
                             <a th:if="${#fields.hasErrors('stage')}" th:errors="*{stage}"></a>
                             <br/>
+
                             <input type="text" th:field="*{exhibit}" placeholder="Wystawa" class="form-control mb-4 col-4">
                             <a th:if="${#fields.hasErrors('exhibit')}" th:errors="*{exhibit}"></a>
                             <br/>
-                            <input type="text" th:field="*{begin}" placeholder="Godzina rozpoczęcia" class="form-control mb-4 col-4">
+                            Godzina rozpoczęcia:
+                            <input id="datetime" type="time" th:field="*{begin}" placeholder="Godzina rozpoczęcia" class="form-control mb-4 col-4">
                             <a th:if="${#fields.hasErrors('begin')}" th:errors="*{begin}"></a>
                             <br/>
-                            <input type="text" th:field="*{end}" placeholder="Godzina zakończenia" class="form-control mb-4 col-4">
+                            <br>
+                            Godzina zakończenia:
+                            <input id="datetime2" type="time" th:field="*{end}" placeholder="Godzina zakończenia" class="form-control mb-4 col-4">
                             <a th:if="${#fields.hasErrors('end')}" th:errors="*{end}"></a>
                             <br/>
+                            <br>
+
                             <button type="submit" class="registerButton"> Dodaj Harmonogram</button>
                         </form>
                 </div>
@@ -93,8 +116,89 @@ and open the template in the editor.
         </header>
         <br/><br/>
 
+        <link href="/assets/css/timetable.css" rel="stylesheet">
+        <div class="timetable">
+
+            <script src="/assets/js/timetable.js"></script>
+            <p id="demo"></p>
+        <script th:inline="javascript">
+            //Ile Timelinów ma dany event - DZIAŁA
 
 
+            //var listTimetables = [[${listTimetables}]];
+
+            var firstTime="24:00";
+            var lastTime="01:00";
+
+            var k=0;
+
+                var listTimetables = [[${listTimetables}]];
+                for (k = 0; k < listTimetables.length; k++) {
+                    if(listTimetables[k].begin < firstTime){
+                     firstTime = listTimetables[k].begin;
+                     }
+                    if(listTimetables[k].end > firstTime){
+                     lastTime = listTimetables[k].end;
+                     }
+                    if((firstTime == "24:00")&&( lastTime== "01:00")){
+                    firstTime = "09:00"; lastTime= "16:00";
+                    }
+
+                }
+
+
+            var firstTimeInt=parseInt(firstTime);
+            var lastTimeInt=parseInt(lastTime);
+
+            var timetable = new Timetable();
+            //USTAWIANIE ZAKRESU GODZINOWEGO
+            if(lastTimeInt-firstTimeInt < 8 ){
+                timetable.setScope(firstTimeInt-2, firstTimeInt+6);
+            }
+            else{
+                timetable.setScope(firstTimeInt, lastTimeInt);
+            }
+
+
+            var z=0;
+            var zapisane =0;
+            var stage = [];
+            for (k = 0; k < listTimetables.length; k++) {
+                zapisane=0;
+                for(z = 0; z < listTimetables.length; z++){
+
+                    if(stage[z] == listTimetables[k].stage){
+                        zapisane=1;
+                    }
+                }
+                if(zapisane!=1){
+                   stage.push(listTimetables[k].stage);
+                }
+            }
+
+            timetable.addLocations(stage);
+
+            for (k = 0; k < listTimetables.length; k++) {
+            var begin1 = parseInt(listTimetables[k].begin.slice(0,2));
+            var begin2 = parseInt(listTimetables[k].begin.slice(3,5));
+            var end1 = parseInt(listTimetables[k].end.slice(0,2));
+            var end2 = parseInt(listTimetables[k].end.slice(3,5));
+            timetable.addEvent(listTimetables[k].exhibit, listTimetables[k].stage, new Date(2015,7,17,begin1,begin2), new Date(2015,7,17,end1,end2));
+            }
+
+            var renderer = new Timetable.Renderer(timetable);
+            renderer.draw('.timetable'); // any css selector
+
+        </script>
+
+
+
+        </div>
+        <br>
+        <br>
+        <br>
+
+    </div>
     </div>
 
 
