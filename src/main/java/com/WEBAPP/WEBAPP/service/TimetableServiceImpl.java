@@ -30,8 +30,8 @@ public class TimetableServiceImpl implements TimetableService{
     }
 
     @Override
-    public void deleteTimetable(Timetable timetable){
-        timetableRepository.delete(timetable);
+    public void deleteTimetable(Long id){
+        timetableRepository.deleteById(id);
     }
 
     @Override

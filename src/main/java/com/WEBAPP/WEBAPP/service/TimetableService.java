@@ -9,6 +9,6 @@ import java.util.List;
 public interface TimetableService {
     List<Timetable> getTimetableByEventId(Long id);
     void saveTimetable(Timetable timetable);
-    void deleteTimetable(Timetable timetable);
+    void deleteTimetable(Long id);
     void saveTimetable(TimeTableDto timeTableDto, Long id);
 }

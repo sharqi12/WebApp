@@ -49,7 +49,7 @@ public class Timetable {
     @NotBlank(message = "Podaj godzinę zakończenia!")
     private String end;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "id_events", referencedColumnName = "id")
     private Event event;
 

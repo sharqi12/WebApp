@@ -11,4 +11,6 @@ public interface TimetableRepository extends JpaRepository<Timetable, Long> {
 
     @Query(value = "SELECT * FROM timetables WHERE id_events =:em",nativeQuery = true)
     List<Timetable> findByEventId(@Param("em")Long id);
+
+
 }

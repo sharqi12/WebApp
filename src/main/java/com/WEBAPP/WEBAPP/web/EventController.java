@@ -119,37 +119,7 @@ public class EventController {
         model3.addAttribute("allComments", commentRepository.findByEventId(id));
         return "description";
     }
-    /*
-    @GetMapping("/showTimetable/{id}")
-    public String showTimetable(@PathVariable(value = "id") Long id, Model model, Model model2) {
-        Event event = eventService.getEventById(id);
-        model2.addAttribute("listTimetables", timetableService.getTimetableByEventId(id));
-        model.addAttribute("event", event);
-        return "description";
-    }*/
 
-    @GetMapping("/showTimetableForm/{id}")
-    public String showTimetableForm(@PathVariable(value = "id") Long id, Model model, Model model2,Model model3,Model model4, Principal principal ){
-        if (principal != null)
-            model3.addAttribute("activeUser", userRepository.findByEmail(principal.getName()));
-        else model3.addAttribute("activeUser", null);
-        Event event = eventService.getEventById(id);
-        model4.addAttribute("timetable", new TimeTableDto());
-        model2.addAttribute("listTimetables", timetableService.getTimetableByEventId(id));
-        model.addAttribute("event", event);
-        return "timetable";
-    }
-
-
-    @PostMapping("/saveTimetable/{id}")
-    public String saveTimetable(@ModelAttribute("timetable") @Valid TimeTableDto timetable,@PathVariable(value = "id") Long id, Errors errors) {
-        if (errors.hasErrors()) {
-            return "timetable";
-        } else {
-            timetableService.saveTimetable(timetable,id);
-            return "redirect:/list";
-        }
-    }
 
     @ResponseBody
     @RequestMapping(value = "/acceptedPayment/{value}", method = RequestMethod.POST)

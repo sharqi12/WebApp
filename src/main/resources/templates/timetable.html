@@ -71,6 +71,7 @@ and open the template in the editor.
                      <th>Opis</th>
                      <th>Godzina rozpoczęcia</th>
                      <th>Godzina zakończenia</th>
+                     <th></th>
                  </tr>
                  </thead>
                  <tbody>
@@ -79,6 +80,11 @@ and open the template in the editor.
                      <td th:text="${timetable.exhibit}"></td>
                      <td th:text="${timetable.begin}"></td>
                      <td th:text="${timetable.end}"></td>
+                     <td>
+                         <div th:if="${event.user.getId()==activeUser.getId()} ">
+                             <a th:href="@{/deleteTimeline/{id}/{id2}(id=${timetable.id},id2=${event.id})}" class="btn btn-danger">Usuń pozycje</a>
+                         </div>
+                     </td>
                  </tr>
                  </tr>
                  </tbody>
@@ -86,6 +92,8 @@ and open the template in the editor.
 
         </header>
         <br/><br/>
+
+
 
     </div>
 
