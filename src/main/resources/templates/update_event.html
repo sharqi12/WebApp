@@ -81,9 +81,13 @@ and open the template in the editor.
                 <button type="submit" class="registerButton"> Zaktualizuj </button>
             </form>
 
+            <form th:action="@{/showTimetableForm/{id}(id=${event.id})}">
+                <button type="submit" class="loginButton"> Harmonogram wydarzenia</button>
+            </form>
+
             <hr>
 
-            <a th:href="@{/list}"> Back to Event List</a>
+            <a th:href="@{/list}"> Lista wszystkich wydarzeń</a>
 
             </form>
         </header>
