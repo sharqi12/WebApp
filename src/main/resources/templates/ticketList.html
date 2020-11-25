@@ -49,7 +49,9 @@ and open the template in the editor.
 
         <div class="card shadow mb-4">
             <h3 class="m-0 font-weight-bold text-primary">Liczba kupionych biletów: <span th:text="${howManyTickets}"></span></h3>
+            <div th:if="${howManyTickets}!=0 ">
             <h3 class="m-0 font-weight-bold text-primary">Na łączną kwotę: <span th:text="${sumOfTicketsValue}"></span>PLN</h3>
+            </div>
             <div class="card-header py-3">
                     <a th:href="@{/users/export/pdf/{id}(id=${event.id})}">Pobierz PDF</a>
 
