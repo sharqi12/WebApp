@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Wspomaganie organizacji konferencji i targów</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../assets/css/main.css" type="text/css"/>
+</head>
+<body>
+
+<!-- Header -->
+<header id="header">
+    <h1><a th:href="@{/index}">Konferencje i targi<span>   Eventy i organizacja</span></a></h1>
+    <a href="#menu">Menu</a>
+</header>
+
+<!-- Nav -->
+<nav id="menu">
+    <ul class="links">
+        <li><a th:href="@{/index}">Strona główna</a></li>
+        <li><a th:href="@{/list}">Najbliższe wydarzenia</a></li>
+        <li><a th:href="@{/list}">Poprzednie wydarzenia</a></li>
+        <li><a th:href="@{/showNewContactForm}">Pomoc</a></li>
+        <li sec:authorize="hasAuthority('ROLE_CREATOR') or hasAuthority('ROLE_ADMIN')"><a th:href="@{/advice}">Wskazówki przy organizacji</a></li>
+        <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj się</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/show_profile}">Twój profil</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Wyloguj się</a></li>
+        <li sec:authorize="isAnonymous()"><a href="/" th:href="@{/registration}">Zarejestruj się</a></li>
+    </ul>
+</nav>
+
+<section id="banner" >
+    <div class="inner">
+
+        <header>
+            <div sec:authorize="isAuthenticated()">
+                <div th:if="${event.user.getId()==activeUser.getId()} ">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <!--
+                    <a th:href="@{/profile}"> Jak dodać mapę adresu? </a>
+                    <br>
+                    <form action="#" th:action="@{/saveMapURL/{id}(id=${event.id})}" th:object="${timetable}" method="POST">
+                        <input type="text" th:field="*{mapURL}" placeholder="URL od GoogleMap" class="form-control mb-4 col-4">
+                        <button type="submit" class="registerButton"> Zapisz mapę</button>
+                    </form>
+                    -->
+
+                    <!--
+                    <h4>Dodawanie Harmonogramu</h4>
+
+                    <form action="#" th:action="@{/saveTimetable/{id}(id=${event.id})}" th:object="${timetable}" method="POST">
+                        <br/>
+
+                        <input type="text" th:field="*{stage}" placeholder="Sala" class="form-control mb-4 col-4">
+                        <a th:if="${#fields.hasErrors('stage')}" th:errors="*{stage}"></a>
+                        <br/>
+
+                        <input type="text" th:field="*{exhibit}" placeholder="Nazwa" class="form-control mb-4 col-4">
+                        <a th:if="${#fields.hasErrors('exhibit')}" th:errors="*{exhibit}"></a>
+                        <br/>
+                        Godzina rozpoczęcia:
+                        <input id="datetime" type="time" th:field="*{begin}" placeholder="Godzina rozpoczęcia" class="form-control mb-4 col-4">
+                        <a th:if="${#fields.hasErrors('begin')}" th:errors="*{begin}"></a>
+                        <br/>
+                        <br>
+                        Godzina zakończenia:
+                        <input id="datetime2" type="time" th:field="*{end}" placeholder="Godzina zakończenia" class="form-control mb-4 col-4">
+                        <a th:if="${#fields.hasErrors('end')}" th:errors="*{end}"></a>
+                        <br/>
+                        <br>
+                        <button type="submit" class="registerButton"> Dodaj Harmonogram</button>
+                    </form>-->
+                </div>
+            </div>
+
+
+            <h1><a th:text="${event.name}"></a></h1>
+            <h2>Adres</h2>
+            <a id="adress" th:text="${event.adress}"></a>
+            <br>
+            <br>
+            <h2>Mapa</h2>
+
+            <div class="mapouter">
+                <script th:inline="javascript">
+                    function r(f){/in/.test(document.readyState)?setTimeout('r('+f+')',9):f()}
+                    var adress = [[${event.adress}]];
+                    var embed ="<iframe width='1000' height='800' frameborder='0' scrolling='no'  marginheight='0' marginwidth='0'   src='https://maps.google.com/maps?&amp;q="+ encodeURIComponent( adress ) +"&amp;output=embed'></iframe>";
+                    r(function(){
+                    document.getElementById("mapka").innerHTML=embed;
+                });
+                </script>
+                <div id="mapka" class="gmap_canvas"></div>
+
+                </div>
+        </header>
+        <br/><br/>
+        </div>
+        <br>
+        <br>
+        <br>
+
+    </div>
+    </div>
+
+
+
+
+
+</section>
+
+
+<!-- Scripts -->
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/jquery.scrolly.min.js"></script>
+<script src="/assets/js/skel.min.js"></script>
+<script src="/assets/js/util.js"></script>
+<script src="/assets/js/main.js"></script>
+
+</body>
+</html>

@@ -80,14 +80,28 @@ public class EventController {
     }
 
     @PostMapping("/saveEvent2")
-    public String saveEvent2(@RequestParam("file") MultipartFile file, @ModelAttribute @Valid Event event, Errors errors) {
+    public String saveEvent2(@RequestParam("file") MultipartFile file, @ModelAttribute @Valid Event event, Errors errors, Principal principal) {
         if (errors.hasErrors()) {
             return "update_event";
         } else {
+            User user = userRepository.findByEmail(principal.getName());
+            event.setUser(user);
             eventService.saveEvent(file, event);
             return "redirect:/list";
         }
     }
+
+    @GetMapping("/showAdressForEvent/{id}")
+    public String showTimetableForm(@PathVariable(value = "id") Long id, Model model, Model model2, Principal principal ){
+        if (principal != null)
+            model2.addAttribute("activeUser", userRepository.findByEmail(principal.getName()));
+        else model2.addAttribute("activeUser", null);
+        Event event = eventService.getEventById(id);
+        model.addAttribute("event", event);
+        return "eventAdress";
+    }
+
+
 
     @GetMapping("/showFormForUpdate/{id}")
     public String showFormForUpdate(@PathVariable(value = "id") Long id, Model model) {

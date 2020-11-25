@@ -62,6 +62,7 @@ and open the template in the editor.
         <br>
         <br>
         <br>
+
         </div>
         <header>
             <h1><a th:text="${event.name}"></a></h1>
@@ -75,7 +76,9 @@ and open the template in the editor.
                 <form th:action="@{/showTimetableForm/{id}(id=${event.id})}">
                 <button type="submit" class="loginButton"> Harmonogram</button>
                 </form>
-                <button type="submit" onclick="location.href = '/login';"  class="loginButton"> Mapa</button>
+                <form th:action="@{/showAdressForEvent/{id}(id=${event.id})}">
+                <button type="submit" onclick="location.href = '/login';"  class="loginButton"> Adres </button>
+                </form>
                 <br>
                 <br>
             </div>

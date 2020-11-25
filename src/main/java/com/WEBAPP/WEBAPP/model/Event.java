@@ -1,5 +1,7 @@
 package com.WEBAPP.WEBAPP.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,6 +43,7 @@ public class Event {
 
     @Column(name = "description")
     @Size(min = 10, message = "Wprowadz opis!")
+    @Type(type="text")
     private String description;
 
     @Lob
@@ -55,12 +58,13 @@ public class Event {
     @NotNull
     private Integer ticket2;
 
+    @Column(name = "adress")
+    @NotNull
+    private String adress;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_events", referencedColumnName = "id")
-
     List<Comment> comments = new ArrayList<>();
-
-
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_user", referencedColumnName = "id")
@@ -128,4 +132,13 @@ public class Event {
     public void setTicket2(Integer ticket2) {
         this.ticket2 = ticket2;
     }
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
+    }
+
 }

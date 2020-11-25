@@ -48,6 +48,20 @@ and open the template in the editor.
     <div class="inner">
 
         <header>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
             <h1>Zarejestruj swój event</h1>
 
             <form action="#" th:action="@{/saveEvent}" th:object="${event}" method="POST" enctype="multipart/form-data">
@@ -58,6 +72,9 @@ and open the template in the editor.
                 <input type="text" th:field="*{city}" placeholder="Miasto" class="form-control mb-4 col-4">
                 <a th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></a>
                 <br/>
+                <textarea th:field="*{adress}" placeholder="Adres">
+                </textarea>
+                <br/>
                 <!--<input type="text" th:field="*{date}" placeholder="Date" class="form-control mb-4 col-4">-->
                 <input id="datetime" th:field="*{date}" type="text" placeholder="Data">
                 <script src="../assets/js/jquery.js"></script>
@@ -67,7 +84,8 @@ and open the template in the editor.
                 </script>
                 <a th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></a>
                 <br/>
-                <input type="text" th:field="*{description}" placeholder="Opis" class="form-control mb-4 col-4">
+                <textarea th:field="*{description}" placeholder="Opis">
+                </textarea>
                 <a th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></a>
                 <br/>
                 <input type="text" th:field="*{ticket1}" placeholder="Bilet normalny" class="form-control mb-4 col-4">
@@ -85,6 +103,9 @@ and open the template in the editor.
              <hr>
 
              <a th:href="@{/list}"> Back to Event List</a>
+            <br>
+            <br>
+            <br>
 
              </form>
          </header>
@@ -94,51 +115,7 @@ and open the template in the editor.
 </section>
 
 
-<!-- Footer -->
-<footer id="footer">
-    <div class="inner">
-        <div class="flex flex-3">
-            <div class="col">
-                <h3>Vestibullum</h3>
-                <ul class="alt">
-                    <li><a href="#">Nascetur nunc varius commodo.</a></li>
-                    <li><a href="#">Vis id faucibus montes tempor</a></li>
-                    <li><a href="#">Massa amet lobortis vel.</a></li>
-                    <li><a href="#">Nascetur nunc varius commodo.</a></li>
-                </ul>
-            </div>
-            <div class="col">
-                <h3>Lobortis</h3>
-                <ul class="alt">
-                    <li><a href="#">Nascetur nunc varius commodo.</a></li>
-                    <li><a href="#">Vis id faucibus montes tempor</a></li>
-                    <li><a href="#">Massa amet lobortis vel.</a></li>
-                    <li><a href="#">Nascetur nunc varius commodo.</a></li>
-                </ul>
-            </div>
-            <div class="col">
-                <h3>Accumsan</h3>
-                <ul class="alt">
-                    <li><a href="#">Nascetur nunc varius commodo.</a></li>
-                    <li><a href="#">Vis id faucibus montes tempor</a></li>
-                    <li><a href="#">Massa amet lobortis vel.</a></li>
-                    <li><a href="#">Nascetur nunc varius commodo.</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="copyright">
-        <ul class="icons">
-            <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-            <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-            <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-            <li><a href="#" class="icon fa-snapchat"><span class="label">Snapchat</span></a></li>
-        </ul>
-        &copy; Untitled. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com">Coverr</a>. Video: <a href="https://coverr.co">Coverr</a>.
-    </div>
-</footer>
 
-<!-- Scripts -->
 <!-- Scripts -->
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/jquery.scrolly.min.js"></script>
