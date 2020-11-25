@@ -28,6 +28,11 @@ public class MainController {
         return "pomoc";
     }
 
+    @GetMapping("/advice")
+    public String advice() {
+        return "advice";
+    }
+
 
 /*
     @GetMapping("/profile")

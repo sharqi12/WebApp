@@ -29,6 +29,7 @@ and open the template in the editor.
         <li><a th:href="@{/list}">Najbliższe wydarzenia</a></li>
         <li><a th:href="@{/list}">Poprzednie wydarzenia</a></li>
         <li><a th:href="@{/showNewContactForm}">Pomoc</a></li>
+        <li sec:authorize="hasAuthority('ROLE_CREATOR') or hasAuthority('ROLE_ADMIN')"><a th:href="@{/advice}">Wskazówki przy organizacji</a></li>
         <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj się</a></li>
         <li sec:authorize="isAuthenticated()"><a th:href="@{/show_profile}">Twój profil</a></li>
         <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Wyloguj się</a></li>
@@ -44,6 +45,7 @@ and open the template in the editor.
 -->
 <section id="banner" >
     <div class="inner">
+        <div sec:authorize="isAuthenticated()">
         <br>
         <br>
         <br>
@@ -60,10 +62,10 @@ and open the template in the editor.
         <br>
         <br>
         <br>
+        </div>
         <header>
-            <h1>Opis wydarzenia</h1>
+            <h1><a th:text="${event.name}"></a></h1>
             <br>
-            <h2><a th:text="${event.name}"></a></h2>
             <img alt="" th:src="*{'data:image/jpeg;base64,'+{event.image}}" style="width: 100px;height: 100px;">
             <br>
 

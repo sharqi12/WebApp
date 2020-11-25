@@ -12,7 +12,7 @@ and open the template in the editor.
     <title>Wspomaganie organizacji konferencji i targów</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="assets/css/main.css" type="text/css"/>
+    <link rel="stylesheet" href="assets/css/main.css" />
 </head>
 <body>
 
@@ -43,65 +43,33 @@ and open the template in the editor.
     its extension (eg. images/banner). Your video must be available in both .mp4 and .webm
     formats to work correctly.
 -->
+<div sec:authorize="hasAuthority('ROLE_CREATOR') or hasAuthority('ROLE_ADMIN')">
 <section id="banner" >
     <div class="inner">
-
         <header>
-
-
-
-            <h1>Wydarzenia</h1>
-            <div sec:authorize="hasAuthority('ROLE_CREATOR')">
-
-            <a th:href = "@{/showNewEventForm}" class="btn btn-primary btn-sm mb-3"> Dodaj wydarzenie </a>
-            </div>
-            <div sec:authorize="hasAuthority('ROLE_ADMIN')">
-                <a th:href = "@{/showNewEventForm}" class="btn btn-primary btn-sm mb-3"> Dodaj wydarzenie </a>
-            </div>
-            <table border="1" class = "table table-striped table-responsive-md">
-                <br>
-                <thead>
-                <tr><!--
-                    <th>Nazwa</th>
-                    <th>Miasto</th>
-                    <th>Data</th>-->
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="event : ${listEvents}">
-                    <td><a th:text="${event.name}" th:href="@{/showDescription/{id}(id=${event.id})}" class="btn btn-primary"></a></td>
-                    <td th:text="${event.city}"></td>
-                    <td th:text="${event.date}"></td>
-                    <div sec:authorize="hasAuthority('ROLE_ADMIN')">
-                        <td>
-                            <a th:href="@{/showTicketsForEvent/{id}(id=${event.id})}" class="btn btn-primary">Tickets</a>
-                            <a th:href="@{/showFormForUpdate/{id}(id=${event.id})}" class="btn btn-primary">Update</a>
-                            <a th:href="@{/deleteEvent/{id}(id=${event.id})}" class="btn btn-danger">Delete</a></td>
-                    </div>
-
-                        <td>
-                            <div sec:authorize="isAuthenticated()">
-                                <div th:if="${event.user.getId()==activeUser.getId()} ">
-                                    <a th:href="@{/showTicketsForEvent/{id}(id=${event.id})}" class="btn btn-primary">Tickets</a>
-                                <a th:href="@{/showFormForUpdate/{id}(id=${event.id})}" class="btn btn-primary">Update</a>
-                                <a th:href="@{/deleteEvent/{id}(id=${event.id})}" class="btn btn-danger">Delete</a>
-                                </div>
-                             </div>
-                        </td>
-
-                </tr>
-                </tr>
-                </tbody>
-            </table>
-
-            </form>
+            <h1>Przy organizacji wydarzenia łatwo o czymś zapomnieć</h1>
+            <p>Ponizej znajdziesz najważniejsze rady dotyczące organizacji wydarzeń
+            </p>
         </header>
         <!-- <a href="#main" class="button big alt scrolly">Dignissim</a> -->
     </div>
 
 
 </section>
-
+<section id="FAQ">
+    <div class="(small)">
+        <h3>Sem turpis amet semper ?</h3>
+        <p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat commodo eu sed ante lacinia. Sapien a lorem in integer ornare praesent commodo adipiscing arcu in massa commodo lorem accumsan at odio massa ac ac. Semper adipiscing varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>
+    </div>
+    <div class="(small)">
+        <h3>Sem turpis amet semper ?</h3>
+        <p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat commodo eu sed ante lacinia. Sapien a lorem in integer ornare praesent commodo adipiscing arcu in massa commodo lorem accumsan at odio massa ac ac. Semper adipiscing varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>
+    </div>
+    <div class="6(small)">
+        <h3>Sem turpis amet semper ?</h3>
+        <p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat commodo eu sed ante lacinia. Sapien a lorem in integer ornare praesent commodo adipiscing arcu in massa commodo lorem accumsan at odio massa ac ac. Semper adipiscing varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>
+    </div>
+</section>
 
 <!-- Footer -->
 <footer id="footer">
@@ -136,6 +104,7 @@ and open the template in the editor.
             </div>
         </div>
     </div>
+
     <div class="copyright">
         <ul class="icons">
             <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
@@ -143,15 +112,16 @@ and open the template in the editor.
             <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
             <li><a href="#" class="icon fa-snapchat"><span class="label">Snapchat</span></a></li>
         </ul>
+        &copy; Untitled. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com">Coverr</a>. Video: <a href="https://coverr.co">Coverr</a>.
     </div>
 </footer>
+</div>
 
-<!-- Scripts -->
+
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/jquery.scrolly.min.js"></script>
 <script src="assets/js/skel.min.js"></script>
 <script src="assets/js/util.js"></script>
 <script src="assets/js/main.js"></script>
-
 </body>
 </html>
