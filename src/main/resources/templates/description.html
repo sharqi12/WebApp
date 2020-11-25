@@ -56,9 +56,14 @@ and open the template in the editor.
         <br>
         <br>
         <br>
+        <br>
+        <br>
+        <br>
+        <br>
         <header>
             <h1>Opis wydarzenia</h1>
-
+            <br>
+            <h2><a th:text="${event.name}"></a></h2>
             <img alt="" th:src="*{'data:image/jpeg;base64,'+{event.image}}" style="width: 100px;height: 100px;">
             <br>
 
