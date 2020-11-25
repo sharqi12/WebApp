@@ -66,7 +66,7 @@ and open the template in the editor.
                             <a th:if="${#fields.hasErrors('stage')}" th:errors="*{stage}"></a>
                             <br/>
 
-                            <input type="text" th:field="*{exhibit}" placeholder="Wystawa" class="form-control mb-4 col-4">
+                            <input type="text" th:field="*{exhibit}" placeholder="Nazwa" class="form-control mb-4 col-4">
                             <a th:if="${#fields.hasErrors('exhibit')}" th:errors="*{exhibit}"></a>
                             <br/>
                             Godzina rozpoczęcia:
@@ -79,6 +79,11 @@ and open the template in the editor.
                             <a th:if="${#fields.hasErrors('end')}" th:errors="*{end}"></a>
                             <br/>
                             <br>
+                            <!--Opis:
+                            <textarea th:field="*{description}" placeholder="Nie wymagany">
+
+                            </textarea>
+                            <br/>-->
 
                             <button type="submit" class="registerButton"> Dodaj Harmonogram</button>
                         </form>
@@ -91,7 +96,7 @@ and open the template in the editor.
                  <thead>
                  <tr>
                      <th>Miejsce</th>
-                     <th>Opis</th>
+                     <th>Nazwa</th>
                      <th>Godzina rozpoczęcia</th>
                      <th>Godzina zakończenia</th>
                      <th></th>
@@ -187,7 +192,7 @@ and open the template in the editor.
             }
 
             var renderer = new Timetable.Renderer(timetable);
-            renderer.draw('.timetable'); // any css selector
+            renderer.draw('.timetable');
 
         </script>
 
