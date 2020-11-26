@@ -38,13 +38,14 @@ public class TimetableController {
 
 
     @GetMapping("/showTimetableForm/{id}")
-    public String showTimetableForm(@PathVariable(value = "id") Long id, Model model, Model model2, Model model3, Model model4, Principal principal ){
+    public String showTimetableForm(@PathVariable(value = "id") Long id, Model model, Model model2, Model model3, Model model4, Model model5, Principal principal ){
         if (principal != null)
             model3.addAttribute("activeUser", userRepository.findByEmail(principal.getName()));
         else model3.addAttribute("activeUser", null);
         Event event = eventService.getEventById(id);
         model4.addAttribute("timetable", new TimeTableDto());
         model2.addAttribute("listTimetables", timetableService.getTimetableByEventId(id));
+        model5.addAttribute("howManyTimetables", timetableService.howManyTimetablesByEventId(id));
         model.addAttribute("event", event);
         return "timetable";
     }

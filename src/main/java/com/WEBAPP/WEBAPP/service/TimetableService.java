@@ -11,4 +11,5 @@ public interface TimetableService {
     void saveTimetable(Timetable timetable);
     void deleteTimetable(Long id);
     void saveTimetable(TimeTableDto timeTableDto, Long id);
+    Integer howManyTimetablesByEventId(Long id);
 }

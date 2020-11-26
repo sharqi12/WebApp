@@ -91,34 +91,38 @@ and open the template in the editor.
                 </div>
             </div>
 
+            <div th:if="${howManyTimetables}!=0 ">
+                <h1>Harmonogram wydarzenia</h1>
 
-            <h1>Harmonogram wydarzenia</h1>
-            <table border="1" class = "table table-striped table-responsive-md">
-                 <thead>
-                 <tr>
-                     <th>Miejsce</th>
-                     <th>Nazwa</th>
-                     <th>Godzina rozpoczęcia</th>
-                     <th>Godzina zakończenia</th>
-                     <th></th>
-                 </tr>
-                 </thead>
-                 <tbody>
-                 <tr th:each="timetable : ${listTimetables}">
-                     <td th:text="${timetable.stage}"></td>
-                     <td th:text="${timetable.exhibit}"></td>
-                     <td th:text="${timetable.begin}"></td>
-                     <td th:text="${timetable.end}"></td>
-                     <td>
-                         <div th:if="${event.user.getId()==activeUser.getId()} ">
-                             <a th:href="@{/deleteTimeline/{id}/{id2}(id=${timetable.id},id2=${event.id})}" class="btn btn-danger">Usuń pozycje</a>
-                         </div>
-                     </td>
-                 </tr>
-                 </tr>
-                 </tbody>
-             </table>
-
+                <table border="1" class = "table table-striped table-responsive-md">
+                     <thead>
+                     <tr>
+                         <th>Miejsce</th>
+                         <th>Nazwa</th>
+                         <th>Godzina rozpoczęcia</th>
+                         <th>Godzina zakończenia</th>
+                         <th></th>
+                     </tr>
+                     </thead>
+                     <tbody>
+                     <tr th:each="timetable : ${listTimetables}">
+                         <td th:text="${timetable.stage}"></td>
+                         <td th:text="${timetable.exhibit}"></td>
+                         <td th:text="${timetable.begin}"></td>
+                         <td th:text="${timetable.end}"></td>
+                         <td>
+                             <div th:if="${event.user.getId()==activeUser.getId()} ">
+                                 <a th:href="@{/deleteTimeline/{id}/{id2}(id=${timetable.id},id2=${event.id})}" class="btn btn-danger">Usuń pozycje</a>
+                             </div>
+                         </td>
+                     </tr>
+                     </tr>
+                     </tbody>
+                 </table>
+            </div>
+            <div th:if="${howManyTimetables}==0 ">
+                <h3>Organizator nie dodał harmonogramu!</h3>
+            </div>
         </header>
         <br/><br/>
 

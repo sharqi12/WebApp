@@ -12,5 +12,6 @@ public interface TimetableRepository extends JpaRepository<Timetable, Long> {
     @Query(value = "SELECT * FROM timetables WHERE id_events =:em ORDER BY begin",nativeQuery = true)
     List<Timetable> findByEventId(@Param("em")Long id);
 
-
+    @Query(value = "SELECT COUNT(id) FROM timetables WHERE id_events =:em",nativeQuery = true)
+    Integer howManyTimetablesByEventId(@Param("em")Long id);
 }

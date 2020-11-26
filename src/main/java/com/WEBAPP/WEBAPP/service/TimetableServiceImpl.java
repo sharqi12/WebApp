@@ -41,4 +41,9 @@ public class TimetableServiceImpl implements TimetableService{
         timetableRepository.save(timetable);
     }
 
+    @Override
+    public Integer howManyTimetablesByEventId(Long id){
+        return timetableRepository.howManyTimetablesByEventId(id);
+    }
+
 }
