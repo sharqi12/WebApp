@@ -42,57 +42,24 @@ and open the template in the editor.
 
         <header>
             <div sec:authorize="isAuthenticated()">
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
                 <div th:if="${event.user.getId()==activeUser.getId()} ">
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <!--
-                    <a th:href="@{/profile}"> Jak dodać mapę adresu? </a>
-                    <br>
-                    <form action="#" th:action="@{/saveMapURL/{id}(id=${event.id})}" th:object="${timetable}" method="POST">
-                        <input type="text" th:field="*{mapURL}" placeholder="URL od GoogleMap" class="form-control mb-4 col-4">
-                        <button type="submit" class="registerButton"> Zapisz mapę</button>
-                    </form>
-                    -->
 
-                    <!--
-                    <h4>Dodawanie Harmonogramu</h4>
-
-                    <form action="#" th:action="@{/saveTimetable/{id}(id=${event.id})}" th:object="${timetable}" method="POST">
-                        <br/>
-
-                        <input type="text" th:field="*{stage}" placeholder="Sala" class="form-control mb-4 col-4">
-                        <a th:if="${#fields.hasErrors('stage')}" th:errors="*{stage}"></a>
-                        <br/>
-
-                        <input type="text" th:field="*{exhibit}" placeholder="Nazwa" class="form-control mb-4 col-4">
-                        <a th:if="${#fields.hasErrors('exhibit')}" th:errors="*{exhibit}"></a>
-                        <br/>
-                        Godzina rozpoczęcia:
-                        <input id="datetime" type="time" th:field="*{begin}" placeholder="Godzina rozpoczęcia" class="form-control mb-4 col-4">
-                        <a th:if="${#fields.hasErrors('begin')}" th:errors="*{begin}"></a>
-                        <br/>
-                        <br>
-                        Godzina zakończenia:
-                        <input id="datetime2" type="time" th:field="*{end}" placeholder="Godzina zakończenia" class="form-control mb-4 col-4">
-                        <a th:if="${#fields.hasErrors('end')}" th:errors="*{end}"></a>
-                        <br/>
-                        <br>
-                        <button type="submit" class="registerButton"> Dodaj Harmonogram</button>
-                    </form>-->
                 </div>
             </div>
 
