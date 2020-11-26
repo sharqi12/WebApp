@@ -37,7 +37,6 @@ public class EventTickets {
     }
 
     public EventTickets(EventTicketDto eventTicketDto){
-        this.id = eventTicketDto.getId();
         this.event = eventTicketDto.getEvent();
         this.ticketPrice = eventTicketDto.getTicketPrice();
         this.ticketName = eventTicketDto.getTicketName();
