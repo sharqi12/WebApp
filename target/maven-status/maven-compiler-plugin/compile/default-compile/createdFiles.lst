@@ -23,6 +23,8 @@ com\WEBAPP\WEBAPP\service\ContactServiceImpl.class
 com\WEBAPP\WEBAPP\WebappApplication.class
 com\WEBAPP\WEBAPP\service\CommentServiceImpl.class
 com\WEBAPP\WEBAPP\model\User.class
+com\WEBAPP\WEBAPP\repository\EventTicketsRepository.class
+com\WEBAPP\WEBAPP\web\TicketController.class
 com\WEBAPP\WEBAPP\model\Contact.class
 com\WEBAPP\WEBAPP\web\ContactController.class
 com\WEBAPP\WEBAPP\web\CurrentUserControllerAdvice.class
@@ -30,6 +32,7 @@ com\WEBAPP\WEBAPP\service\EventServiceImpl.class
 com\WEBAPP\WEBAPP\model\MyUserPrincipal.class
 com\WEBAPP\WEBAPP\repository\EventRepository.class
 com\WEBAPP\WEBAPP\service\CommentService.class
+com\WEBAPP\WEBAPP\web\dto\EventTicketDto.class
 com\WEBAPP\WEBAPP\web\EventController.class
 com\WEBAPP\WEBAPP\web\dto\UserRegistrationDto.class
 com\WEBAPP\WEBAPP\service\UserService.class
@@ -37,5 +40,6 @@ com\WEBAPP\WEBAPP\service\TimetableServiceImpl.class
 com\WEBAPP\WEBAPP\model\Role.class
 com\WEBAPP\WEBAPP\service\TicketServiceImpl.class
 com\WEBAPP\WEBAPP\web\CommentController.class
+com\WEBAPP\WEBAPP\model\EventTickets.class
 com\WEBAPP\WEBAPP\service\ContactService.class
 com\WEBAPP\WEBAPP\service\MyUserDetailsService.class

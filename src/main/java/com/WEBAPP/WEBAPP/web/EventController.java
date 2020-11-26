@@ -135,27 +135,6 @@ public class EventController {
     }
 
 
-    @ResponseBody
-    @RequestMapping(value = "/acceptedPayment/{value}", method = RequestMethod.POST)
-    public String getSearchResultViaAjax(@RequestParam(value = "value") Integer value, @RequestParam(value = "user_id") Integer user_id, @RequestParam(value = "event_id") Long event_id)
-    {
-        //User user = userRepository.findById(user_id);
-
-        Tickets ticket = new Tickets(userService.getUserById(user_id), eventService.getEventById(event_id), value);
-        ticketService.saveTicket(ticket);
-
-        //System.out.println("Cena: "+value+" UserId: "+user_id+" EventId: "+ event_id);
-        return "description";
-    }
-    @GetMapping("/showTicketsForEvent/{id}")
-    public String showTicketsForEvent(@PathVariable(value = "id") Long id, Model model,Model model2, Model model3, Model model4) {
-        model.addAttribute("listTickets", ticketService.getAllTickets(id));
-        model2.addAttribute("howManyTickets", ticketService.howManyTicketsBoughtByEventId(id));
-        model3.addAttribute("sumOfTicketsValue", ticketService.sumOfTicketsPriceByEventId(id));
-        model4.addAttribute("event", eventService.getEventById(id));
-        return "ticketList";
-    }
-
     @GetMapping("/users/export/pdf/{id}")
     public void exportToPDF(@PathVariable(value = "id") Long id, HttpServletResponse response) throws DocumentException, IOException {
         response.setContentType("application/pdf");

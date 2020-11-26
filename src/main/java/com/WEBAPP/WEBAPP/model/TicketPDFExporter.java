@@ -40,7 +40,10 @@ public class TicketPDFExporter {
         cell.setPhrase(new Phrase("E-mail", font));
         table.addCell(cell);
 
-        cell.setPhrase(new Phrase("Cena biletu", font));
+        //cell.setPhrase(new Phrase("Cena biletu", font));
+        //table.addCell(cell);
+
+        cell.setPhrase(new Phrase("Typ biletu", font));
         table.addCell(cell);
 
     }
@@ -49,7 +52,9 @@ public class TicketPDFExporter {
         for(Tickets ticket : listTickets){
             table.addCell(String.valueOf(ticket.getUser().getName()));
             table.addCell(String.valueOf(ticket.getUser().getEmail()));
-            table.addCell(String.valueOf(ticket.getTicketPrice())+" PLN");
+            table.addCell(ticket.getTicketName());
+            //table.addCell(String.valueOf(ticket.getTicketPrice())+" PLN");
+
         }
     }
 

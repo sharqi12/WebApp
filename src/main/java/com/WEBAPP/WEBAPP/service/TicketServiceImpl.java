@@ -1,10 +1,13 @@
 package com.WEBAPP.WEBAPP.service;
 
 import com.WEBAPP.WEBAPP.model.Event;
+import com.WEBAPP.WEBAPP.model.EventTickets;
 import com.WEBAPP.WEBAPP.model.Tickets;
 import com.WEBAPP.WEBAPP.repository.EventRepository;
+import com.WEBAPP.WEBAPP.repository.EventTicketsRepository;
 import com.WEBAPP.WEBAPP.repository.TicketRepository;
 import com.WEBAPP.WEBAPP.repository.UserRepository;
+import com.WEBAPP.WEBAPP.web.dto.EventTicketDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +20,16 @@ public class TicketServiceImpl implements TicketService{
     private TicketRepository ticketRepository;
 
     @Autowired
+    private EventTicketsRepository eventTicketsRepository;
+
+    @Autowired
     private EventRepository eventRepository;
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private EventService eventService;
 
     @Override
     public List<Tickets> getAllTickets(Long id) {
@@ -44,4 +53,32 @@ public class TicketServiceImpl implements TicketService{
     public void saveTicket(Tickets ticket){
         this.ticketRepository.save(ticket);
     }
+
+    @Override
+    public List<EventTickets> getAllTypesOfTicketsByEventId(long id){
+        return eventTicketsRepository.findTypesByEventId(id);
+    }
+
+    @Override
+    public Integer howManyTicketsTypesByEventId(Long id){
+        return eventTicketsRepository.howManyTicketsTypesByEventId(id);
+    }
+
+    @Override
+    public void saveTicketType(EventTicketDto eventTicketDto, Long id){
+        EventTickets eventTickets = new EventTickets(eventTicketDto);
+        eventTickets.setEvent(eventService.getEventById(id));
+        eventTicketsRepository.save(eventTickets);
+    }
+
+    @Override
+    public void deleteTicketTypeById(Long id){
+        eventTicketsRepository.deleteById(id);
+    }
+
+    @Override
+    public String getTicketTypeNameByValue(Integer value){
+        return eventTicketsRepository.findNameByValue(value);
+    }
+
 }

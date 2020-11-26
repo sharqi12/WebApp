@@ -67,6 +67,7 @@ and open the template in the editor.
                                 <th>Id biletu</th>
                                 <th>Imię i nazwisko</th>
                                 <th>Cena biletu</th>
+                                <th>Typ biletu</th>
 
                             </tr>
                             </thead>
@@ -75,6 +76,7 @@ and open the template in the editor.
                                 <td th:text="${ticket.id}"></td>
                                 <td th:text="${ticket.user.getName()}"></td>
                                 <td th:text="${ticket.ticketPrice+' PLN'}"></td>
+                                <td th:text="${ticket.ticketName}"></td>
 
                             </tr>
                             </tbody>

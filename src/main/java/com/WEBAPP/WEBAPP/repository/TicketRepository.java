@@ -1,5 +1,6 @@
 package com.WEBAPP.WEBAPP.repository;
 
+import com.WEBAPP.WEBAPP.model.EventTickets;
 import com.WEBAPP.WEBAPP.model.Tickets;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

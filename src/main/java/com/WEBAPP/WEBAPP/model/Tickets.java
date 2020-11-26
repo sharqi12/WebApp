@@ -18,15 +18,26 @@ public class Tickets {
     @JoinColumn(name = "event_id")
     private Event event;
 
+    private String ticketName;
+
     private Integer ticketPrice;
 
     public Tickets(){
 
     }
-    public Tickets(User user, Event event, Integer ticketPrice){
+    public Tickets(User user, Event event, Integer ticketPrice, String ticketName){
         this.event = event;
         this.user = user;
         this.ticketPrice=ticketPrice;
+        this.ticketName=ticketName;
+    }
+
+    public String getTicketName() {
+        return ticketName;
+    }
+
+    public void setTicketName(String ticketName) {
+        this.ticketName = ticketName;
     }
 
     public Long getId() {

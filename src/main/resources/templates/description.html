@@ -77,40 +77,44 @@ and open the template in the editor.
                 <button type="submit" class="loginButton"> Harmonogram</button>
                 </form>
                 <form th:action="@{/showAdressForEvent/{id}(id=${event.id})}">
-                <button type="submit" onclick="location.href = '/login';"  class="loginButton"> Adres </button>
+                <button type="submit" class="loginButton"> Adres </button>
+                </form>
+                <form th:action="@{/showTicketsTypesForEvent/{id}(id=${event.id})}">
+                    <button type="submit" class="loginButton"> Bilety </button>
                 </form>
                 <br>
                 <br>
             </div>
             <div sec:authorize="isAuthenticated()">
-            Kup Bilet:
-            <br>
-            <form action="#" th:action="@{/saveEvent}" th:object="${event}" method="POST" enctype="multipart/form-data">
-            Bilet normalny/ulgowy
-            <div class="12u$">
-                <div class="select-wrapper">
-                    <select id="ticket" >
-                        <option th:value="*{ticket1}" th:text="*{ticket1}"></option>
-                        <option th:value="*{ticket2}" th:text="*{ticket2}"></option>
-                    </select>
+                <!--
+                Kup Bilet:
+                <br>
+                <form action="#" th:action="@{/saveEvent}" th:object="${event}" method="POST" enctype="multipart/form-data">
+                Bilet normalny/ulgowy
+                <div class="12u$">
+                    <div class="select-wrapper">
+                        <select id="ticket" >
+                            <option th:value="*{ticket1}" th:text="*{ticket1}"></option>
+                            <option th:value="*{ticket2}" th:text="*{ticket2}"></option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            </form>
+                </form>
+                -->
             <!-- Set up a container element for the button -->
 
 
 
+                <!--
+                <div id="paypal-button-container"></div>
 
-            <div id="paypal-button-container"></div>
-
-            <!-- Include the PayPal JavaScript SDK -->
             <script src="https://www.paypal.com/sdk/js?client-id=AZY-1WtRQ5nISTIb7YZYX31PYlrqHk2d5MvDqWGYs2kG8szLdZghbj0vCc-BNAMa-x1VEtjHfmtHxBSy&currency=PLN"></script>
                 <div th:with="localId=${#authentication.getPrincipal().getId()}">
                     <div th:with="localEventId=${event.id}">
             <script th:inline="javascript">
             var ticket = document.getElementById("ticket");
-        // Render the PayPal button into #paypal-button-container
-        paypal.Buttons({
+            // Render the PayPal button into #paypal-button-container
+            paypal.Buttons({
 
             // Set up the transaction
             createOrder: function(data, actions) {
@@ -157,7 +161,7 @@ and open the template in the editor.
         }).render('#paypal-button-container');
     </script>
                     </div>
-                </div>
+                </div>-->
 
 
             <table>
