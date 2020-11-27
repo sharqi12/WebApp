@@ -38,7 +38,7 @@ public class TicketController {
     public String getSearchResultViaAjax(@RequestParam(value = "value") Integer value, @RequestParam(value = "user_id") Integer user_id, @RequestParam(value = "event_id") Long event_id)
     {
         //User user = userRepository.findById(user_id);
-        String ticket_name = ticketService.getTicketTypeNameByValue(value);
+        String ticket_name = ticketService.getTicketTypeNameByValue(value, event_id);
         Tickets ticket = new Tickets(userService.getUserById(user_id), eventService.getEventById(event_id), value, ticket_name);
         ticketService.saveTicket(ticket);
 

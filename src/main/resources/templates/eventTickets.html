@@ -42,7 +42,52 @@ and open the template in the editor.
         <div th:if=" ${howManyTypesTicket}==0 ">
             <header>
                 <div sec:authorize="isAuthenticated()">
-                    <div th:if="${event.user.getId()==activeUser.getId()} ">
+                    <div th:if="${event.user.getId()==activeUser.getId()}">
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <h4>Dodawanie typów biletu na wydarzenie</h4>
+                        <form action="#" th:action="@{/saveNewTicket/{id}(id=${event.id})}" th:object="${eventTicket}" method="POST">
+                            <br/>
+                            Typ biletu:
+                            <input type="text" th:field="*{ticketName}" placeholder="np. Ulgowy" class="form-control mb-4 col-4">
+                            <a th:if="${#fields.hasErrors('ticketName')}" th:errors="*{ticketName}"></a>
+                            <br/>
+                            Cena biletu:
+                            <input type="text" th:field="*{ticketPrice}" placeholder="Cena biletu" class="form-control mb-4 col-4">
+                            <a th:if="${#fields.hasErrors('ticketPrice')}" th:errors="*{ticketPrice}"></a>
+                            <br/>
+                            Opis typu biletu:
+                            <textarea th:field="*{ticketDescription}" placeholder="Nie wymagany, np. Bilet ulgowy dla dzieci do lat 12">
+                        </textarea>
+                            <a th:if="${#fields.hasErrors('ticketDescription')}" th:errors="*{ticketDescription}"></a>
+                            <br/>
+                            <br>
+
+                            <!--Opis:
+                            <textarea th:field="*{description}" placeholder="Nie wymagany">
+
+                            </textarea>
+                            <br/>-->
+
+                            <button type="submit" class="registerButton"> Dodaj typ biletu</button>
+                        </form>
+                    </div>
+
+                    <div sec:authorize="hasAuthority('ROLE_ADMIN')">
                         <br>
                         <br>
                         <br>
@@ -155,6 +200,51 @@ and open the template in the editor.
 
                         <button type="submit" class="registerButton"> Dodaj typ biletu</button>
                     </form>
+
+                </div>
+                <div sec:authorize="hasAuthority('ROLE_ADMIN')">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <h4>Dodawanie typów biletu na wydarzenie</h4>
+                    <form action="#" th:action="@{/saveNewTicket/{id}(id=${event.id})}" th:object="${eventTicket}" method="POST">
+                        <br/>
+                        Typ biletu:
+                        <input type="text" th:field="*{ticketName}" placeholder="np. Ulgowy" class="form-control mb-4 col-4">
+                        <a th:if="${#fields.hasErrors('ticketName')}" th:errors="*{ticketName}"></a>
+                        <br/>
+                        Cena biletu:
+                        <input type="text" th:field="*{ticketPrice}" placeholder="Cena biletu" class="form-control mb-4 col-4">
+                        <a th:if="${#fields.hasErrors('ticketPrice')}" th:errors="*{ticketPrice}"></a>
+                        <br/>
+                        Opis typu biletu:
+                        <textarea th:field="*{ticketDescription}" placeholder="Nie wymagany, np. Bilet ulgowy dla dzieci do lat 12">
+                        </textarea>
+                        <a th:if="${#fields.hasErrors('ticketDescription')}" th:errors="*{ticketDescription}"></a>
+                        <br/>
+                        <br>
+
+                        <!--Opis:
+                        <textarea th:field="*{description}" placeholder="Nie wymagany">
+
+                        </textarea>
+                        <br/>-->
+
+                        <button type="submit" class="registerButton"> Dodaj typ biletu</button>
+                    </form>
                 </div>
             </div>
 
@@ -179,6 +269,9 @@ and open the template in the editor.
                 <td th:text="${ticketType.ticketDescription}"></td>
                 <td>
                     <div th:if="${event.user.getId()==activeUser.getId()} ">
+                        <a th:href="@{/deleteTicketType/{id}/{id2}(id=${ticketType.id},id2=${event.id})}" class="btn btn-danger">Usuń pozycje</a>
+                    </div>
+                    <div sec:authorize="hasAuthority('ROLE_ADMIN')">
                         <a th:href="@{/deleteTicketType/{id}/{id2}(id=${ticketType.id},id2=${event.id})}" class="btn btn-danger">Usuń pozycje</a>
                     </div>
                 </td>

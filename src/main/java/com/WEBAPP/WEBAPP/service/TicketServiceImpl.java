@@ -77,8 +77,8 @@ public class TicketServiceImpl implements TicketService{
     }
 
     @Override
-    public String getTicketTypeNameByValue(Integer value){
-        return eventTicketsRepository.findNameByValue(value);
+    public String getTicketTypeNameByValue(Integer value, Long event_id){
+        return eventTicketsRepository.findNameByValue(value, event_id);
     }
 
 }

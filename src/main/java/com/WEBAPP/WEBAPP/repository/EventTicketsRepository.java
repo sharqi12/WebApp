@@ -18,7 +18,7 @@ public interface EventTicketsRepository extends JpaRepository<EventTickets, Long
     @Query(value = "SELECT COUNT(id) FROM event_tickets WHERE event_id =:em",nativeQuery = true)
     Integer howManyTicketsTypesByEventId(@Param("em")Long id);
 
-    @Query(value = "SELECT ticket_name FROM event_tickets WHERE ticket_price =:em",nativeQuery = true)
-    String findNameByValue(@Param("em")Integer value);
+    @Query(value = "SELECT ticket_name FROM event_tickets WHERE ticket_price =:em AND event_id =:emm",nativeQuery = true)
+    String findNameByValue(@Param("em")Integer value, @Param("emm")Long event_id);
 
 }
