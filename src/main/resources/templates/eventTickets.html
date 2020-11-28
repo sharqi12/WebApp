@@ -278,76 +278,84 @@ and open the template in the editor.
             </tr>
             </tbody>
             </table>
+            <div th:if="${alreadybought==0}">
+                <!--WYŚWIETLANIE FORMULARZA I WYBIERANIE TYPU BILETU-->
+                <form action="#" method="POST" enctype="multipart/form-data">
+                    <h2>Kup Bilet</h2>
+                    <div class="12u$">
+                        <div class="select-wrapper">
+                            Typ biletu:
+                            <select id="ticket" >
+                                <tr th:each="ticketType : ${eventTicketList}">
+                                    <option th:value="${ticketType.ticketPrice}" th:text="${ticketType.ticketName}"></option>
+                                </tr>
 
-            <!--WYŚWIETLANIE FORMULARZA I WYBIERANIE TYPU BILETU-->
-            <form action="#" method="POST" enctype="multipart/form-data">
-                <h2>Kup Bilet</h2>
-                <div class="12u$">
-                    <div class="select-wrapper">
-                        Typ biletu:
-                        <select id="ticket" >
-                            <tr th:each="ticketType : ${eventTicketList}">
-                                <option th:value="${ticketType.ticketPrice}" th:text="${ticketType.ticketName}"></option>
-                            </tr>
+                            </select>
+                        </div>
+                    </div>
+                </form>
 
-                        </select>
+                <!--SKRYPT PAYPAL-->
+                <div id="paypal-button-container"></div>
+                <script src="https://www.paypal.com/sdk/js?client-id=AZY-1WtRQ5nISTIb7YZYX31PYlrqHk2d5MvDqWGYs2kG8szLdZghbj0vCc-BNAMa-x1VEtjHfmtHxBSy&currency=PLN"></script>
+                <div th:with="localId=${#authentication.getPrincipal().getId()}">
+                    <div th:with="localEventId=${event.id}">
+
+                            <script th:inline="javascript">
+                                var ticket = document.getElementById("ticket");
+                                // Render the PayPal button into #paypal-button-container
+                                paypal.Buttons({
+
+                                // Set up the transaction
+                                createOrder: function(data, actions) {
+                                    return actions.order.create({
+                                        purchase_units: [{
+                                            amount: {
+                                                value: ticket.value
+                                            }
+                                        }]
+                                    });
+                                },
+
+                                // Finalize the transaction
+                                onApprove: function(data, actions) {
+                                    return actions.order.capture().then(function(details) {
+                                        // Show a success message to the buyer
+                                        alert('Transakcja zakończona sukcesem dla użytkownika ' + details.payer.name.given_name + '!');
+
+                                            var tempId = ticket.value;
+                                            var tempUserId = [[${localId}]];
+                                            var tempEventId = [[${localEventId}]];
+
+                                                $.ajax({
+                                                    type : "POST",
+                                                    url : "/acceptedPayment/"+tempId,
+                                                    data : {value:tempId , user_id:tempUserId , event_id:tempEventId},
+                                                    timeout : 100000,
+                                                    success : function() {
+                                                        console.log("SUCCESS: ");
+                                                        alert(response);
+                                                    },
+                                                    error : function(e) {
+                                                        console.log("ERROR");
+                                                    },
+                                                    done : function(e) {
+                                                        console.log("DONE");
+                                                    }
+                                                });
+                                    });
+                                }
+                                }).render('#paypal-button-container');
+                            </script>
                     </div>
                 </div>
-            </form>
-
-            <!--SKRYPT PAYPAL-->
-            <div id="paypal-button-container"></div>
-            <script src="https://www.paypal.com/sdk/js?client-id=AZY-1WtRQ5nISTIb7YZYX31PYlrqHk2d5MvDqWGYs2kG8szLdZghbj0vCc-BNAMa-x1VEtjHfmtHxBSy&currency=PLN"></script>
-            <div th:with="localId=${#authentication.getPrincipal().getId()}">
-                <div th:with="localEventId=${event.id}">
-
-                        <script th:inline="javascript">
-                            var ticket = document.getElementById("ticket");
-                            // Render the PayPal button into #paypal-button-container
-                            paypal.Buttons({
-
-                            // Set up the transaction
-                            createOrder: function(data, actions) {
-                                return actions.order.create({
-                                    purchase_units: [{
-                                        amount: {
-                                            value: ticket.value
-                                        }
-                                    }]
-                                });
-                            },
-
-                            // Finalize the transaction
-                            onApprove: function(data, actions) {
-                                return actions.order.capture().then(function(details) {
-                                    // Show a success message to the buyer
-                                    alert('Transakcja zakończona sukcesem dla użytkownika ' + details.payer.name.given_name + '!');
-
-                                        var tempId = ticket.value;
-                                        var tempUserId = [[${localId}]];
-                                        var tempEventId = [[${localEventId}]];
-
-                                            $.ajax({
-                                                type : "POST",
-                                                url : "/acceptedPayment/"+tempId,
-                                                data : {value:tempId , user_id:tempUserId , event_id:tempEventId},
-                                                timeout : 100000,
-                                                success : function() {
-                                                    console.log("SUCCESS: ");
-                                                    alert(response);
-                                                },
-                                                error : function(e) {
-                                                    console.log("ERROR");
-                                                },
-                                                done : function(e) {
-                                                    console.log("DONE");
-                                                }
-                                            });
-                                });
-                            }
-                            }).render('#paypal-button-container');
-                        </script>
-                </div>
+            </div>
+            <div th:if="${alreadybought!=0}">
+                <h3>Zakupiłeś już bilet na to wydarzenie!</h3>
+                <br>
+                <form th:action="@{/listOfUserTickets}">
+                    <button type="submit" class="loginButton"> Twoje kupione bilety</button>
+                </form>
             </div>
         </header>
         <br/><br/>

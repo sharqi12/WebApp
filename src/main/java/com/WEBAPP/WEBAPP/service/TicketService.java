@@ -18,4 +18,5 @@ public interface TicketService {
     void saveTicketType(EventTicketDto eventTicketDto, Long id);
     void deleteTicketTypeById(Long id);
     String getTicketTypeNameByValue(Integer value, Long event_id);
+    Integer alreadyTicketBoughtById(Integer userId, Long event_id);
 }

@@ -81,4 +81,9 @@ public class TicketServiceImpl implements TicketService{
         return eventTicketsRepository.findNameByValue(value, event_id);
     }
 
+    @Override
+    public Integer alreadyTicketBoughtById(Integer userId, Long event_id){
+        return ticketRepository.isTicketBought(userId,event_id);
+    }
+
 }
