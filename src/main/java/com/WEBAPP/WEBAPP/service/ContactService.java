@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface ContactService {
     List<Contact> getAllContacts();
+    List<Contact> findUnsolved();
+    List<Contact> findSolved();
     void saveContact(Contact contact);
     Contact getContactById(long id);
     void deleteContactById(long id);

@@ -33,6 +33,7 @@
         <li sec:authorize="isAuthenticated()"><a th:href="@{/show_profile}">Twój profil</a></li>
         <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Wyloguj się</a></li>
         <li sec:authorize="isAnonymous()"><a href="/" th:href="@{/registration}">Zarejestruj się</a></li>
+
     </ul>
 </nav>
 
@@ -115,6 +116,13 @@
                     </div>
                     <div sec:authorize="hasAuthority('ROLE_USER')">
                         <button type="submit" th:onclick="location.href = 'listOfUserTickets';" id="myButton4" class="registerButton" >Twoje bilety</button>
+                    </div>
+                    <div sec:authorize="hasAuthority('ROLE_ADMIN')">
+                        <br>
+                        <form th:action="@{/problemsList}">
+                            <button type="submit" class="loginButton"> Zgłoszone problemy</button>
+                        </form>
+                        <br>
                     </div>
                 </div>
             </div>

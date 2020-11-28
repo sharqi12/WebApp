@@ -93,6 +93,7 @@ and open the template in the editor.
         <textarea rows="5" cols="25" th:field="*{note}"></textarea>
         <p th:if="${#fields.hasErrors('note')}" th:errors="*{note}"></p>
         <br/>
+        <input type="hidden" id="solved" th:field="*{solved}"  th:value="false"/>
         <button type="submit" class="registerButton"> Wyślij</button>
     </form>
 
