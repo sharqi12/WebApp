@@ -6,9 +6,19 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
+
 @Repository
 public interface EventRepository extends JpaRepository<Event, Long>{
 
     @Query(value = "SELECT id_user from events WHERE id =:em",nativeQuery = true)
     Integer findByUserId(@Param("em")Integer id);
+
+    @Query(value = "SELECT * from events WHERE date <:emm",nativeQuery = true)
+    List<Event> findPastEvents(@Param("emm") String data);
+
+    @Query(value = "SELECT * from events WHERE date >:emm",nativeQuery = true)
+    List<Event> findFutureEvents(@Param("emm") String data);
 }

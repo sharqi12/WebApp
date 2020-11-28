@@ -2202,162 +2202,6 @@
 		padding: 0.75em 1em;
 	}
 
-	input[type="checkbox"],
-	input[type="radio"] {
-		-moz-appearance: none;
-		-webkit-appearance: none;
-		-ms-appearance: none;
-		appearance: none;
-		display: block;
-		float: left;
-		margin-right: -2em;
-		opacity: 0;
-		width: 1em;
-		z-index: -1;
-                background: rgba(255, 255, 255, 0.075);
-		border-color: #000000;
-	}
-
-		input[type="checkbox"] + label,
-		input[type="radio"] + label {
-			text-decoration: none;
-			cursor: pointer;
-			display: inline-block;
-			font-size: 1em;
-			font-weight: 300;
-			padding-left: 2.4em;
-			padding-right: 0.75em;
-			position: relative;
-                        border-color: #000000;
-		}
-
-			input[type="checkbox"] + label:before,
-			input[type="radio"] + label:before {
-				-moz-osx-font-smoothing: grayscale;
-				-webkit-font-smoothing: antialiased;
-				font-family: FontAwesome;
-				font-style: normal;
-				font-weight: normal;
-				text-transform: none !important;
-			}
-
-			input[type="checkbox"] + label:before,
-			input[type="radio"] + label:before {
-				border-radius: 4px;
-				border: solid 1px;
-				content: '';
-				display: inline-block;
-				height: 1.65em;
-				left: 0;
-				line-height: 1.58125em;
-				position: absolute;
-				text-align: center;
-				top: 0;
-				width: 1.65em;
-			}
-
-		input[type="checkbox"]:checked + label:before,
-		input[type="radio"]:checked + label:before {
-			content: '\f00c';
-		}
-
-	input[type="checkbox"] + label:before {
-		border-radius: 4px;
-	}
-
-	input[type="radio"] + label:before {
-		border-radius: 100%;
-	}
-
-	::-webkit-input-placeholder {
-		opacity: 1.0;
-	}
-
-	:-moz-placeholder {
-		opacity: 1.0;
-	}
-
-	::-moz-placeholder {
-		opacity: 1.0;
-	}
-
-	:-ms-input-placeholder {
-		opacity: 1.0;
-	}
-
-	.formerize-placeholder {
-		opacity: 1.0;
-	}
-
-	label {
-		color: #000000;
-	}
-
-	input[type="text"],
-	input[type="password"],
-	input[type="email"],
-	select,
-	textarea {
-		background: #e0ddd5; /*Tło textArea*/
-		border-color: #000000;
-	}
-
-		input[type="text"]:focus,
-		input[type="password"]:focus,
-		input[type="email"]:focus,
-		select:focus,
-		textarea:focus {
-			border-color: #000000;
-			box-shadow: 0 0 0 1px #062038;
-		}
-
-	.select-wrapper:before {
-		color: rgba(255, 255, 255, 0.15);
-	}
-
-	input[type="checkbox"] + label,
-	input[type="radio"] + label {
-		color: #000000;
-	}
-
-		input[type="checkbox"] + label:before,      /* CHECKBOX DLA FORMULARZA "WYŚLIJ MI KOPIĘ TEJ" */
-		input[type="radio"] + label:before {
-			background: rgba(255, 255, 255, 0.075);
-			border-color: #000000;
-		}
-
-	input[type="checkbox"]:checked + label:before,
-	input[type="radio"]:checked + label:before {
-		background-color: #062038;
-		border-color: #000000;
-		color: #ffffff;
-	}
-
-	input[type="checkbox"]:focus + label:before,
-	input[type="radio"]:focus + label:before {
-		border-color: #062038;
-		box-shadow: 0 0 0 1px #062038;
-	}
-
-	::-webkit-input-placeholder {
-		color: #000000 !important;
-	}
-
-	:-moz-placeholder {
-		color: #000000 !important;
-	}
-
-	::-moz-placeholder {
-		color: #000000 !important;
-	}
-
-	:-ms-input-placeholder {
-		color: #000000 !important;
-	}
-
-	.formerize-placeholder {
-		color: #000000 !important;
-	}
 
 /* Icon */
 
@@ -3665,7 +3509,7 @@
 			position: relative;
 			z-index: 2;
                         color: #000000;
-                        
+
 		}
 
 		#banner h1 {
@@ -3787,7 +3631,7 @@
 	}
 
 		#footer > .inner {
-                    
+
 			margin: 0 auto;
 			width: 80em;
 		}
@@ -3827,7 +3671,7 @@
 			}
 
 		}
-                
+
                 #FAQ {
 		display: -ms-flexbox;
 		-ms-flex-pack: center;
@@ -3854,7 +3698,7 @@
 		text-align: center;
 		/*overflow: hidden;*/
 	}
-        
+
         #formularz {
 		padding: 3em 0 3em 0;
 		display: -moz-flex;
@@ -3927,7 +3771,7 @@
 		/*overflow: hidden;*/
 
         }
-        
+
         .checked {
   color: orange;
 }
@@ -3947,7 +3791,7 @@ button {
   background-color: #4CAF50;
   color: black;
   padding: 14px 20px;
-  
+
   border: none;
   cursor: pointer;
   width: 50%;
@@ -3961,7 +3805,7 @@ button:hover {
 /* Add padding to containers */
 .container {
   padding: 16px;
-    
+
 }
 
 /* The "Forgot password" text */
@@ -4079,7 +3923,7 @@ span.psw {
 }
 
 .rating > label:active {
-	position:relative;
+	position:static;
 	top:2px;
 	left:2px;
 }
@@ -4105,6 +3949,67 @@ span.psw {
 	text-decoration: none;
 	white-space: nowrap;
 	background-color: #4CAF50;
-	position: relative;
+	position: static;
 
+}
+
+/* Style the list items */
+#lista ul li {
+	cursor: pointer;
+	position: relative;
+	padding: 12px 8px 12px 40px;
+	list-style-type: none;
+	background: #eee;
+	font-size: 18px;
+	transition: 0.2s;
+
+	/* make the list items unselectable */
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+/* Set all odd list items to a different color (zebra-stripes) */
+#lista ul li:nth-child(odd) {
+	background: #f9f9f9;
+}
+
+/* Darker background-color on hover */
+#lista ul li:hover {
+	background: #ddd;
+}
+
+/* When clicked on, add a background color and strike out text */
+#lista ul li.checked {
+	background: #888;
+	color: #fff;
+	text-decoration: line-through;
+}
+
+/* Add a "checked" mark when clicked on */
+#lista ul li.checked::before {
+	content: '';
+	position: absolute;
+	border-color: #fff;
+	border-style: solid;
+	border-width: 0 2px 2px 0;
+	top: 10px;
+	left: 16px;
+	transform: rotate(45deg);
+	height: 15px;
+	width: 7px;
+}
+
+/* Style the close button */
+#lista .close {
+	position: absolute;
+	right: 0;
+	top: 0;
+	padding: 12px 16px 12px 16px;
+}
+
+#lista .close:hover {
+	background-color: #f44336;
+	color: white;
 }

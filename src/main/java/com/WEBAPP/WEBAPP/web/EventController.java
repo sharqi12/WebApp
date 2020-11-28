@@ -48,14 +48,22 @@ public class EventController {
     private TimetableService timetableService;
 
 
-    @GetMapping("/list")
+    @GetMapping("/listOfFutureEvents")
     public String viewHomePage(Model model, Principal principal) {
         if (principal != null)
             model.addAttribute("activeUser", userRepository.findByEmail(principal.getName()));
         else model.addAttribute("activeUser", null);
         ;
-        model.addAttribute("listEvents", eventService.getAllEvents());
+        model.addAttribute("listEvents", eventService.getFutureEvents());
         return "list";
+    }
+    @GetMapping("/listOfPastEvents")
+    public String viewListOfPastEvents(Model model, Principal principal) {
+        if (principal != null)
+            model.addAttribute("activeUser", userRepository.findByEmail(principal.getName()));
+        else model.addAttribute("activeUser", null);
+        model.addAttribute("listEvents", eventService.getPastEvents());
+        return "listOfPastEvents";
     }
 
     @GetMapping("/showNewEventForm")

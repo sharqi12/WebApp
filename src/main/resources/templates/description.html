@@ -26,8 +26,8 @@ and open the template in the editor.
 <nav id="menu">
     <ul class="links">
         <li><a th:href="@{/index}">Strona główna</a></li>
-        <li><a th:href="@{/list}">Najbliższe wydarzenia</a></li>
-        <li><a th:href="@{/list}">Poprzednie wydarzenia</a></li>
+        <li><a th:href="@{/listOfFutureEvents}">Najbliższe wydarzenia</a></li>
+        <li><a th:href="@{/listOfPastEvents}">Poprzednie wydarzenia</a></li>
         <li><a th:href="@{/showNewContactForm}">Pomoc</a></li>
         <li sec:authorize="hasAuthority('ROLE_CREATOR') or hasAuthority('ROLE_ADMIN')"><a th:href="@{/advice}">Wskazówki przy organizacji</a></li>
         <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj się</a></li>
@@ -46,22 +46,22 @@ and open the template in the editor.
 <section id="banner" >
     <div class="inner">
         <div sec:authorize="isAuthenticated()">
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
 
         </div>
         <header>
@@ -74,10 +74,10 @@ and open the template in the editor.
             <br>
             <div>
                 <form th:action="@{/showTimetableForm/{id}(id=${event.id})}">
-                <button type="submit" class="loginButton"> Harmonogram</button>
+                    <button type="submit" class="loginButton"> Harmonogram</button>
                 </form>
                 <form th:action="@{/showAdressForEvent/{id}(id=${event.id})}">
-                <button type="submit" class="loginButton"> Adres </button>
+                    <button type="submit" class="loginButton"> Adres </button>
                 </form>
                 <form th:action="@{/showTicketsTypesForEvent/{id}(id=${event.id})}">
                     <button type="submit" class="loginButton"> Bilety </button>
@@ -101,7 +101,7 @@ and open the template in the editor.
                 </div>
                 </form>
                 -->
-            <!-- Set up a container element for the button -->
+                <!-- Set up a container element for the button -->
 
 
 
@@ -164,44 +164,50 @@ and open the template in the editor.
                 </div>-->
 
 
-            <table>
-                <thead>
-                <tr>
-                    <th></th>
-                    <th></th>
-                </tr>
-                </thead>
-                <h3>Komentarze</h3>
-                <tbody>
-                <tr th:each="comments : ${allComments}">
-                    <td><span th:text="${comments.text}"></span></td>
-                    <td><span th:text="${comments.rating}"></span></td>
-                    <td><span><a th:href="@{/deleteComment/{idC}/event/{id}(idC=${comments.id}, id=${event.id})}"  class="btn btn-danger">Delete</a></span></td>
+                <table>
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <h3>Komentarze</h3>
+                    <tbody>
+                    <tr th:each="comments : ${allComments}">
+                        <td><span th:text="${comments.text}">text</span></td>
+                        <td><span th:text="${comments.rating}">rating</span></td>
+                        <td><span th:text="${comments.getUser().nick}">user</span></td>
+                        <td><span th:text="${comments.dateCreated}">data</span></td>
 
-                </tr>
-                </tbody>
-            </table>
+                        <td><span><a th:href="@{/deleteComment/{idC}/{id} (idC=${comments.idC}, id=${event.id})}"  class="btn btn-danger">Delete</a></span></td>
 
-            <form th:action="@{/saveComment/{id}(id=${event.id})}" th:object="${comment}" method="POST">
-                <br/>
-                <input type="text" th:field="*{text}" placeholder="Komentarz" class="form-control mb-4 col-4">
-                <p th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></p>
-                <br/>
-                <div class="rating">
-                    <legend>Oceń:</legend>
-                    <input type="radio" id="star5" name="rating" th:value="5" th:field="*{rating}" /><label for="star5" title="Wspaniale!">5 stars</label>
-                    <input type="radio" id="star4" name="rating" th:value="4" th:field="*{rating}" /><label for="star4" title="Całkiem nieźle">4 stars</label>
-                    <input type="radio" id="star3" name="rating" th:value="3" th:field="*{rating}" /><label for="star3" title="Przeciętnie">3 stars</label>
-                    <input type="radio" id="star2" name="rating" th:value="2" th:field="*{rating}" /><label for="star2" title="Słabo">2 stars</label>
-                    <input type="radio" id="star1" name="rating" th:value="1" th:field="*{rating}" /><label for="star1" title="Fatalnie">1 star</label>
-                </div>
-                <br/>
+                    </tr>
+                    </tbody>
+                </table>
 
 
-                <button type="submit" class="addCommentButton"> Dodaj komentarz</button>
+                <hr>
 
-            </form>
-    </div>
+                <form action="#" th:action="@{/saveComment/{id}(id=${event.id})}" th:object="${comment}" method="POST">
+                    <br/>
+                    <input type="text" th:field="*{text}" placeholder="Komentarz" class="form-control mb-4 col-4">
+                    <p th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></p>
+                    <br/>
+                    <div class="rating">
+                        <legend>Oceń:</legend>
+                        <input type="radio" id="star5" name="rating" th:value="5" th:field="*{rating}" /><label for="star5" title="Wspaniale!">5 stars</label>
+                        <input type="radio" id="star4" name="rating" th:value="4" th:field="*{rating}" /><label for="star4" title="Całkiem nieźle">4 stars</label>
+                        <input type="radio" id="star3" name="rating" th:value="3" th:field="*{rating}" /><label for="star3" title="Przeciętnie">3 stars</label>
+                        <input type="radio" id="star2" name="rating" th:value="2" th:field="*{rating}" /><label for="star2" title="Słabo">2 stars</label>
+                        <input type="radio" id="star1" name="rating" th:value="1" th:field="*{rating}" /><label for="star1" title="Fatalnie">1 star</label>
+                    </div>
+                    <br/>
+
+
+                    <button type="submit" class="addCommentButton"> Dodaj komentarz</button>
+
+                </form>
+            </div>
 
             <div sec:authorize="isAnonymous()" class="inner">
                 <button type="submit" onclick="location.href = '/login';"  class="loginButton"> Kup Bilet</button>
@@ -209,11 +215,11 @@ and open the template in the editor.
             </div>
 
 
-                <a th:href="@{/list}"> Powrót do wydarzeń</a>
+            <a th:href="@{/list}"> Powrót do wydarzeń</a>
         </header>
         <!-- <a href="#main" class="button big alt scrolly">Dignissim</a> -->
 
-</div>
+    </div>
 
 </section>
 

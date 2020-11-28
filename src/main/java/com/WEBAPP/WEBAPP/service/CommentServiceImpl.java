@@ -61,5 +61,25 @@ public class CommentServiceImpl implements CommentService {
     public void deleteCommentById(Long idC) {
         this.commentRepository.deleteById(idC);
     }
-}
 
+    @Override
+    public Comment findOne(Long idC) {
+        return commentRepository.findByIdC(idC).get();
+    }
+
+    @Override
+    public void delete(Long idC) {
+        delete(findOne(idC));
+    }
+
+    @Override
+    public void delete(Comment comment) {
+        commentRepository.delete(comment);
+    }
+
+    @Override
+    public void deleteCommentsByEventId(Long id) {
+
+        commentRepository.deleteCommentsByEventId(id);
+    }
+}

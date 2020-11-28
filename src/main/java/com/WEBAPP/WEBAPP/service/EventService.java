@@ -9,5 +9,6 @@ public interface EventService {
     void saveEvent(MultipartFile file, Event event);
     Event getEventById(Long id);
     void deleteEventById(Long id);
-
+    List<Event> getPastEvents();
+    List<Event> getFutureEvents();
 }
