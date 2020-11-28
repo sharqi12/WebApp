@@ -43,7 +43,7 @@
         <div class="inner">
 
             <!-- Elements -->
-            <h2 id="elements">Opis problem</h2>
+            <h2 id="elements">Opis problemu</h2>
             <h4>Rozwiązany: </h4>
             <div th:if="${problem.solved==false} ">
                 Nie
@@ -57,8 +57,9 @@
             <a th:text="${problem.name}"></a><br/>
             <a th:text="${problem.email}"></a><br/><br/>
 
-            <h3><span th:text="${problem.category}"></span></h3>
+            <h3>Kategoria: <span th:text="${problem.category}"></span></h3>
             <a th:text="${problem.note}"></a>
+            <br>
             <br>
             <div th:if="${problem.solved==false} ">
                 <form th:action="@{/solveProblem/{id}(id=${problem.id})}">

@@ -86,9 +86,6 @@ and open the template in the editor.
         </select>
         <br/>
         <div class="12u$">
-        <input type="checkbox" id="copy" name="copy" >
-            <label for="copy">Wysłać kopię tej wiadomości?</label><br/>
-        </div>
         <label>Wiadomość:</label>
         <textarea rows="5" cols="25" th:field="*{note}"></textarea>
         <p th:if="${#fields.hasErrors('note')}" th:errors="*{note}"></p>

@@ -64,8 +64,8 @@ and open the template in the editor.
                 <tr th:each="problem : ${listProblemsUnsolved}">
                     <td th:text="${problem.id}" ></td>
                     <td><a th:text="${problem.category}" th:href="@{/showProblem/{id}(id=${problem.id})}" class="btn btn-primary"></a></td>
-                    <td th:text="${problem.email}"></td>
-                    <td th:text="${problem.name}"></td>
+                    <td><a th:text="${problem.email}" th:href="@{/showProblem/{id}(id=${problem.id})}" class="btn btn-primary"></a></td>
+                    <td><a th:text="${problem.name}" th:href="@{/showProblem/{id}(id=${problem.id})}" class="btn btn-primary"></a></td>
                     </td>
                 </tr>
 
@@ -88,8 +88,8 @@ and open the template in the editor.
                 <tr th:each="problemSolved : ${listProblemsSolved}">
                     <td th:text="${problemSolved.id}" ></td>
                     <td><a th:text="${problemSolved.category}" th:href="@{/showProblem/{id}(id=${problemSolved.id})}" class="btn btn-primary"></a></td>
-                    <td th:text="${problemSolved.email}"></td>
-                    <td th:text="${problemSolved.name}"></td>
+                    <td><a th:text="${problemSolved.email}" th:href="@{/showProblem/{id}(id=${problemSolved.id})}" class="btn btn-primary"></a></td>
+                    <td><a th:text="${problemSolved.name}" th:href="@{/showProblem/{id}(id=${problemSolved.id})}" class="btn btn-primary"></a></td>
                     </td>
                 </tr>
 

@@ -27,8 +27,6 @@ public class Contact {
     @Column(name = "category")
     private String category;
 
-    @Column(name = "copy")
-    private boolean copy;
 
     @Column(name = "note")
     @Size(min = 10, message = "Opisz problem!")
@@ -39,12 +37,11 @@ public class Contact {
     public Contact() {
     }
 
-    public Contact(long id, @Pattern(regexp = "[a-zA-Z]*[\\s]{1}[a-zA-Z].*", message = "wprowadz imie i nazwisko!") @Size(min = 6, message = "Minimum 6 znakow!") String name, @Email(regexp = "^(.+)@(.+)$", message = "Nieprawidłowy email!") @Size(min = 8, message = "Minimum 8 znakow!") String email, String category, boolean copy, @Size(min = 10, message = "Opisz problem!") String note) {
+    public Contact(long id, @Pattern(regexp = "[a-zA-Z]*[\\s]{1}[a-zA-Z].*", message = "wprowadz imie i nazwisko!") @Size(min = 6, message = "Minimum 6 znakow!") String name, @Email(regexp = "^(.+)@(.+)$", message = "Nieprawidłowy email!") @Size(min = 8, message = "Minimum 8 znakow!") String email, @Size(min = 10, message = "Opisz problem!") String note) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.category = category;
-        this.copy = copy;
         this.note = note;
         this.solved = false;
     }
@@ -87,14 +84,6 @@ public class Contact {
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-    public boolean isCopy() {
-        return copy;
-    }
-
-    public void setCopy(boolean copy) {
-        this.copy = copy;
     }
 
     public String getNote() {
