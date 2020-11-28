@@ -73,7 +73,7 @@ public class ContactController {
         Contact contact = contactService.getContactById(id);
         contact.setSolved(true);
         contactService.saveContact(contact);
-        return "/solveProblem";
+        return "redirect:/problemsList";
     }
 
 }
