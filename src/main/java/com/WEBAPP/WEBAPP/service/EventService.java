@@ -11,4 +11,5 @@ public interface EventService {
     void deleteEventById(Long id);
     List<Event> getPastEvents();
     List<Event> getFutureEvents();
+    Integer isEventEnded(Long id);
 }

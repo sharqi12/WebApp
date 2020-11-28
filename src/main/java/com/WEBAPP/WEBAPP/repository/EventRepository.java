@@ -21,4 +21,7 @@ public interface EventRepository extends JpaRepository<Event, Long>{
 
     @Query(value = "SELECT * from events WHERE date >:emm",nativeQuery = true)
     List<Event> findFutureEvents(@Param("emm") String data);
+
+    @Query(value = "SELECT COUNT(id) from events WHERE id =:em and date <:emm",nativeQuery = true)
+    Integer isEventEnded(@Param("em")Long id,@Param("emm") String data);
 }

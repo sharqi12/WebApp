@@ -131,7 +131,7 @@ public class EventController {
     }
 
     @GetMapping("/showDescription/{id}")
-    public String showDescription(@PathVariable(value = "id") Long id, Model model, Model model2, Model model3) {
+    public String showDescription(@PathVariable(value = "id") Long id, Model model, Model model2, Model model3, Model model4) {
         // get event from the service
         Event event = eventService.getEventById(id);
         Comment comment = new Comment();
@@ -139,6 +139,7 @@ public class EventController {
         model.addAttribute("event", event);
         model2.addAttribute("comment", comment);
         model3.addAttribute("allComments", commentRepository.findByEventId(id));
+        model4.addAttribute("isEventEnded", eventService.isEventEnded(id));
         return "description";
     }
 

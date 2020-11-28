@@ -62,8 +62,6 @@ public class EventServiceImpl implements EventService {
         this.eventRepository.deleteById(id);
     }
 
-
-
     @Override
     public List <Event> getPastEvents() {
         return eventRepository.findPastEvents(LocalDate.now().toString().replace('-','/'));
@@ -71,7 +69,11 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public List <Event> getFutureEvents() {
-
         return eventRepository.findFutureEvents(LocalDate.now().toString().replace('-','/'));
+    }
+
+    @Override
+    public  Integer isEventEnded(Long id){
+        return eventRepository.isEventEnded(id, LocalDate.now().toString().replace('-','/'));
     }
 }

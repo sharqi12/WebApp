@@ -46,6 +46,7 @@ and open the template in the editor.
 <section id="banner" >
     <div class="inner">
         <div sec:authorize="isAuthenticated()">
+            <div th:if="${isEventEnded==1}">
             <br>
             <br>
             <br>
@@ -62,7 +63,7 @@ and open the template in the editor.
             <br>
             <br>
             <br>
-
+        </div>
         </div>
         <header>
             <h1><a th:text="${event.name}"></a></h1>
@@ -85,129 +86,52 @@ and open the template in the editor.
                 <br>
                 <br>
             </div>
-            <div sec:authorize="isAuthenticated()">
-                <!--
-                Kup Bilet:
-                <br>
-                <form action="#" th:action="@{/saveEvent}" th:object="${event}" method="POST" enctype="multipart/form-data">
-                Bilet normalny/ulgowy
-                <div class="12u$">
-                    <div class="select-wrapper">
-                        <select id="ticket" >
-                            <option th:value="*{ticket1}" th:text="*{ticket1}"></option>
-                            <option th:value="*{ticket2}" th:text="*{ticket2}"></option>
-                        </select>
-                    </div>
+
+            <div th:if="${isEventEnded==1}"> <!-- JEŻELI EVENT JEST ODBYTY -->
+                <div sec:authorize="isAuthenticated()">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <h3>Komentarze</h3>
+                        <tbody>
+                        <tr th:each="comments : ${allComments}">
+                            <td><span th:text="${comments.text}">text</span></td>
+                            <td><span th:text="${comments.rating}">rating</span></td>
+                            <td><span th:text="${comments.getUser().nick}">user</span></td>
+                            <td><span th:text="${comments.dateCreated}">data</span></td>
+
+                            <td><span><a th:href="@{/deleteComment/{idC}/{id} (idC=${comments.idC}, id=${event.id})}"  class="btn btn-danger">Delete</a></span></td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+
+
+                    <hr>
+
+                    <form action="#" th:action="@{/saveComment/{id}(id=${event.id})}" th:object="${comment}" method="POST">
+                        <br/>
+                        <input type="text" th:field="*{text}" placeholder="Komentarz" class="form-control mb-4 col-4">
+                        <p th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></p>
+                        <br/>
+                        <div class="rating">
+                            <legend>Oceń:</legend>
+                            <input type="radio" id="star5" name="rating" th:value="5" th:field="*{rating}" /><label for="star5" title="Wspaniale!">5 stars</label>
+                            <input type="radio" id="star4" name="rating" th:value="4" th:field="*{rating}" /><label for="star4" title="Całkiem nieźle">4 stars</label>
+                            <input type="radio" id="star3" name="rating" th:value="3" th:field="*{rating}" /><label for="star3" title="Przeciętnie">3 stars</label>
+                            <input type="radio" id="star2" name="rating" th:value="2" th:field="*{rating}" /><label for="star2" title="Słabo">2 stars</label>
+                            <input type="radio" id="star1" name="rating" th:value="1" th:field="*{rating}" /><label for="star1" title="Fatalnie">1 star</label>
+                        </div>
+                        <br/>
+                        <button type="submit" class="addCommentButton"> Dodaj komentarz</button>
+                    </form>
                 </div>
-                </form>
-                -->
-                <!-- Set up a container element for the button -->
-
-
-
-                <!--
-                <div id="paypal-button-container"></div>
-
-            <script src="https://www.paypal.com/sdk/js?client-id=AZY-1WtRQ5nISTIb7YZYX31PYlrqHk2d5MvDqWGYs2kG8szLdZghbj0vCc-BNAMa-x1VEtjHfmtHxBSy&currency=PLN"></script>
-                <div th:with="localId=${#authentication.getPrincipal().getId()}">
-                    <div th:with="localEventId=${event.id}">
-            <script th:inline="javascript">
-            var ticket = document.getElementById("ticket");
-            // Render the PayPal button into #paypal-button-container
-            paypal.Buttons({
-
-            // Set up the transaction
-            createOrder: function(data, actions) {
-                return actions.order.create({
-                    purchase_units: [{
-                        amount: {
-                            value: ticket.value
-                        }
-                    }]
-                });
-            },
-
-            // Finalize the transaction
-            onApprove: function(data, actions) {
-                return actions.order.capture().then(function(details) {
-                    // Show a success message to the buyer
-                    alert('Transaction completed by ' + details.payer.name.given_name + '!');
-
-                        var tempId = ticket.value;
-                        var tempUserId = [[${localId}]];
-                        var tempEventId = [[${localEventId}]];
-
-                            $.ajax({
-                                type : "POST",
-                                url : "/acceptedPayment/"+tempId,
-                                data : {value:tempId , user_id:tempUserId , event_id:tempEventId},
-                                timeout : 100000,
-                                success : function() {
-                                    console.log("SUCCESS: ");
-                                    alert(response);
-                                },
-                                error : function(e) {
-                                    console.log("ERROR");
-                                },
-                                done : function(e) {
-                                    console.log("DONE");
-                                }
-                            });
-
-                });
-            }
-
-
-        }).render('#paypal-button-container');
-    </script>
-                    </div>
-                </div>-->
-
-
-                <table>
-                    <thead>
-                    <tr>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <h3>Komentarze</h3>
-                    <tbody>
-                    <tr th:each="comments : ${allComments}">
-                        <td><span th:text="${comments.text}">text</span></td>
-                        <td><span th:text="${comments.rating}">rating</span></td>
-                        <td><span th:text="${comments.getUser().nick}">user</span></td>
-                        <td><span th:text="${comments.dateCreated}">data</span></td>
-
-                        <td><span><a th:href="@{/deleteComment/{idC}/{id} (idC=${comments.idC}, id=${event.id})}"  class="btn btn-danger">Delete</a></span></td>
-
-                    </tr>
-                    </tbody>
-                </table>
-
-
-                <hr>
-
-                <form action="#" th:action="@{/saveComment/{id}(id=${event.id})}" th:object="${comment}" method="POST">
-                    <br/>
-                    <input type="text" th:field="*{text}" placeholder="Komentarz" class="form-control mb-4 col-4">
-                    <p th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></p>
-                    <br/>
-                    <div class="rating">
-                        <legend>Oceń:</legend>
-                        <input type="radio" id="star5" name="rating" th:value="5" th:field="*{rating}" /><label for="star5" title="Wspaniale!">5 stars</label>
-                        <input type="radio" id="star4" name="rating" th:value="4" th:field="*{rating}" /><label for="star4" title="Całkiem nieźle">4 stars</label>
-                        <input type="radio" id="star3" name="rating" th:value="3" th:field="*{rating}" /><label for="star3" title="Przeciętnie">3 stars</label>
-                        <input type="radio" id="star2" name="rating" th:value="2" th:field="*{rating}" /><label for="star2" title="Słabo">2 stars</label>
-                        <input type="radio" id="star1" name="rating" th:value="1" th:field="*{rating}" /><label for="star1" title="Fatalnie">1 star</label>
-                    </div>
-                    <br/>
-
-
-                    <button type="submit" class="addCommentButton"> Dodaj komentarz</button>
-
-                </form>
             </div>
+
 
             <div sec:authorize="isAnonymous()" class="inner">
                 <button type="submit" onclick="location.href = '/login';"  class="loginButton"> Kup Bilet</button>
