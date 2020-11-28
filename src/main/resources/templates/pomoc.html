@@ -28,7 +28,6 @@ and open the template in the editor.
 				<li><a th:href="@{/index}">Strona główna</a></li>
 				<li><a th:href="@{/list}">Najbliższe wydarzenia</a></li>
 				<li><a th:href="@{/list}">Poprzednie wydarzenia</a></li>
-				<li><a th:href="@{/todo}">Lista zadań do zrobienia</a></li>
 				<li><a th:href="@{/showNewContactForm}">Pomoc</a></li>
 				<li sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj się</a></li>
 				<li sec:authorize="isAuthenticated()"><a th:href="@{/show_profile}">Twój profil</a></li>

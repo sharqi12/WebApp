@@ -27,12 +27,13 @@
         <li><a th:href="@{/index}">Strona główna</a></li>
         <li><a th:href="@{/list}">Najbliższe wydarzenia</a></li>
         <li><a th:href="@{/list}">Poprzednie wydarzenia</a></li>
-        <li><a th:href="@{/todo}">Lista zadań do zrobienia</a></li>
-        <li><a th:href="@{/pomoc}">Pomoc</a></li>
+        <li><a th:href="@{/showNewContactForm}">Pomoc</a></li>
+        <li sec:authorize="hasAuthority('ROLE_CREATOR') or hasAuthority('ROLE_ADMIN')"><a th:href="@{/advice}">Wskazówki przy organizacji</a></li>
         <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj się</a></li>
         <li sec:authorize="isAuthenticated()"><a th:href="@{/show_profile}">Twój profil</a></li>
         <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Wyloguj się</a></li>
         <li sec:authorize="isAnonymous()"><a href="/" th:href="@{/registration}">Zarejestruj się</a></li>
+
     </ul>
 </nav>
 
@@ -103,6 +104,26 @@
                     <br>
                     <br>
                     <button type="submit" onclick="location.href = 'change_user_password';" id="myButton2" class="registerButton" >Zmień hasło</button>
+                    <br>
+                    <br>
+                    <div sec:authorize="hasAuthority('ROLE_ADMIN')">
+                        <button type="submit" th:onclick="location.href = 'creatorProm';" id="myButton1" class="registerButton" >Dodaj organizatora</button>
+                        <br>
+                        <br>
+                    </div>
+                    <div sec:authorize="hasAuthority('ROLE_CREATOR') or hasAuthority('ROLE_ADMIN')">
+                        <button type="submit" th:onclick="location.href = 'listOfUserEvent';" id="myButton3" class="registerButton" >Twoje wydarzenia</button>
+                    </div>
+                    <div sec:authorize="hasAuthority('ROLE_USER')">
+                        <button type="submit" th:onclick="location.href = 'listOfUserTickets';" id="myButton4" class="registerButton" >Twoje bilety</button>
+                    </div>
+                    <div sec:authorize="hasAuthority('ROLE_ADMIN')">
+                        <br>
+                        <form th:action="@{/problemsList}">
+                            <button type="submit" class="loginButton"> Zgłoszone problemy</button>
+                        </form>
+                        <br>
+                    </div>
                 </div>
             </div>
         </div>

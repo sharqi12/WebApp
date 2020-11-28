@@ -12,7 +12,7 @@ and open the template in the editor.
     <title>Wspomaganie organizacji konferencji i targów</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="../assets/css/main.css" type="text/css"/>
+    <link rel="stylesheet" href="/assets/css/main.css" type="text/css"/>
 </head>
 <body>
 
@@ -28,8 +28,8 @@ and open the template in the editor.
         <li><a th:href="@{/index}">Strona główna</a></li>
         <li><a th:href="@{/list}">Najbliższe wydarzenia</a></li>
         <li><a th:href="@{/list}">Poprzednie wydarzenia</a></li>
-        <li><a th:href="@{/todo}">Lista zadań do zrobienia</a></li>
         <li><a th:href="@{/showNewContactForm}">Pomoc</a></li>
+        <li sec:authorize="hasAuthority('ROLE_CREATOR') or hasAuthority('ROLE_ADMIN')"><a th:href="@{/advice}">Wskazówki przy organizacji</a></li>
         <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj się</a></li>
         <li sec:authorize="isAuthenticated()"><a th:href="@{/show_profile}">Twój profil</a></li>
         <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Wyloguj się</a></li>
@@ -45,39 +45,151 @@ and open the template in the editor.
 -->
 <section id="banner" >
     <div class="inner">
+        <div sec:authorize="isAuthenticated()">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
 
+        </div>
         <header>
-            <h1> Opis</h1>
-
-            <a th:text="${event.description}"></a>
-            <br/>
-            <br/>
+            <h1><a th:text="${event.name}"></a></h1>
+            <br>
             <img alt="" th:src="*{'data:image/jpeg;base64,'+{event.image}}" style="width: 100px;height: 100px;">
+            <br>
 
-            <hr>
+            <a th:text="${event.description}"></a><br/><br/>
+            <br>
+            <div>
+                <form th:action="@{/showTimetableForm/{id}(id=${event.id})}">
+                <button type="submit" class="loginButton"> Harmonogram</button>
+                </form>
+                <form th:action="@{/showAdressForEvent/{id}(id=${event.id})}">
+                <button type="submit" class="loginButton"> Adres </button>
+                </form>
+                <form th:action="@{/showTicketsTypesForEvent/{id}(id=${event.id})}">
+                    <button type="submit" class="loginButton"> Bilety </button>
+                </form>
+                <br>
+                <br>
+            </div>
+            <div sec:authorize="isAuthenticated()">
+                <!--
+                Kup Bilet:
+                <br>
+                <form action="#" th:action="@{/saveEvent}" th:object="${event}" method="POST" enctype="multipart/form-data">
+                Bilet normalny/ulgowy
+                <div class="12u$">
+                    <div class="select-wrapper">
+                        <select id="ticket" >
+                            <option th:value="*{ticket1}" th:text="*{ticket1}"></option>
+                            <option th:value="*{ticket2}" th:text="*{ticket2}"></option>
+                        </select>
+                    </div>
+                </div>
+                </form>
+                -->
+            <!-- Set up a container element for the button -->
+
+
+
+                <!--
+                <div id="paypal-button-container"></div>
+
+            <script src="https://www.paypal.com/sdk/js?client-id=AZY-1WtRQ5nISTIb7YZYX31PYlrqHk2d5MvDqWGYs2kG8szLdZghbj0vCc-BNAMa-x1VEtjHfmtHxBSy&currency=PLN"></script>
+                <div th:with="localId=${#authentication.getPrincipal().getId()}">
+                    <div th:with="localEventId=${event.id}">
+            <script th:inline="javascript">
+            var ticket = document.getElementById("ticket");
+            // Render the PayPal button into #paypal-button-container
+            paypal.Buttons({
+
+            // Set up the transaction
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: ticket.value
+                        }
+                    }]
+                });
+            },
+
+            // Finalize the transaction
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    // Show a success message to the buyer
+                    alert('Transaction completed by ' + details.payer.name.given_name + '!');
+
+                        var tempId = ticket.value;
+                        var tempUserId = [[${localId}]];
+                        var tempEventId = [[${localEventId}]];
+
+                            $.ajax({
+                                type : "POST",
+                                url : "/acceptedPayment/"+tempId,
+                                data : {value:tempId , user_id:tempUserId , event_id:tempEventId},
+                                timeout : 100000,
+                                success : function() {
+                                    console.log("SUCCESS: ");
+                                    alert(response);
+                                },
+                                error : function(e) {
+                                    console.log("ERROR");
+                                },
+                                done : function(e) {
+                                    console.log("DONE");
+                                }
+                            });
+
+                });
+            }
+
+
+        }).render('#paypal-button-container');
+    </script>
+                    </div>
+                </div>-->
+
 
             <table>
                 <thead>
                 <tr>
-                    <th>text</th>
-                    <th>rating</th>
+                    <th></th>
+                    <th></th>
                 </tr>
                 </thead>
+                <h3>Komentarze</h3>
                 <tbody>
                 <tr th:each="comments : ${allComments}">
                     <td><span th:text="${comments.text}">text</span></td>
                     <td><span th:text="${comments.rating}">rating</span></td>
-                    <td><span><a th:href="@{/deleteComment/{idC}/event/{id}(idC=${comments.id}, id=${event.id})}"  class="btn btn-danger">Delete</a></span></td>
+                    <td><span th:text="${comments.getUser().nick}">user</span></td>
+                    <td><span th:text="${comments.dateCreated}">data</span></td>
+
+                    <td><span><a th:href="@{/deleteComment/{idC}/{id} (idC=${comments.idC}, id=${event.id})}"  class="btn btn-danger">Delete</a></span></td>
 
                 </tr>
                 </tbody>
             </table>
 
 
-            <hr>
+                <hr>
 
-            <form action="#" th:action="@{/saveComment/{id}(id=${event.id})}" th:object="${comment}" method="POST">
-                <br/>
+                <form action="#" th:action="@{/saveComment/{id}(id=${event.id})}" th:object="${comment}" method="POST">
+                    <br/>
                 <input type="text" th:field="*{text}" placeholder="Komentarz" class="form-control mb-4 col-4">
                 <p th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></p>
                 <br/>
@@ -90,55 +202,61 @@ and open the template in the editor.
                     <input type="radio" id="star1" name="rating" th:value="1" th:field="*{rating}" /><label for="star1" title="Fatalnie">1 star</label>
                 </div>
                 <br/>
-                <hr>
 
-                <button type="submit" class="addCommentButton"> Dodaj </button>
+
+                <button type="submit" class="addCommentButton"> Dodaj komentarz</button>
 
             </form>
+    </div>
+
+            <div sec:authorize="isAnonymous()" class="inner">
+                <button type="submit" onclick="location.href = '/login';"  class="loginButton"> Kup Bilet</button>
+                <br>
+            </div>
+
 
                 <a th:href="@{/list}"> Powrót do wydarzeń</a>
-
-            </form>
         </header>
         <!-- <a href="#main" class="button big alt scrolly">Dignissim</a> -->
-    </div>
+
+</div>
 
 </section>
 
-
-<!-- Footer -->
+<!--
+Footer
 <footer id="footer">
-    <div class="inner">
-        <div class="flex flex-3">
-            <div class="col">
-                <h3>Vestibullum</h3>
-                <ul class="alt">
-                    <li><a href="#">Nascetur nunc varius commodo.</a></li>
-                    <li><a href="#">Vis id faucibus montes tempor</a></li>
-                    <li><a href="#">Massa amet lobortis vel.</a></li>
-                    <li><a href="#">Nascetur nunc varius commodo.</a></li>
-                </ul>
-            </div>
-            <div class="col">
-                <h3>Lobortis</h3>
-                <ul class="alt">
-                    <li><a href="#">Nascetur nunc varius commodo.</a></li>
-                    <li><a href="#">Vis id faucibus montes tempor</a></li>
-                    <li><a href="#">Massa amet lobortis vel.</a></li>
-                    <li><a href="#">Nascetur nunc varius commodo.</a></li>
-                </ul>
-            </div>
-            <div class="col">
-                <h3>Accumsan</h3>
-                <ul class="alt">
-                    <li><a href="#">Nascetur nunc varius commodo.</a></li>
-                    <li><a href="#">Vis id faucibus montes tempor</a></li>
-                    <li><a href="#">Massa amet lobortis vel.</a></li>
-                    <li><a href="#">Nascetur nunc varius commodo.</a></li>
-                </ul>
+        <div class="inner">
+            <div class="flex flex-3">
+                <div class="col">
+                    <h3>Vestibullum</h3>
+                    <ul class="alt">
+                        <li><a href="#">Nascetur nunc varius commodo.</a></li>
+                        <li><a href="#">Vis id faucibus montes tempor</a></li>
+                        <li><a href="#">Massa amet lobortis vel.</a></li>
+                        <li><a href="#">Nascetur nunc varius commodo.</a></li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>Lobortis</h3>
+                    <ul class="alt">
+                        <li><a href="#">Nascetur nunc varius commodo.</a></li>
+                        <li><a href="#">Vis id faucibus montes tempor</a></li>
+                        <li><a href="#">Massa amet lobortis vel.</a></li>
+                        <li><a href="#">Nascetur nunc varius commodo.</a></li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>Accumsan</h3>
+                    <ul class="alt">
+                        <li><a href="#">Nascetur nunc varius commodo.</a></li>
+                        <li><a href="#">Vis id faucibus montes tempor</a></li>
+                        <li><a href="#">Massa amet lobortis vel.</a></li>
+                        <li><a href="#">Nascetur nunc varius commodo.</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
     <div class="copyright">
         <ul class="icons">
             <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
@@ -148,15 +266,16 @@ and open the template in the editor.
         </ul>
         &copy; Untitled. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com">Coverr</a>. Video: <a href="https://coverr.co">Coverr</a>.
     </div>
-</footer>
+</footer>-->
+
 
 <!-- Scripts -->
 <!-- Scripts -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/jquery.scrolly.min.js"></script>
-<script src="assets/js/skel.min.js"></script>
-<script src="assets/js/util.js"></script>
-<script src="assets/js/main.js"></script>
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/jquery.scrolly.min.js"></script>
+<script src="/assets/js/skel.min.js"></script>
+<script src="/assets/js/util.js"></script>
+<script src="/assets/js/main.js"></script>
 
 </body>
 </html>

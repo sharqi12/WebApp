@@ -2203,97 +2203,6 @@
 	}
 
 
-
-	::-webkit-input-placeholder {
-		opacity: 1.0;
-	}
-
-	:-moz-placeholder {
-		opacity: 1.0;
-	}
-
-	::-moz-placeholder {
-		opacity: 1.0;
-	}
-
-	:-ms-input-placeholder {
-		opacity: 1.0;
-	}
-
-	.formerize-placeholder {
-		opacity: 1.0;
-	}
-
-	label {
-		color: #000000;
-	}
-
-	input[type="text"],
-	input[type="password"],
-	input[type="email"],
-	select,
-	textarea {
-		background: #e0ddd5; /*Tło textArea*/
-		border-color: #000000;
-	}
-
-		input[type="text"]:focus,
-		input[type="password"]:focus,
-		input[type="email"]:focus,
-		select:focus,
-		textarea:focus {
-			border-color: #000000;
-			box-shadow: 0 0 0 1px #062038;
-		}
-
-	.select-wrapper:before {
-		color: rgba(255, 255, 255, 0.15);
-	}
-
-	input[type="checkbox"] + label,
-	input[type="radio"] + label {
-		color: #000000;
-	}
-
-		input[type="checkbox"] + label:before,      /* CHECKBOX DLA FORMULARZA "WYŚLIJ MI KOPIĘ TEJ" */
-		input[type="radio"] + label:before {
-			background: rgba(255, 255, 255, 0.075);
-			border-color: #000000;
-		}
-
-	input[type="checkbox"]:checked + label:before,
-	input[type="radio"]:checked + label:before {
-		background-color: #062038;
-		border-color: #000000;
-		color: #ffffff;
-	}
-
-	input[type="checkbox"]:focus + label:before,
-	input[type="radio"]:focus + label:before {
-		border-color: #062038;
-		box-shadow: 0 0 0 1px #062038;
-	}
-
-	::-webkit-input-placeholder {
-		color: #000000 !important;
-	}
-
-	:-moz-placeholder {
-		color: #000000 !important;
-	}
-
-	::-moz-placeholder {
-		color: #000000 !important;
-	}
-
-	:-ms-input-placeholder {
-		color: #000000 !important;
-	}
-
-	.formerize-placeholder {
-		color: #000000 !important;
-	}
-
 /* Icon */
 
 	.icon {
@@ -2705,7 +2614,7 @@
 		}
 
 	table th {
-		color: #ffffff;
+		color: #000000;
 	}
 
 	table thead {
@@ -4014,7 +3923,7 @@ span.psw {
 }
 
 .rating > label:active {
-	position:relative;
+	position:static;
 	top:2px;
 	left:2px;
 }
@@ -4040,7 +3949,7 @@ span.psw {
 	text-decoration: none;
 	white-space: nowrap;
 	background-color: #4CAF50;
-	position: relative;
+	position: static;
 
 }
 

@@ -28,10 +28,12 @@ public class MainController {
         return "pomoc";
     }
 
-    @GetMapping("/todo")
-    public String todo() {
-        return "todo";
+    @GetMapping("/advice")
+    public String advice() {
+        return "advice";
     }
+
+
 /*
     @GetMapping("/profile")
     public String profile() {
