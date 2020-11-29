@@ -47,8 +47,6 @@ public class RegistrationController {
         else {
             return "redirect:registration?errorPass";
         }
-
-
     }
 
 }

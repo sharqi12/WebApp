@@ -15,7 +15,7 @@ public class Contact {
     private long id;
 
     @Column(name = "name")
-    @Pattern(regexp = "[a-zA-Z]*[\\s]{1}[a-zA-Z].*",  message = "wprowadz imie i nazwisko!")
+    //@Pattern(regexp = "[a-zA-Z]*[\\s]{1}[a-zA-Z].*",  message = "wprowadz imie i nazwisko!") ZAKOMENTOWANE BO NIE POZWALA WPROWADZAĆ POLSKICH ZNAKÓW
     @Size(min=6, message = "Minimum 6 znakow!")
     private String name;
 
@@ -27,12 +27,32 @@ public class Contact {
     @Column(name = "category")
     private String category;
 
-    @Column(name = "copy")
-    private boolean copy;
 
     @Column(name = "note")
     @Size(min = 10, message = "Opisz problem!")
     private String note;
+
+    private boolean solved;
+
+    public Contact() {
+    }
+
+    public Contact(long id, @Pattern(regexp = "[a-zA-Z]*[\\s]{1}[a-zA-Z].*", message = "wprowadz imie i nazwisko!") @Size(min = 6, message = "Minimum 6 znakow!") String name, @Email(regexp = "^(.+)@(.+)$", message = "Nieprawidłowy email!") @Size(min = 8, message = "Minimum 8 znakow!") String email, @Size(min = 10, message = "Opisz problem!") String note) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.category = category;
+        this.note = note;
+        this.solved = false;
+    }
+
+    public boolean isSolved() {
+        return solved;
+    }
+
+    public void setSolved(boolean solved) {
+        this.solved = solved;
+    }
 
     public long getId() {
         return id;
@@ -64,14 +84,6 @@ public class Contact {
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-    public boolean isCopy() {
-        return copy;
-    }
-
-    public void setCopy(boolean copy) {
-        this.copy = copy;
     }
 
     public String getNote() {

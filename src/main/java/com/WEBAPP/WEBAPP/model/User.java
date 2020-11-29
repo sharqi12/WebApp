@@ -1,9 +1,13 @@
 package com.WEBAPP.WEBAPP.model;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -39,8 +43,8 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"))
 
-    private Collection<Role> roles;
-
+    //private Collection<Role> roles;
+    private Collection<Role> roles = new HashSet<>();
 
     public User() {
     }
@@ -61,6 +65,7 @@ public class User implements UserDetails {
         this.name=user.getName();
         this.email=user.getEmail();
         this.password=user.getPassword();
+        this.roles=user.getRoles();
     }
 
 
@@ -106,7 +111,14 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        Collection<Role> roles = getRoles();
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+
+        for (Role role : roles) {
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
+        }
+
+        return authorities;
     }
 
     public String getPassword(){ return password; }

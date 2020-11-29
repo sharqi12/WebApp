@@ -20,6 +20,16 @@ public class ContactServiceImpl implements ContactService{
     }
 
     @Override
+    public List<Contact> findSolved(){
+        return contactRepository.findSolved();
+    }
+
+    @Override
+    public List<Contact> findUnsolved(){
+        return contactRepository.findUnsolved();
+    }
+
+    @Override
     public void saveContact(Contact contact) {
         this.contactRepository.save(contact);
     }

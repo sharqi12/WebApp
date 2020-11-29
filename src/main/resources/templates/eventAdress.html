@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Wspomaganie organizacji konferencji i targów</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../assets/css/main.css" type="text/css"/>
+</head>
+<body>
+
+<!-- Header -->
+<header id="header">
+    <h1><a th:href="@{/index}">Konferencje i targi<span>   Eventy i organizacja</span></a></h1>
+    <a href="#menu">Menu</a>
+</header>
+
+<!-- Nav -->
+<nav id="menu">
+    <ul class="links">
+        <li><a th:href="@{/index}">Strona główna</a></li>
+        <li><a th:href="@{/listOfFutureEvents}">Najbliższe wydarzenia</a></li>
+        <li><a th:href="@{/listOfPastEvents}">Poprzednie wydarzenia</a></li>
+        <li><a th:href="@{/showNewContactForm}">Pomoc</a></li>
+        <li sec:authorize="hasAuthority('ROLE_CREATOR') or hasAuthority('ROLE_ADMIN')"><a th:href="@{/advice}">Wskazówki przy organizacji</a></li>
+        <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj się</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/show_profile}">Twój profil</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Wyloguj się</a></li>
+        <li sec:authorize="isAnonymous()"><a href="/" th:href="@{/registration}">Zarejestruj się</a></li>
+    </ul>
+</nav>
+
+<section id="banner" >
+    <div class="inner">
+
+        <header>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+
+
+
+            <h1><a th:text="${event.name}"></a></h1>
+            <h2>Adres</h2>
+            <a id="adress" th:text="${event.adress}"></a>
+            <br>
+            <br>
+            <h2>Mapa</h2>
+
+            <div class="mapouter">
+                <script th:inline="javascript">
+                    function r(f){/in/.test(document.readyState)?setTimeout('r('+f+')',9):f()}
+                    var adress = [[${event.adress}]];
+                    var embed ="<iframe width='1000' height='800' frameborder='0' scrolling='no'  marginheight='0' marginwidth='0'   src='https://maps.google.com/maps?&amp;q="+ encodeURIComponent( adress ) +"&amp;output=embed'></iframe>";
+                    r(function(){
+                    document.getElementById("mapka").innerHTML=embed;
+                });
+                </script>
+                <div id="mapka" class="gmap_canvas"></div>
+
+                </div>
+        </header>
+        <br/><br/>
+        </div>
+        <br>
+        <br>
+        <br>
+
+    </div>
+    </div>
+
+
+
+
+
+</section>
+
+
+<!-- Scripts -->
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/jquery.scrolly.min.js"></script>
+<script src="/assets/js/skel.min.js"></script>
+<script src="/assets/js/util.js"></script>
+<script src="/assets/js/main.js"></script>
+
+</body>
+</html>

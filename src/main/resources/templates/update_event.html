@@ -27,9 +27,10 @@ and open the template in the editor.
 <nav id="menu">
     <ul class="links">
         <li><a th:href="@{/index}">Strona główna</a></li>
-        <li><a th:href="@{/list}">Najbliższe wydarzenia</a></li>
-        <li><a th:href="@{/list}">Poprzednie wydarzenia</a></li>
+        <li><a th:href="@{/listOfFutureEvents}">Najbliższe wydarzenia</a></li>
+        <li><a th:href="@{/listOfPastEvents}">Poprzednie wydarzenia</a></li>
         <li><a th:href="@{/showNewContactForm}">Pomoc</a></li>
+        <li sec:authorize="hasAuthority('ROLE_CREATOR') or hasAuthority('ROLE_ADMIN')"><a th:href="@{/advice}">Wskazówki przy organizacji</a></li>
         <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj się</a></li>
         <li sec:authorize="isAuthenticated()"><a th:href="@{/show_profile}">Twój profil</a></li>
         <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Wyloguj się</a></li>
@@ -47,6 +48,11 @@ and open the template in the editor.
     <div class="inner">
 
         <header>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
             <h1>Zaktualizuj wydarzenie</h1>
 
             <form action="#" th:action="@{/saveEvent2}" th:object="${event}" method="POST" enctype="multipart/form-data">
@@ -59,6 +65,9 @@ and open the template in the editor.
                 <input type="text" th:field="*{city}"  class="form-control mb-4 col-4">
                 <a th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></a>
                 <br/>
+                <textarea th:field="*{adress}" placeholder="Adres">
+                </textarea>
+                <br/>
                 <!--<input type="text" th:field="*{date}"  class="form-control mb-4 col-4">-->
                 <input id="datetime" th:field="*{date}" type="text" placeholder="Date">
                 <script src="../assets/js/jquery.js"></script>
@@ -68,22 +77,27 @@ and open the template in the editor.
                 </script>
                 <a th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></a>
                 <br/>
-                <input type="text" th:field="*{description}"  class="form-control mb-4 col-4">
+                <textarea th:field="*{description}" placeholder="Opis">
+                </textarea>
                 <a th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></a>
                 <br/>
-                <input type="text" th:field="*{ticket1}" placeholder="Bilet normalny" class="form-control mb-4 col-4">
+                <!--<input type="text" th:field="*{ticket1}" placeholder="Bilet normalny" class="form-control mb-4 col-4">
                 <a th:if="${#fields.hasErrors('ticket1')}" th:errors="*{ticket1}"></a><br/>
                 <input type="text" th:field="*{ticket2}" placeholder="Bilet ulgowy" class="form-control mb-4 col-4">
-                <a th:if="${#fields.hasErrors('ticket2')}" th:errors="*{ticket2}"></a><br/>
+                <a th:if="${#fields.hasErrors('ticket2')}" th:errors="*{ticket2}"></a><br/>-->
                 <input type="file" name="file" class="custom-file-input" id="customFile">
                 <label class="custom-file-label" for="customFile">Wybierz plik</label>
                 <br/>
                 <button type="submit" class="registerButton"> Zaktualizuj </button>
             </form>
 
+            <form th:action="@{/showTimetableForm/{id}(id=${event.id})}">
+                <button type="submit" class="loginButton"> Harmonogram wydarzenia</button>
+            </form>
+
             <hr>
 
-            <a th:href="@{/list}"> Back to Event List</a>
+            <a th:href="@{/list}"> Lista wszystkich wydarzeń</a>
 
             </form>
         </header>

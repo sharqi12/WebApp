@@ -9,5 +9,8 @@ import java.lang.Long;
 public interface CommentService {
     void saveComment(Comment comment);
     void deleteCommentById(Long idC);
+    Comment findOne(Long idC);
+    void delete(Long idC);
+    void delete(Comment comment);
+    void deleteCommentsByEventId(Long id);
 }
-

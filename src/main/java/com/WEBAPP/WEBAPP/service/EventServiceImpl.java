@@ -1,13 +1,18 @@
 package com.WEBAPP.WEBAPP.service;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Base64;
+import java.util.Date;
 import java.util.List;
 
 import java.util.Optional;
 
 import com.WEBAPP.WEBAPP.model.Event;
 import com.WEBAPP.WEBAPP.repository.EventRepository;
+import com.WEBAPP.WEBAPP.repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -19,6 +24,9 @@ public class EventServiceImpl implements EventService {
 
     @Autowired
     private EventRepository eventRepository;
+
+    @Autowired
+    TicketRepository ticketRepository;
 
     @Override
     public List <Event> getAllEvents() {
@@ -56,5 +64,30 @@ public class EventServiceImpl implements EventService {
     @Override
     public void deleteEventById(Long id) {
         this.eventRepository.deleteById(id);
+    }
+
+    @Override
+    public List <Event> getPastEvents() {
+        return eventRepository.findPastEvents(LocalDate.now().toString().replace('-','/'));
+    }
+
+    @Override
+    public List <Event> getFutureEvents() {
+        return eventRepository.findFutureEvents(LocalDate.now().toString().replace('-','/'));
+    }
+
+    @Override
+    public  Integer isEventEnded(Long id){
+        return eventRepository.isEventEnded(id, LocalDate.now().toString().replace('-','/'));
+    }
+
+    @Override
+    public Integer hasUserBoughtTicket(Integer user_id, Long event_id){
+        return ticketRepository.isTicketBought(user_id,event_id);
+    }
+
+    @Override
+    public Integer howManyTicketsTypesByEventId(Long id){
+        return ticketRepository.howManyTicketsTypesByEventId(id);
     }
 }

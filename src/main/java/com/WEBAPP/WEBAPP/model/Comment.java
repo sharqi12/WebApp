@@ -1,6 +1,7 @@
 package com.WEBAPP.WEBAPP.model;
 
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -14,6 +15,7 @@ import javax.persistence.Table;
 import javax.persistence.ManyToOne;
 import javax.persistence.ManyToMany;
 import javax.persistence.FetchType;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import javax.validation.constraints.NotNull;
@@ -34,28 +36,35 @@ public class Comment {
     private int rating;
 
 
+    @Column(name= "dateCreated")
+    private Timestamp dateCreated;
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "eve_com")
+
+    @ManyToOne(cascade = {CascadeType.ALL})
+    //@JoinColumn(name = "eve_com")
     private Event event;
 
 
 
-   /* @ManyToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "eve_usr" ,nullable = false)
-    private User user;*/
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_nick")
+    private User user;
 
-
+    @PreRemove
+    public void checkUserAssociations(){
+        setUser(null);
+        setEvent(null);
+    }
     public Comment() {
     }
 
 
-    public Long getId() {
+    public Long getIdC() {
         return idC;
     }
 
-    public void setId(Long idC) {
+    public void setIdC(Long idC) {
         this.idC = idC;
     }
 
@@ -80,21 +89,30 @@ public class Comment {
     public void setEvent(Event event) {
         this.event = event;
     }
-    /*public User getUser() {
+    public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
-    }*/
+    }
+    public Timestamp getDateCreated() {
+        return dateCreated;
+    }
 
+    public void setDateCreated(Timestamp dateCreated) {
+        this.dateCreated = dateCreated;
+    }
     @Override
     public String toString() {
         return "Comment{" +
 
                 ", text='" + text + '\'' +
+                ", user='" + user + '\'' +
                 ", rating=" + rating +
 
                 '}';
     }
+
+
 }

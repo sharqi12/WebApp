@@ -26,9 +26,10 @@ and open the template in the editor.
 <nav id="menu">
     <ul class="links">
         <li><a th:href="@{/index}">Strona główna</a></li>
-        <li><a th:href="@{/list}">Najbliższe wydarzenia</a></li>
-        <li><a th:href="@{/list}">Poprzednie wydarzenia</a></li>
+        <li><a th:href="@{/listOfFutureEvents}">Najbliższe wydarzenia</a></li>
+        <li><a th:href="@{/listOfPastEvents}">Poprzednie wydarzenia</a></li>
         <li><a th:href="@{/showNewContactForm}">Pomoc</a></li>
+        <li sec:authorize="hasAuthority('ROLE_CREATOR') or hasAuthority('ROLE_ADMIN')"><a th:href="@{/advice}">Wskazówki przy organizacji</a></li>
         <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj się</a></li>
         <li sec:authorize="isAuthenticated()"><a th:href="@{/show_profile}">Twój profil</a></li>
         <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Wyloguj się</a></li>
@@ -50,13 +51,20 @@ and open the template in the editor.
 
 
             <h1>Wydarzenia</h1>
+            <div sec:authorize="hasAuthority('ROLE_CREATOR')">
+
             <a th:href = "@{/showNewEventForm}" class="btn btn-primary btn-sm mb-3"> Dodaj wydarzenie </a>
+            </div>
+            <div sec:authorize="hasAuthority('ROLE_ADMIN')">
+                <a th:href = "@{/showNewEventForm}" class="btn btn-primary btn-sm mb-3"> Dodaj wydarzenie </a>
+            </div>
             <table border="1" class = "table table-striped table-responsive-md">
+                <br>
                 <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>City</th>
-                    <th>Date</th>
+                <tr><!--
+                    <th>Nazwa</th>
+                    <th>Miasto</th>
+                    <th>Data</th>-->
                 </tr>
                 </thead>
                 <tbody>
@@ -64,8 +72,23 @@ and open the template in the editor.
                     <td><a th:text="${event.name}" th:href="@{/showDescription/{id}(id=${event.id})}" class="btn btn-primary"></a></td>
                     <td th:text="${event.city}"></td>
                     <td th:text="${event.date}"></td>
-                    <td><a th:href="@{/showFormForUpdate/{id}(id=${event.id})}" class="btn btn-primary">Update</a>
-                        <a th:href="@{/deleteEvent/{id}(id=${event.id})}" class="btn btn-danger">Delete</a></td>
+                    <div sec:authorize="hasAuthority('ROLE_ADMIN')">
+                        <td>
+                            <a th:href="@{/showTicketsForEvent/{id}(id=${event.id})}" class="btn btn-primary">Tickets</a>
+                            <a th:href="@{/showFormForUpdate/{id}(id=${event.id})}" class="btn btn-primary">Update</a>
+                            <a th:href="@{/deleteEvent/{id}(id=${event.id})}" class="btn btn-danger">Delete</a></td>
+                    </div>
+
+                        <td>
+                            <div sec:authorize="isAuthenticated()">
+                                <div th:if="${event.user.getId()==activeUser.getId()} ">
+                                    <a th:href="@{/showTicketsForEvent/{id}(id=${event.id})}" class="btn btn-primary">Tickets</a>
+                                <a th:href="@{/showFormForUpdate/{id}(id=${event.id})}" class="btn btn-primary">Update</a>
+                                <a th:href="@{/deleteEvent/{id}(id=${event.id})}" class="btn btn-danger">Delete</a>
+                                </div>
+                             </div>
+                        </td>
+
                 </tr>
                 </tr>
                 </tbody>
@@ -76,52 +99,8 @@ and open the template in the editor.
         <!-- <a href="#main" class="button big alt scrolly">Dignissim</a> -->
     </div>
 
+
 </section>
-
-
-<!-- Footer -->
-<footer id="footer">
-    <div class="inner">
-        <div class="flex flex-3">
-            <div class="col">
-                <h3>Vestibullum</h3>
-                <ul class="alt">
-                    <li><a href="#">Nascetur nunc varius commodo.</a></li>
-                    <li><a href="#">Vis id faucibus montes tempor</a></li>
-                    <li><a href="#">Massa amet lobortis vel.</a></li>
-                    <li><a href="#">Nascetur nunc varius commodo.</a></li>
-                </ul>
-            </div>
-            <div class="col">
-                <h3>Lobortis</h3>
-                <ul class="alt">
-                    <li><a href="#">Nascetur nunc varius commodo.</a></li>
-                    <li><a href="#">Vis id faucibus montes tempor</a></li>
-                    <li><a href="#">Massa amet lobortis vel.</a></li>
-                    <li><a href="#">Nascetur nunc varius commodo.</a></li>
-                </ul>
-            </div>
-            <div class="col">
-                <h3>Accumsan</h3>
-                <ul class="alt">
-                    <li><a href="#">Nascetur nunc varius commodo.</a></li>
-                    <li><a href="#">Vis id faucibus montes tempor</a></li>
-                    <li><a href="#">Massa amet lobortis vel.</a></li>
-                    <li><a href="#">Nascetur nunc varius commodo.</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="copyright">
-        <ul class="icons">
-            <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-            <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-            <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-            <li><a href="#" class="icon fa-snapchat"><span class="label">Snapchat</span></a></li>
-        </ul>
-        &copy; Untitled. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com">Coverr</a>. Video: <a href="https://coverr.co">Coverr</a>.
-    </div>
-</footer>
 
 <!-- Scripts -->
 <script src="assets/js/jquery.min.js"></script>

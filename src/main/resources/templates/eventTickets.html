@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Wspomaganie organizacji konferencji i targów</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../assets/css/main.css" type="text/css"/>
+</head>
+<body>
+
+<!-- Header -->
+<header id="header">
+    <h1><a th:href="@{/index}">Konferencje i targi<span>   Eventy i organizacja</span></a></h1>
+    <a href="#menu">Menu</a>
+</header>
+
+<!-- Nav -->
+<nav id="menu">
+    <ul class="links">
+        <li><a th:href="@{/index}">Strona główna</a></li>
+        <li><a th:href="@{/listOfFutureEvents}">Najbliższe wydarzenia</a></li>
+        <li><a th:href="@{/listOfPastEvents}">Poprzednie wydarzenia</a></li>
+        <li><a th:href="@{/showNewContactForm}">Pomoc</a></li>
+        <li sec:authorize="hasAuthority('ROLE_CREATOR') or hasAuthority('ROLE_ADMIN')"><a th:href="@{/advice}">Wskazówki przy organizacji</a></li>
+        <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj się</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/show_profile}">Twój profil</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Wyloguj się</a></li>
+        <li sec:authorize="isAnonymous()"><a href="/" th:href="@{/registration}">Zarejestruj się</a></li>
+    </ul>
+</nav>
+
+<section id="banner" >
+    <div class="inner">
+        <div th:if=" ${howManyTypesTicket}==0 ">
+            <header>
+                <div sec:authorize="isAuthenticated()">
+                    <div th:if="${event.user.getId()==activeUser.getId()}">
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <h4>Dodawanie typów biletu na wydarzenie</h4>
+                        <form action="#" th:action="@{/saveNewTicket/{id}(id=${event.id})}" th:object="${eventTicket}" method="POST">
+                            <br/>
+                            Typ biletu:
+                            <input type="text" th:field="*{ticketName}" placeholder="np. Ulgowy" class="form-control mb-4 col-4">
+                            <a th:if="${#fields.hasErrors('ticketName')}" th:errors="*{ticketName}"></a>
+                            <br/>
+                            Cena biletu:
+                            <input type="text" th:field="*{ticketPrice}" placeholder="Cena biletu" class="form-control mb-4 col-4">
+                            <a th:if="${#fields.hasErrors('ticketPrice')}" th:errors="*{ticketPrice}"></a>
+                            <br/>
+                            Opis typu biletu:
+                            <textarea th:field="*{ticketDescription}" placeholder="Nie wymagany, np. Bilet ulgowy dla dzieci do lat 12">
+                        </textarea>
+                            <a th:if="${#fields.hasErrors('ticketDescription')}" th:errors="*{ticketDescription}"></a>
+                            <br/>
+                            <br>
+
+                            <!--Opis:
+                            <textarea th:field="*{description}" placeholder="Nie wymagany">
+
+                            </textarea>
+                            <br/>-->
+
+                            <button type="submit" class="registerButton"> Dodaj typ biletu</button>
+                        </form>
+                    </div>
+
+                    <div sec:authorize="hasAuthority('ROLE_ADMIN')">
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <h4>Dodawanie typów biletu na wydarzenie</h4>
+                        <form action="#" th:action="@{/saveNewTicket/{id}(id=${event.id})}" th:object="${eventTicket}" method="POST">
+                            <br/>
+                            Typ biletu:
+                            <input type="text" th:field="*{ticketName}" placeholder="np. Ulgowy" class="form-control mb-4 col-4">
+                            <a th:if="${#fields.hasErrors('ticketName')}" th:errors="*{ticketName}"></a>
+                            <br/>
+                            Cena biletu:
+                            <input type="text" th:field="*{ticketPrice}" placeholder="Cena biletu" class="form-control mb-4 col-4">
+                            <a th:if="${#fields.hasErrors('ticketPrice')}" th:errors="*{ticketPrice}"></a>
+                            <br/>
+                            Opis typu biletu:
+                            <textarea th:field="*{ticketDescription}" placeholder="Nie wymagany, np. Bilet ulgowy dla dzieci do lat 12">
+                        </textarea>
+                            <a th:if="${#fields.hasErrors('ticketDescription')}" th:errors="*{ticketDescription}"></a>
+                            <br/>
+                            <br>
+
+                            <!--Opis:
+                            <textarea th:field="*{description}" placeholder="Nie wymagany">
+
+                            </textarea>
+                            <br/>-->
+
+                            <button type="submit" class="registerButton"> Dodaj typ biletu</button>
+                        </form>
+                    </div>
+                </div>
+
+
+                <h1><a th:text="${event.name}"></a></h1>
+                <h2>Organizator nie dodał biletów do tego wydarzenia</h2>
+            </header>
+        </div>
+        <div th:if=" ${howManyTypesTicket}!=0 ">
+        <header>
+            <div sec:authorize="isAuthenticated()">
+                <div th:if="${event.user.getId()==activeUser.getId()} ">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <h4>Dodawanie typów biletu na wydarzenie</h4>
+                    <form action="#" th:action="@{/saveNewTicket/{id}(id=${event.id})}" th:object="${eventTicket}" method="POST">
+                        <br/>
+                        Typ biletu:
+                        <input type="text" th:field="*{ticketName}" placeholder="np. Ulgowy" class="form-control mb-4 col-4">
+                        <a th:if="${#fields.hasErrors('ticketName')}" th:errors="*{ticketName}"></a>
+                        <br/>
+                        Cena biletu:
+                        <input type="text" th:field="*{ticketPrice}" placeholder="Cena biletu" class="form-control mb-4 col-4">
+                        <a th:if="${#fields.hasErrors('ticketPrice')}" th:errors="*{ticketPrice}"></a>
+                        <br/>
+                        Opis typu biletu:
+                        <textarea th:field="*{ticketDescription}" placeholder="Nie wymagany, np. Bilet ulgowy dla dzieci do lat 12">
+                        </textarea>
+                        <a th:if="${#fields.hasErrors('ticketDescription')}" th:errors="*{ticketDescription}"></a>
+                        <br/>
+                        <br>
+
+                        <!--Opis:
+                        <textarea th:field="*{description}" placeholder="Nie wymagany">
+
+                        </textarea>
+                        <br/>-->
+
+                        <button type="submit" class="registerButton"> Dodaj typ biletu</button>
+                    </form>
+
+                </div>
+                <div sec:authorize="hasAuthority('ROLE_ADMIN')">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <h4>Dodawanie typów biletu na wydarzenie</h4>
+                    <form action="#" th:action="@{/saveNewTicket/{id}(id=${event.id})}" th:object="${eventTicket}" method="POST">
+                        <br/>
+                        Typ biletu:
+                        <input type="text" th:field="*{ticketName}" placeholder="np. Ulgowy" class="form-control mb-4 col-4">
+                        <a th:if="${#fields.hasErrors('ticketName')}" th:errors="*{ticketName}"></a>
+                        <br/>
+                        Cena biletu:
+                        <input type="text" th:field="*{ticketPrice}" placeholder="Cena biletu" class="form-control mb-4 col-4">
+                        <a th:if="${#fields.hasErrors('ticketPrice')}" th:errors="*{ticketPrice}"></a>
+                        <br/>
+                        Opis typu biletu:
+                        <textarea th:field="*{ticketDescription}" placeholder="Nie wymagany, np. Bilet ulgowy dla dzieci do lat 12">
+                        </textarea>
+                        <a th:if="${#fields.hasErrors('ticketDescription')}" th:errors="*{ticketDescription}"></a>
+                        <br/>
+                        <br>
+
+                        <!--Opis:
+                        <textarea th:field="*{description}" placeholder="Nie wymagany">
+
+                        </textarea>
+                        <br/>-->
+
+                        <button type="submit" class="registerButton"> Dodaj typ biletu</button>
+                    </form>
+                </div>
+            </div>
+
+
+            <h1><a th:text="${event.name}"></a></h1>
+
+            <br>
+            <table border="1" class = "table table-striped table-responsive-md">
+                <h2>Typy biletów</h2>
+                <thead>
+                <tr>
+                    <th>Nazwa</th>
+                    <th>Cena</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+            <tbody>
+            <tr th:each="ticketType : ${eventTicketList}">
+                <td th:text="${ticketType.ticketName}"></td>
+                <td th:text="${ticketType.ticketPrice} +' PLN'"></td>
+                <td th:text="${ticketType.ticketDescription}"></td>
+                <td>
+                    <div th:if="${event.user.getId()==activeUser.getId()} ">
+                        <a th:href="@{/deleteTicketType/{id}/{id2}(id=${ticketType.id},id2=${event.id})}" class="btn btn-danger">Usuń pozycje</a>
+                    </div>
+                    <div sec:authorize="hasAuthority('ROLE_ADMIN')">
+                        <a th:href="@{/deleteTicketType/{id}/{id2}(id=${ticketType.id},id2=${event.id})}" class="btn btn-danger">Usuń pozycje</a>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            </table>
+            <div th:if="${alreadybought==0}"><!-- JEZELI NIE ZOSTAŁ KUPIONY BILET -->
+                <div th:if="${isEventEnded==0}"><!-- JEZELI WYDARZENIE SIĘ NIE ODBYŁO -->
+                    <!--WYŚWIETLANIE FORMULARZA I WYBIERANIE TYPU BILETU-->
+                    <form action="#" method="POST" enctype="multipart/form-data">
+                        <h2>Kup Bilet</h2>
+                        <div class="12u$">
+                            <div class="select-wrapper">
+                                Typ biletu:
+                                <select id="ticket" >
+                                    <tr th:each="ticketType : ${eventTicketList}">
+                                        <option th:value="${ticketType.ticketPrice}" th:text="${ticketType.ticketName}"></option>
+                                    </tr>
+
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!--SKRYPT PAYPAL-->
+                    <div id="paypal-button-container"></div>
+                    <script src="https://www.paypal.com/sdk/js?client-id=AZY-1WtRQ5nISTIb7YZYX31PYlrqHk2d5MvDqWGYs2kG8szLdZghbj0vCc-BNAMa-x1VEtjHfmtHxBSy&currency=PLN"></script>
+                    <div th:with="localId=${#authentication.getPrincipal().getId()}">
+                        <div th:with="localEventId=${event.id}">
+
+                                <script th:inline="javascript">
+                                    var ticket = document.getElementById("ticket");
+                                    // Render the PayPal button into #paypal-button-container
+                                    paypal.Buttons({
+
+                                    // Set up the transaction
+                                    createOrder: function(data, actions) {
+                                        return actions.order.create({
+                                            purchase_units: [{
+                                                amount: {
+                                                    value: ticket.value
+                                                }
+                                            }]
+                                        });
+                                    },
+
+                                    // Finalize the transaction
+                                    onApprove: function(data, actions) {
+                                        return actions.order.capture().then(function(details) {
+                                            // Show a success message to the buyer
+                                            alert('Transakcja zakończona sukcesem dla użytkownika ' + details.payer.name.given_name + '!');
+
+                                                var tempId = ticket.value;
+                                                var tempUserId = [[${localId}]];
+                                                var tempEventId = [[${localEventId}]];
+
+                                                    $.ajax({
+                                                        type : "POST",
+                                                        url : "/acceptedPayment/"+tempId,
+                                                        data : {value:tempId , user_id:tempUserId , event_id:tempEventId},
+                                                        timeout : 100000,
+                                                        success : function() {
+                                                            console.log("SUCCESS: ");
+                                                            alert(response);
+                                                        },
+                                                        error : function(e) {
+                                                            console.log("ERROR");
+                                                        },
+                                                        done : function(e) {
+                                                            console.log("DONE");
+                                                        }
+                                                    });
+                                        });
+                                    }
+                                    }).render('#paypal-button-container');
+                                </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div th:if="${alreadybought!=0}">
+                <h3>Zakupiłeś już bilet na to wydarzenie!</h3>
+                <br>
+                <form th:action="@{/listOfUserTickets}">
+                    <button type="submit" class="loginButton"> Twoje kupione bilety</button>
+                </form>
+            </div>
+            <div th:if="${isEventEnded==1}"><!-- JEZELI WYDARZENIE SIĘ ODBYŁO -->
+                <h3>Wydarzenie już się odbyło, nie można kupić biletu.</h3>
+            </div>
+        </header>
+        <br/><br/>
+    </div>
+    <br>
+    <br>
+    <br>
+    </div>
+    </div>
+    </div>
+
+
+
+
+
+
+</section>
+
+
+<!-- Scripts -->
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/jquery.scrolly.min.js"></script>
+<script src="/assets/js/skel.min.js"></script>
+<script src="/assets/js/util.js"></script>
+<script src="/assets/js/main.js"></script>
+
+</body>
+</html>
