@@ -33,4 +33,7 @@ public interface TicketRepository extends JpaRepository<Tickets, Long> {
 
     @Query(value = "SELECT COUNT(id) FROM tickets WHERE event_id =:emm and user_id =:em",nativeQuery = true)
     Integer isTicketBought(@Param("em")Integer user_id, @Param("emm")Long event_id);
+
+    @Query(value = "SELECT COUNT(id) FROM event_tickets WHERE event_id =:em",nativeQuery = true)
+    Integer howManyTicketsTypesByEventId(@Param("em")Long id);
 }

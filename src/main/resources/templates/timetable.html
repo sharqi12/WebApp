@@ -42,52 +42,54 @@ and open the template in the editor.
 
         <header>
             <div sec:authorize="isAuthenticated()">
-                <div th:if="${event.user.getId()==activeUser.getId()} ">
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                        <h4>Dodawanie Harmonogramu</h4>
-                        <form action="#" th:action="@{/saveTimetable/{id}(id=${event.id})}" th:object="${timetable}" method="POST">
-                            <br/>
+                <div th:if="${activeUser!=null} ">
+                    <div th:if="${event.user.getId()==activeUser.getId()} ">
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                            <h4>Dodawanie Harmonogramu</h4>
+                            <form action="#" th:action="@{/saveTimetable/{id}(id=${event.id})}" th:object="${timetable}" method="POST">
+                                <br/>
 
-                            <input type="text" th:field="*{stage}" placeholder="Sala" class="form-control mb-4 col-4">
-                            <a th:if="${#fields.hasErrors('stage')}" th:errors="*{stage}"></a>
-                            <br/>
+                                <input type="text" th:field="*{stage}" placeholder="Sala" class="form-control mb-4 col-4">
+                                <a th:if="${#fields.hasErrors('stage')}" th:errors="*{stage}"></a>
+                                <br/>
 
-                            <input type="text" th:field="*{exhibit}" placeholder="Nazwa" class="form-control mb-4 col-4">
-                            <a th:if="${#fields.hasErrors('exhibit')}" th:errors="*{exhibit}"></a>
-                            <br/>
-                            Godzina rozpoczęcia:
-                            <input id="datetime" type="time" th:field="*{begin}" placeholder="Godzina rozpoczęcia" class="form-control mb-4 col-4">
-                            <a th:if="${#fields.hasErrors('begin')}" th:errors="*{begin}"></a>
-                            <br/>
-                            <br>
-                            Godzina zakończenia:
-                            <input id="datetime2" type="time" th:field="*{end}" placeholder="Godzina zakończenia" class="form-control mb-4 col-4">
-                            <a th:if="${#fields.hasErrors('end')}" th:errors="*{end}"></a>
-                            <br/>
-                            <br>
-                            <!--Opis:
-                            <textarea th:field="*{description}" placeholder="Nie wymagany">
+                                <input type="text" th:field="*{exhibit}" placeholder="Nazwa" class="form-control mb-4 col-4">
+                                <a th:if="${#fields.hasErrors('exhibit')}" th:errors="*{exhibit}"></a>
+                                <br/>
+                                Godzina rozpoczęcia:
+                                <input id="datetime" type="time" th:field="*{begin}" placeholder="Godzina rozpoczęcia" class="form-control mb-4 col-4">
+                                <a th:if="${#fields.hasErrors('begin')}" th:errors="*{begin}"></a>
+                                <br/>
+                                <br>
+                                Godzina zakończenia:
+                                <input id="datetime2" type="time" th:field="*{end}" placeholder="Godzina zakończenia" class="form-control mb-4 col-4">
+                                <a th:if="${#fields.hasErrors('end')}" th:errors="*{end}"></a>
+                                <br/>
+                                <br>
+                                <!--Opis:
+                                <textarea th:field="*{description}" placeholder="Nie wymagany">
 
-                            </textarea>
-                            <br/>-->
+                                </textarea>
+                                <br/>-->
 
-                            <button type="submit" class="registerButton"> Dodaj Harmonogram</button>
-                        </form>
+                                <button type="submit" class="registerButton"> Dodaj Harmonogram</button>
+                            </form>
+                    </div>
                 </div>
             </div>
 
@@ -111,8 +113,10 @@ and open the template in the editor.
                          <td th:text="${timetable.begin}"></td>
                          <td th:text="${timetable.end}"></td>
                          <td>
-                             <div th:if="${event.user.getId()==activeUser.getId()} ">
-                                 <a th:href="@{/deleteTimeline/{id}/{id2}(id=${timetable.id},id2=${event.id})}" class="btn btn-danger">Usuń pozycje</a>
+                             <div th:if="${activeUser!=null} ">
+                                 <div th:if="${event.user.getId()==activeUser.getId()} ">
+                                     <a th:href="@{/deleteTimeline/{id}/{id2}(id=${timetable.id},id2=${event.id})}" class="btn btn-danger">Usuń pozycje</a>
+                                 </div>
                              </div>
                          </td>
                      </tr>

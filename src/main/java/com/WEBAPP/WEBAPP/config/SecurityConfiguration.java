@@ -71,6 +71,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 "/js/**",
                 "/css/**",
                         "/showNewContactForm", "/saveContact",
+                        "/eventAdress/**","/eventAdress*","/showAdressForEvent/**",
+                "/showTimetableForm/**", "/showTimetableForm/**",
                 "/img/**").permitAll()
 
                 .antMatchers("/new_event", "/showNewEventForm").hasAnyAuthority("ROLE_ADMIN", "ROLE_CREATOR")

@@ -100,10 +100,7 @@ public class EventController {
     }
 
     @GetMapping("/showAdressForEvent/{id}")
-    public String showTimetableForm(@PathVariable(value = "id") Long id, Model model, Model model2, Principal principal ){
-        if (principal != null)
-            model2.addAttribute("activeUser", userRepository.findByEmail(principal.getName()));
-        else model2.addAttribute("activeUser", null);
+    public String showTimetableForm(@PathVariable(value = "id") Long id, Model model){
         Event event = eventService.getEventById(id);
         model.addAttribute("event", event);
         return "eventAdress";
@@ -131,7 +128,7 @@ public class EventController {
     }
 
     @GetMapping("/showDescription/{id}")
-    public String showDescription(@PathVariable(value = "id") Long id, Model model, Model model2, Model model3, Model model4) {
+    public String showDescription(@PathVariable(value = "id") Long id, Model model, Model model2, Model model3, Model model4, Model model5,Model model6, Principal principal) {
         // get event from the service
         Event event = eventService.getEventById(id);
         Comment comment = new Comment();
@@ -140,6 +137,12 @@ public class EventController {
         model2.addAttribute("comment", comment);
         model3.addAttribute("allComments", commentRepository.findByEventId(id));
         model4.addAttribute("isEventEnded", eventService.isEventEnded(id));
+        if(principal == null){
+            model5.addAttribute("hasUserBoughtTicket", 0);
+        }else{
+            model5.addAttribute("hasUserBoughtTicket", eventService.hasUserBoughtTicket(userRepository.findByEmail(principal.getName()).getId(),id));
+        }
+        model6.addAttribute("howManyTicketTypesForEvent", eventService.howManyTicketsTypesByEventId(id));
         return "description";
     }
 

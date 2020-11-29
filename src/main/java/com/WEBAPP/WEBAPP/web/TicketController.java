@@ -55,7 +55,7 @@ public class TicketController {
     }
 
     @GetMapping("/showTicketsTypesForEvent/{id}")
-    public String showTimetableForm(@PathVariable(value = "id") Long id, Model model, Model model2, Model model3, Model model4, Model model5,  Model model6, Principal principal ){
+    public String showTimetableForm(@PathVariable(value = "id") Long id, Model model, Model model2, Model model3, Model model4, Model model5,  Model model6,Model model7, Principal principal ){
         if (principal != null)
             model2.addAttribute("activeUser", userRepository.findByEmail(principal.getName()));
         else model2.addAttribute("activeUser", null);
@@ -64,6 +64,7 @@ public class TicketController {
         model4.addAttribute("howManyTypesTicket", ticketService.howManyTicketsTypesByEventId(id));
         model5.addAttribute("eventTicket", new EventTicketDto());
         model6.addAttribute("alreadybought", ticketService.alreadyTicketBoughtById( userRepository.findByEmail(principal.getName()).getId() , id ));
+        model7.addAttribute("isEventEnded", eventService.isEventEnded(id));
         return "eventTickets";
     }
 
