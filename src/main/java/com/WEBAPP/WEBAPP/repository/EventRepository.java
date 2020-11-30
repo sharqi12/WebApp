@@ -1,6 +1,8 @@
 package com.WEBAPP.WEBAPP.repository;
 
 import com.WEBAPP.WEBAPP.model.Event;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,10 +19,10 @@ public interface EventRepository extends JpaRepository<Event, Long>{
     Integer findByUserId(@Param("em")Integer id);
 
     @Query(value = "SELECT * from events WHERE date <:emm",nativeQuery = true)
-    List<Event> findPastEvents(@Param("emm") String data);
+    Page<Event> findPastEvents(@Param("emm") String data, Pageable pageable);
 
     @Query(value = "SELECT * from events WHERE date >:emm",nativeQuery = true)
-    List<Event> findFutureEvents(@Param("emm") String data);
+    Page<Event> findFutureEvents(@Param("emm") String data, Pageable pageable);
 
     @Query(value = "SELECT COUNT(id) from events WHERE id =:em and date <:emm",nativeQuery = true)
     Integer isEventEnded(@Param("em")Long id,@Param("emm") String data);
