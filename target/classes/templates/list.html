@@ -12,7 +12,7 @@ and open the template in the editor.
     <title>Wspomaganie organizacji konferencji i targów</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="assets/css/main.css" type="text/css"/>
+    <link rel="stylesheet" href="../assets/css/main.css" type="text/css"/>
 </head>
 <body>
 
@@ -26,8 +26,8 @@ and open the template in the editor.
 <nav id="menu">
     <ul class="links">
         <li><a th:href="@{/index}">Strona główna</a></li>
-        <li><a th:href="@{/listOfFutureEvents}">Najbliższe wydarzenia</a></li>
-        <li><a th:href="@{/listOfPastEvents}">Poprzednie wydarzenia</a></li>
+        <li><a th:href="@{/listOfFutureEvents/1}">Najbliższe wydarzenia</a></li>
+        <li><a th:href="@{/listOfPastEvents/1}">Poprzednie wydarzenia</a></li>
         <li><a th:href="@{/showNewContactForm}">Pomoc</a></li>
         <li sec:authorize="hasAuthority('ROLE_CREATOR') or hasAuthority('ROLE_ADMIN')"><a th:href="@{/advice}">Wskazówki przy organizacji</a></li>
         <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj się</a></li>
@@ -96,18 +96,56 @@ and open the template in the editor.
 
             </form>
         </header>
-        <!-- <a href="#main" class="button big alt scrolly">Dignissim</a> -->
+        <!-- PRZEWIJANIE STRON-->
+        <div th:if="${totalPages > 1}">
+            <a th:if="${currentPage > 1}" th:href="@{/listOfFutureEvents/1}">Pierwsza strona</a>
+            <span th:unless="${currentPage > 1}">Pierwsza strona</span>
+            &nbsp;
+            <a th:if="${currentPage > 1}" th:href="@{/listOfFutureEvents/{currentPage}(currentPage=${currentPage-1})}">Poprzednia strona</a>
+            <span th:unless="${currentPage > 1}">Poprzednia strona</span>
+            &nbsp;
+
+            <a th:if="${currentPage > 3}">
+            <span th:each="i: ${#numbers.sequence(currentPage-3, currentPage+3)}">
+                <a th:if="${currentPage != i}" th:href="@{/listOfFutureEvents/{i}(i=${i})}">[[${i}]]</a>
+                <span th:unless="${currentPage != i}">[[${i}]]</span>
+                &nbsp;
+            </span>
+            </a>
+            <a th:if="${currentPage < 3}">
+                <a th:if="${totalPages > 6}">
+                    <span th:each="i: ${#numbers.sequence(1, 6)}">
+                    <a th:if="${currentPage != i}" th:href="@{/listOfFutureEvents/{i}(i=${i})}">[[${i}]]</a>
+                    <span th:unless="${currentPage != i}">[[${i}]]</span>
+                    &nbsp;
+                    </span>
+                </a>
+                <a th:if="${totalPages < 6}">
+                    <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                    <a th:if="${currentPage != i}" th:href="@{/listOfFutureEvents/{i}(i=${i})}">[[${i}]]</a>
+                    <span th:unless="${currentPage != i}">[[${i}]]</span>
+                    &nbsp;
+                    </span>
+                </a>
+            </a>
+            <a th:if="${currentPage < totalPages}" th:href="@{/listOfFutureEvents/{currentPage}(currentPage=${currentPage+1})}">Następna strona</a>
+            <span th:unless="${currentPage < totalPages}">Następna strona</span>
+                &nbsp;
+            <a th:if="${currentPage < totalPages}" th:href="@{/listOfFutureEvents/{totalPages}(totalPages=${totalPages})}">Ostatnia strona</a>
+            <span th:unless="${currentPage < totalPages}">Ostatnia strona</span>
+            <!-- <a href="#main" class="button big alt scrolly">Dignissim</a> -->
+        </div>
     </div>
 
 
 </section>
 
 <!-- Scripts -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/jquery.scrolly.min.js"></script>
-<script src="assets/js/skel.min.js"></script>
-<script src="assets/js/util.js"></script>
-<script src="assets/js/main.js"></script>
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/jquery.scrolly.min.js"></script>
+<script src="../assets/js/skel.min.js"></script>
+<script src="../assets/js/util.js"></script>
+<script src="../assets/js/main.js"></script>
 
 </body>
 </html>

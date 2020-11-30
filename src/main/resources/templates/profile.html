@@ -25,8 +25,8 @@
 <nav id="menu">
     <ul class="links">
         <li><a th:href="@{/index}">Strona główna</a></li>
-        <li><a th:href="@{/listOfFutureEvents}">Najbliższe wydarzenia</a></li>
-        <li><a th:href="@{/listOfPastEvents}">Poprzednie wydarzenia</a></li>
+        <li><a th:href="@{/listOfFutureEvents/1}">Najbliższe wydarzenia</a></li>
+        <li><a th:href="@{/listOfPastEvents/1}">Poprzednie wydarzenia</a></li>
         <li><a th:href="@{/showNewContactForm}">Pomoc</a></li>
         <li sec:authorize="hasAuthority('ROLE_CREATOR') or hasAuthority('ROLE_ADMIN')"><a th:href="@{/advice}">Wskazówki przy organizacji</a></li>
         <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj się</a></li>
