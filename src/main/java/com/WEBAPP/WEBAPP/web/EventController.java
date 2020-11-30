@@ -13,6 +13,7 @@ import com.WEBAPP.WEBAPP.web.dto.TimeTableDto;
 import com.lowagie.text.DocumentException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,21 +49,33 @@ public class EventController {
     private TimetableService timetableService;
 
 
-    @GetMapping("/listOfFutureEvents")
-    public String viewHomePage(Model model, Principal principal) {
+    @GetMapping("/listOfFutureEvents/{pageNum}")
+    public String viewHomePage(@PathVariable(name = "pageNum") int pageNum, Model model, Principal principal) {
         if (principal != null)
             model.addAttribute("activeUser", userRepository.findByEmail(principal.getName()));
         else model.addAttribute("activeUser", null);
-        ;
-        model.addAttribute("listEvents", eventService.getFutureEvents());
+
+        Page<Event> page = eventService.getFutureEvents(pageNum);
+        List<Event> listEvents = page.getContent();
+        model.addAttribute("listEvents", listEvents);
+        model.addAttribute("currentPage", pageNum);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalEvents", page.getTotalElements());
+
         return "list";
     }
-    @GetMapping("/listOfPastEvents")
-    public String viewListOfPastEvents(Model model, Principal principal) {
+    @GetMapping("/listOfPastEvents/{pageNum}")
+    public String viewListOfPastEvents(@PathVariable(name = "pageNum") int pageNum, Model model, Principal principal) {
         if (principal != null)
             model.addAttribute("activeUser", userRepository.findByEmail(principal.getName()));
         else model.addAttribute("activeUser", null);
-        model.addAttribute("listEvents", eventService.getPastEvents());
+
+        Page<Event> page = eventService.getPastEvents(pageNum);
+        List<Event> listEvents = page.getContent();
+        model.addAttribute("listEvents", listEvents);
+        model.addAttribute("currentPage", pageNum);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalEvents", page.getTotalElements());
         return "listOfPastEvents";
     }
 
@@ -71,6 +84,7 @@ public class EventController {
         // create model attribute to bind form data
         Event event = new Event();
         model.addAttribute("event", event);
+
         return "new_event";
     }
 

@@ -14,6 +14,9 @@ import com.WEBAPP.WEBAPP.model.Event;
 import com.WEBAPP.WEBAPP.repository.EventRepository;
 import com.WEBAPP.WEBAPP.repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -67,13 +70,17 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List <Event> getPastEvents() {
-        return eventRepository.findPastEvents(LocalDate.now().toString().replace('-','/'));
+    public Page<Event> getPastEvents(int pageNum) {
+        int pageSize = 6;
+        Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
+        return eventRepository.findPastEvents(LocalDate.now().toString().replace('-','/'),pageable);
     }
 
     @Override
-    public List <Event> getFutureEvents() {
-        return eventRepository.findFutureEvents(LocalDate.now().toString().replace('-','/'));
+    public Page <Event> getFutureEvents(int pageNum) {
+        int pageSize = 6;
+        Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
+        return eventRepository.findFutureEvents(LocalDate.now().toString().replace('-','/'),pageable);
     }
 
     @Override
