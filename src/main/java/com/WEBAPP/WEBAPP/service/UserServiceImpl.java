@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService{
     }
     @Override
     public void promoToCreator(Integer id){
-        userRepository.promoteUserToCreator(id);
+        userRepository.promoteUserToCreator(userRepository.getUserRoleID(id));
     }
 
     @Override

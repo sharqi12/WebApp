@@ -68,7 +68,7 @@ public class Event {
     @JoinColumn(name = "id_events", referencedColumnName = "id")
     List<Comment> comments = new ArrayList<>();
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "id_user", referencedColumnName = "id")
     private User user;
 

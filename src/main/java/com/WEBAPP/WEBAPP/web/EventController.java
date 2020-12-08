@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.security.Principal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -97,7 +98,7 @@ public class EventController {
             User user = userRepository.findByEmail(principal.getName());
             event.setUser(user);
             eventService.saveEvent(file, event);
-            return "redirect:/list";
+            return "redirect:/listOfFutureEvents/1";
         }
     }
 
@@ -109,7 +110,7 @@ public class EventController {
             User user = userRepository.findByEmail(principal.getName());
             event.setUser(user);
             eventService.saveEvent(file, event);
-            return "redirect:/list";
+            return "redirect:/listOfFutureEvents/1";
         }
     }
 
@@ -138,7 +139,7 @@ public class EventController {
 
         // call delete event method
         this.eventService.deleteEventById(id);
-        return "redirect:/list";
+        return "redirect:/listOfFutureEvents/1";
     }
 
     @GetMapping("/showDescription/{id}")

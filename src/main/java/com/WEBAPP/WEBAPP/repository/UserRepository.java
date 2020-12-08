@@ -19,4 +19,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query(value = "UPDATE role SET name='ROLE_CREATOR' WHERE id =:em",nativeQuery = true)
     void promoteUserToCreator(@Param("em")Integer id);
 
+    // select role_id from users_roles where user_id = 9;
+    @Query(value = "SELECT role_id FROM users_roles WHERE user_id =:em",nativeQuery = true)
+    Integer getUserRoleID(@Param("em")Integer id);
 }
