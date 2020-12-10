@@ -3496,6 +3496,7 @@
 		position: relative;
 		text-align: center;
 		/*overflow: hidden;*/
+		margin: auto;
 	}
 
 		#banner .inner {
