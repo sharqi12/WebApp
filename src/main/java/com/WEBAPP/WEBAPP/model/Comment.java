@@ -59,6 +59,13 @@ public class Comment {
     public Comment() {
     }
 
+    public Comment(String text, int rating, Event event, User user){
+        this.text = text;
+        this.rating = rating;
+        this.event = event;
+        this.user = user;
+    }
+
 
     public Long getIdC() {
         return idC;

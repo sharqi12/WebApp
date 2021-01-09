@@ -29,14 +29,10 @@ public class MyUserPrincipal extends User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<Role> roles = user.getRoles();
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-
         for (Role role : roles) {
             authorities.add(new SimpleGrantedAuthority(role.getName()));
         }
-
         return authorities;
-        // You don't talk about UserRoles, so return ADMIN for everybody or implement roles.
-        // return AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER");
     }
 
     @Override
@@ -56,7 +52,6 @@ public class MyUserPrincipal extends User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        // just for example
         return  true;
     }
 
