@@ -5,10 +5,7 @@ import com.WEBAPP.WEBAPP.repository.CommentRepository;
 import com.WEBAPP.WEBAPP.repository.EventRepository;
 import com.WEBAPP.WEBAPP.repository.TicketRepository;
 import com.WEBAPP.WEBAPP.repository.UserRepository;
-import com.WEBAPP.WEBAPP.service.EventService;
-import com.WEBAPP.WEBAPP.service.TicketService;
-import com.WEBAPP.WEBAPP.service.TimetableService;
-import com.WEBAPP.WEBAPP.service.UserService;
+import com.WEBAPP.WEBAPP.service.*;
 import com.WEBAPP.WEBAPP.web.dto.TimeTableDto;
 import com.lowagie.text.DocumentException;
 import org.json.JSONObject;
@@ -27,6 +24,7 @@ import java.io.IOException;
 import java.security.Principal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -78,6 +76,11 @@ public class EventController {
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("totalEvents", page.getTotalElements());
         return "listOfPastEvents";
+    }
+
+    public List<Event> getEventList(){
+        List<Event> eventList = new ArrayList<>();
+        return eventList = eventService.getAllEvents();
     }
 
     @GetMapping("/showNewEventForm")
