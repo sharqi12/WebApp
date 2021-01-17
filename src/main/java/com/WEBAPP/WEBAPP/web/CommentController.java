@@ -48,7 +48,7 @@ public class CommentController {
 
     @PostMapping("/saveComment/{id}")
     public String saveComment(@PathVariable( value = "id")  Long id, @ModelAttribute @Valid Comment comment,
-                               Errors errors, Principal principal) {
+                              Authentication authentication, Errors errors, Principal principal) {
         // save comment to database
         //model.addAttribute("event", event);
 

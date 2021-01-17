@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
+	Broadcast by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
@@ -13,6 +13,7 @@ and open the template in the editor.
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="assets/css/main.css" />
+
 </head>
 <body>
 
@@ -31,6 +32,7 @@ and open the template in the editor.
         <li><a th:href="@{/showNewContactForm}">Pomoc</a></li>
         <li sec:authorize="hasAuthority('ROLE_CREATOR') or hasAuthority('ROLE_ADMIN')"><a th:href="@{/advice}">Wskazówki przy organizacji</a></li>
         <li sec:authorize="hasAuthority('ROLE_CREATOR') or hasAuthority('ROLE_ADMIN')"><a th:href="@{/todo}">Lista zadań do zrobienia</a></li>
+
         <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj się</a></li>
         <li sec:authorize="isAuthenticated()"><a th:href="@{/show_profile}">Twój profil</a></li>
         <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Wyloguj się</a></li>
@@ -46,58 +48,99 @@ and open the template in the editor.
 -->
 <section id="banner" >
     <div class="inner">
-        <header>
-            <h1>Przykro nam że natrafiłeś na jakiś problem</h1>
-            <p>Ponizej znajdziesz FAQ oraz formularz kontaktowy do nas
-            </p>
-        </header>
-        <!-- <a href="#main" class="button big alt scrolly">Dignissim</a> -->
+        <section id="lista" >
+            <h2 style="margin:5px">Lista zadań do zrobienia</h2>
+             <form action="#" th:action = "@{/saveAct}" th:object="${todo}" method="POST">
+            <input type="text" th:field="*{activity}" placeholder="Zadanie" class="form-control mb-4 col-4">
+                 <button type="submit" class="addCommentButton"> Dodaj zadanie</button>
+
+                 <!--<form action="#" th:action="@{/saveAct/{id}(id=${todo.idT})}" th:object="${todo}" method="POST">-->
+            </form>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <ul id="myUL" >
+
+                <h5 th:each="todos : ${allTodo}">
+                    <span th:text="${todos.activity}">activity</span>
+
+
+                    <span><a th:href="@{/deleteAct/{idT} (idT=${todos.idT})}"  class="btn btn-danger">Zrealizowano</a></span></td>
+
+                </h5>
+                <!--<li>Rezerwacja miejsca</li>
+                <li>Zaproszenie gości</li>
+                <li>Promocja wydarzenia (media społecznościowe, plakaty)</li>
+                <li>Reorganizacja i dekoracja przestrzeni wydarzenia</li>
+                <li>Zadbanie o gastronomię/catering</li>
+                <li>Zapewnienie bezpieczeństwa imprezie</li>-->
+            </ul>
+    </div>
     </div>
 
+    <script>
+        // Create a "close" button and append it to each list item
+        var myNodelist = document.getElementsByTagName("LI");
+        var i;
+        for (i = 0; i < myNodelist.length; i++) {
+            var span = document.createElement("SPAN");
+            var txt = document.createTextNode("\u00D7");
+            span.className = "close";
+            span.appendChild(txt);
+            myNodelist[i].appendChild(span);
+        }
+
+        // Click on a close button to hide the current list item
+        var close = document.getElementsByClassName("close");
+        var i;
+        for (i = 0; i < close.length; i++) {
+            close[i].onclick = function() {
+                var div = this.parentElement;
+                div.style.display = "none";
+            }
+        }
+
+        // Add a "checked" symbol when clicking on a list item
+        var list = document.querySelector('ul');
+        list.addEventListener('click', function(ev) {
+            if (ev.target.tagName === 'LI') {
+                ev.target.classList.toggle('checked');
+            }
+        }, false);
+
+        // Create a new list item when clicking on the "Add" button
+        function newElement() {
+            var li = document.createElement("li");
+            var inputValue = document.getElementById("myInput").value;
+            var t = document.createTextNode(inputValue);
+            li.appendChild(t);
+            if (inputValue === '') {
+                alert("Musisz uzupełnić pole");
+            } else {
+                document.getElementById("myUL").appendChild(li);
+            }
+            document.getElementById("myInput").value = "";
+
+            var span = document.createElement("SPAN");
+            var txt = document.createTextNode("\u00D7");
+            span.className = "close";
+            span.appendChild(txt);
+            li.appendChild(span);
+
+            for (i = 0; i < close.length; i++) {
+                close[i].onclick = function() {
+                    var div = this.parentElement;
+                    div.style.display = "none";
+                }
+            }
+        }
+    </script>
+</section>
+</div>
 
 </section>
-<section id="FAQ">
-    <div class="(small)">
-        <h3>Sem turpis amet semper ?</h3>
-        <p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat commodo eu sed ante lacinia. Sapien a lorem in integer ornare praesent commodo adipiscing arcu in massa commodo lorem accumsan at odio massa ac ac. Semper adipiscing varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>
-    </div>
-    <div class="(small)">
-        <h3>Sem turpis amet semper ?</h3>
-        <p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat commodo eu sed ante lacinia. Sapien a lorem in integer ornare praesent commodo adipiscing arcu in massa commodo lorem accumsan at odio massa ac ac. Semper adipiscing varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>
-    </div>
-    <div class="6(small)">
-        <h3>Sem turpis amet semper ?</h3>
-        <p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat commodo eu sed ante lacinia. Sapien a lorem in integer ornare praesent commodo adipiscing arcu in massa commodo lorem accumsan at odio massa ac ac. Semper adipiscing varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>
-    </div>
-</section>
-<section id="tekst"><h3>Formularz</h3></section>
-<section id="formularz">
 
-    <form action="#" th:action="@{/saveContact}" th:object="${contact}" method="POST">
-        <br/>
-        <input type="text" th:field="*{name}" placeholder="Imię i nazwisko" class="form-control mb-4 col-4">
-        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
-        <br/>
-        <input type="text" th:field="*{email}" placeholder="Email" class="form-control mb-4 col-4">
-        <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
-        <br/>
-        <label>Kategoria:</label>
-        <select th:field="*{category}">
-            <option th:each="p : ${listCategory}" th:value="${p}" th:text="${p}" />
-        </select>
-        <br/>
-        <div class="12u$">
-        <label>Wiadomość:</label>
-        <textarea rows="5" cols="25" th:field="*{note}"></textarea>
-        <p th:if="${#fields.hasErrors('note')}" th:errors="*{note}"></p>
-        <br/>
-        <input type="hidden" id="solved" th:field="*{solved}"  th:value="false"/>
-        <button type="submit" class="registerButton"> Wyślij</button>
-    </form>
-
-
-    <hr />
-</section>
 <!-- Footer -->
 <footer id="footer">
     <div class="inner">
@@ -142,12 +185,12 @@ and open the template in the editor.
     </div>
 </footer>
 
-
-
+<!-- Scripts -->
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/jquery.scrolly.min.js"></script>
 <script src="assets/js/skel.min.js"></script>
 <script src="assets/js/util.js"></script>
 <script src="assets/js/main.js"></script>
+
 </body>
 </html>
