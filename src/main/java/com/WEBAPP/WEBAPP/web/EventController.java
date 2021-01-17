@@ -5,7 +5,10 @@ import com.WEBAPP.WEBAPP.repository.CommentRepository;
 import com.WEBAPP.WEBAPP.repository.EventRepository;
 import com.WEBAPP.WEBAPP.repository.TicketRepository;
 import com.WEBAPP.WEBAPP.repository.UserRepository;
-import com.WEBAPP.WEBAPP.service.*;
+import com.WEBAPP.WEBAPP.service.EventService;
+import com.WEBAPP.WEBAPP.service.TicketService;
+import com.WEBAPP.WEBAPP.service.TimetableService;
+import com.WEBAPP.WEBAPP.service.UserService;
 import com.WEBAPP.WEBAPP.web.dto.TimeTableDto;
 import com.lowagie.text.DocumentException;
 import org.json.JSONObject;
@@ -77,10 +80,9 @@ public class EventController {
         model.addAttribute("totalEvents", page.getTotalElements());
         return "listOfPastEvents";
     }
-
-    public List<Event> getEventList(){
-        List<Event> eventList = new ArrayList<>();
-        return eventList = eventService.getAllEvents();
+    public List<Event> getEventList(){	
+        List<Event> eventList = new ArrayList<>();	
+        return eventList = eventService.getAllEvents();	
     }
 
     @GetMapping("/showNewEventForm")
