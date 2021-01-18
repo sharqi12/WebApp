@@ -51,10 +51,11 @@ public class EventServiceImpl implements EventService {
         }
         this.eventRepository.save(event);
     }
-    public void saveEvent(Event event)
-    {
-        this.eventRepository.save(event);
-    }
+
+    public void saveEvent(Event event)	
+    {	
+        this.eventRepository.save(event);	
+    }	
 
     @Override
     public Event getEventById(Long id) {
